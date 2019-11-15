@@ -13,7 +13,45 @@ https://htmlcolorcodes.com/es/
 */
 
 header {
+    width: 96%;
+    padding: 2%;
     text-align: center;
+    background-color: #C6FAA6;
+}
+#menuprincipal a {
+    font: bold 18px Arial, sans-serif;
+    color: #333333;
+    text-decoration: none;
+}
+img{
+    width: 90px;
+    /*margin-right: 50%;*/
+    /*margin-top: 5%;*/
+    align-items: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #C1E3AB;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 14px;
+    text-decoration: none;
+}
+
+li a:hover {
     background-color: #C6FAA6;
 }
 
@@ -21,10 +59,13 @@ header {
     width: 96%;
     padding: 2%;
     background-color: #C6FAA6;
+    position: absolute;
+    bottom: 0;
 }
 #pie > div {
-    width: 960px;
-    margin: 0px auto;
+    width: 96%;
+    padding: 2%;
     background-color: #C6FAA6;
     border-radius: 10px;
 }
+
