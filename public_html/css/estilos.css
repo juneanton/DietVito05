@@ -8,3 +8,23 @@ and open the template in the editor.
     Author     : June
 */
 
+/*COLORES: https://es.wikipedia.org/wiki/Anexo:Colores_por_orden_alfab%C3%A9tico
+https://htmlcolorcodes.com/es/
+*/
+
+header {
+    text-align: center;
+    background-color: #C6FAA6;
+}
+
+#pie {
+    width: 96%;
+    padding: 2%;
+    background-color: #C6FAA6;
+}
+#pie > div {
+    width: 960px;
+    margin: 0px auto;
+    background-color: #C6FAA6;
+    border-radius: 10px;
+}
