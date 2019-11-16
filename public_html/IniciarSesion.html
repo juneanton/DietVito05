@@ -32,7 +32,7 @@
                     <form name="informacion" method="get" action="procesar.php">
 
                         <!--ADIIIII No poner type email, sino crear nuestro patrón-->
-                        <p><label>Correo: <input type="email" name="correo" id="correo" required></label></p>
+                        <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">></label></p>
                         <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" required></label></p>
                         <p><button type="button" id="enviar">Aceptar</button></p>
                     </form>
