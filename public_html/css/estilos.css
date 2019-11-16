@@ -14,11 +14,13 @@ header {
     text-align: center;
     background-color: #C6FAA6;
 }
+    
 #menuprincipal a {
     font: bold 18px Arial, sans-serif;
     color: #333333;
     text-decoration: none;
 }
+
 img{
     width: 90px;
     /*margin-right: 50%;*/
@@ -26,6 +28,7 @@ img{
     align-items: center;
 }
 
+/*Mejor cambiar el nombre a menuprincipal para evitar problemas futuros con ul (me salen bolas negras)*/
 ul {
     list-style-type: none;
     margin: 0;
@@ -33,6 +36,8 @@ ul {
     overflow: hidden;
     background-color: #C1E3AB;
     text-align: center;
+    border-top: 1px solid #094660;
+    border-bottom: 1px solid #094660;
 }
 li {
     float: left;
@@ -75,7 +80,6 @@ form input:focus:invalid{
     border:2px solid red;
 }
 
-/*NO LA HACE MAS PEQUEÑA!!!!*/
 img.pequeña{
   width: 20px; height: 20px;
 }
