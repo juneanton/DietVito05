@@ -12,13 +12,13 @@
             <div>
                 <!--<h1>DietVito</h1>-->
                 <img src="img/dietvito.png">
-                 <a style ="float:left" href="javascript:history.back()"><img src="img/flecha.png" /></a>
             </div>
         </header>
         
         <nav id = "menuprincipal">
             <ul class="menu">
-                <li><a id = "casa" title = "casa" href="index.html"><img src="img/casa.png"/></a></li>
+                <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
+                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png"/></a></li>
                 <li><a href="#">Consultar calorias alimentos</a></li>
                 <li><a href="Actividades.html">Consultar actividades</a></li>
                 <li style="float:right" ><a href="IniciarSesion.html">Iniciar sesión</a></li>
@@ -31,7 +31,6 @@
                 <section id="FormularioIS">
                     <form name="informacion" method="get" action="procesar.php">
 
-                        <!--ADIIIII No poner type email, sino crear nuestro patrón-->
                         <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">></label></p>
                         <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" required></label></p>
                         <p><button type="button" id="enviar">Aceptar</button></p>

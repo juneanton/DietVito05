@@ -76,7 +76,7 @@ form input:focus:invalid{
 }
 
 /*NO LA HACE MAS PEQUEÑA!!!!*/
-img.casa{
-  width: 10px; height: 10px;
+img.pequeña{
+  width: 20px; height: 20px;
 }
 
