@@ -37,8 +37,6 @@ header {
 
 img{
     width: 90px;
-    /*margin-right: 50%;*/
-    /*margin-top: 5%;*/
     align-items: center;
 }
 
@@ -48,8 +46,9 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    /*background-color: #C1E3AB;*/
-    background-color: #128B3E;
+    /*background-color: #C1E3AB;*/ /* COLOR ANTERIOR*/
+    background-color: #128B3E; /* COLOR DEL LOGO*/
+    /*background-color: rgba(163,197,124,1); /* COLOR DEL FINAL DEL DEGRADADO*/
     text-align: center;
     border-top: 1px solid #094660;
     border-bottom: 1px solid #094660;
