@@ -8,6 +8,8 @@
 https://htmlcolorcodes.com/es/
 */
 
+/*COLOR DIETVITO #128B3E*/
+
 header {
     width: 96%;
     padding: 2%;
@@ -27,7 +29,9 @@ header {
     
 #menuprincipal a {
     font: bold 18px Arial, sans-serif;
-    color: #333333;
+    /*color: #333333;*/
+    color: black;
+    /*QUEDA MEJOR EN BLANCO PERO CUANOD TE PONES ENCIMA QUE SE CAMBIE A NEGRO*/
     text-decoration: none;
 }
 
@@ -44,7 +48,8 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #C1E3AB;
+    /*background-color: #C1E3AB;*/
+    background-color: #128B3E;
     text-align: center;
     border-top: 1px solid #094660;
     border-bottom: 1px solid #094660;
@@ -64,10 +69,10 @@ li a:hover {
     background-color: #C6FAA6;
 }
 nav a{
-      text-decoration:none;
-      color:inherit;
-      font-size:14px;
-      }
+    text-decoration:none;
+    color:inherit;
+    font-size:14px;
+}
             
 nav li{
       display:inline-block;
@@ -77,7 +82,7 @@ nav li{
             
 nav li>ul{
       display:none;
-      }
+}
 
 nav li:hover>ul{
       display:block;
@@ -93,18 +98,19 @@ nav li:hover>ul{
     display: block;
 }
 
-
 #pie {
     width: 96%;
     padding: 2%;
-    background-color: #C6FAA6;
+    /*background-color: #C6FAA6;*/
+    background-color: white;
     position: absolute;
     bottom: 0;
 }
 #pie > div {
     width: 96%;
     padding: 2%;
-    background-color: #C6FAA6;
+    /*background-color: #C6FAA6;*/
+    background-color: white;
     border-radius: 10px;
 }
 
@@ -123,5 +129,11 @@ form input:focus:invalid{
 
 img.pequeña{
   width: 20px; height: 20px;
+}
+img.grande{
+  width: 150px; height: 150px;
+}
+img.mediana{
+    width: 40px; height: 40px;
 }
 
