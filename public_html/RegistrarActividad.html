@@ -17,12 +17,21 @@
         
         <nav id = "menuprincipal">
             <ul class="menu">
-                <!--MISMO MENU QUE CLIENTE!!!!!!!!!-->
-                <!--<li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>-->
-                <!--<li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png"/></a></li>
-                <li><a href="#">Consultar alimentos</a></li>
-                <li><a href="Actividades.html">Consultar actividades</a></li>
-                <li style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Iniciar sesión</a></li>-->
+                <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
+                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png" /></a></li>
+                
+                <li id = "item"><a href="#">Registrar</a>
+                    <ul id = "desple"><li><a href="RegistrarActividad.html">Actividades</a></li>
+                        <li><a href="#">Alimentos</a></li></ul> 
+                        
+                <li id = "item"><a href="#">Consultar</a>
+                    <ul id = "desple"><li><a href="Actividades.html">Actividades</a></li>
+                        <li><a href="#">Alimentos</a></li>  
+                        <li><a href="#">Pesos</a></li></ul>
+                </li>
+                           
+                <!--CERRAR SESION!!!1-->
+                <li id = "CS" style="float:right" ><a href="IniciarSesion.html">Cerrar sesión</a></li>
             </ul>
         </nav>
         
@@ -31,10 +40,19 @@
                 <a> Registra las actividades que has realizado hoy: </a>
                 <section id="FormularioRA">
                     <form name="informacion" method="get" action="procesar.php">
-
-                        <!--ADIIIII No poner type email, sino crear nuestro patrón-->
-                        <p><label>Correo: <input type="email" name="correo" id="correo" required></label></p>
-                        <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" required></label></p>
+                        <p><label for="listado">Actividades: </label>
+                            <select name="actividad" id="listado" required>
+<!--                            APARECE LUEGO EN EL DESPEGABLE
+                                NOOOOOO MAAAAAAAL-->
+                                <option selected value="0"> Seleccione una</option>
+                                <option value="1">Correr</option>
+                                <option value="2">Caminata</option>
+                                <option value="3">Bici</option>
+                                <option value="4">Pesas</option>
+                            </select>
+                        </p>
+                        <p>Fecha y hora de la actividad: <input type="datetime-local" name="fecha" ></p>
+                        
                         <p><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
