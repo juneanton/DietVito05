@@ -71,13 +71,7 @@ nav a{
             
 nav li{
       display:inline-block;
-/*    width:150px;
-      height:30px;
-      padding:5px 10px;*/
-      /*background-color:#000;*/
-      /*border:1px solid #000;*/
       text-align:center;
-      /*color:#fff;*/
       position:relative;
 }
             
@@ -91,6 +85,14 @@ nav li:hover>ul{
       top:30px;
       left:0px;
 }
+
+#menuprincipal #desple{
+    display: none;
+}
+#menuprincipal #item:hover #desple{
+    display: block;
+}
+
 
 #pie {
     width: 96%;
