@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DietVito-Registrar Actividad</title>
+        <title>DietVito-Registrar Alimento</title>
         <meta charset="UTF-8">
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="css/estilos.css">
@@ -35,30 +35,12 @@
             </ul>
         </nav>
         
-        <main id ="registrarActi">
+        <main id ="registrarAlimento">
             <div align="center">
                 <p></p>
-                <p id = "imagenUsuario" ><img src = "img/deportes.png"/></p> 
-                <p></p>
-                <a> Registra las actividades que has realizado hoy: </a>
-                <section id="FormularioRA">
-                    <form name="informacion" method="get" action="procesar.php">
-                        <p><label for="listado">Actividades: </label>
-                            <select name="actividad" id="listado" required>
-<!--                            APARECE LUEGO EN EL DESPEGABLE
-                                NOOOOOO MAAAAAAAL-->
-                                <option selected value="0"> Seleccione una: </option>
-                                <option value="1">Correr</option>
-                                <option value="2">Caminata</option>
-                                <option value="3">Bici</option>
-                                <option value="4">Pesas</option>
-                            </select>
-                        </p>
-                        <p>Fecha y hora de la actividad: <input type="datetime-local" name="fecha" ></p>
-                        
-                        <p><button type="button" id="enviar">Aceptar</button></p>
-                    </form>
-                </section>
+                <!--FORMULARIO PARA REGISTRO DE ALIMENTOS-->
+                <P> Aqui podras registrar los alimentos que has consumido </P>
+                <img src ="img/error.png"/>
             </div>
         </main>
         <footer id="pie">

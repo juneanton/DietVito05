@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DietVito-Registrar Actividad</title>
+        <title>DietVito-Consultar pesos</title>
         <meta charset="UTF-8">
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="css/estilos.css">
@@ -22,12 +22,12 @@
                 
                 <li id = "item"><a href="#">Registrar</a>
                     <ul id = "desple"><li><a href="RegistrarActividad.html">Actividades</a></li>
-                        <li><a href="#">Alimentos</a></li></ul> 
+                        <li><a href="RegistrarAlimento.html">Alimentos</a></li></ul> 
                         
                 <li id = "item"><a href="#">Consultar</a>
-                    <ul id = "desple"><li><a href="Actividades.html">Actividades</a></li>
-                        <li><a href="Alimentos.html">Alimentos</a></li>  
-                        <li><a href="#">Pesos</a></li></ul>
+                    <ul id = "desple"><li><a href="ConsultarActividadesRealizadas.html">Actividades realizadas</a></li>
+                        <li><a href="ConsultarCaloriasConsumidas.html">Alimentos consumidos</a></li>  
+                        <li><a href="ConsultarPesos.html">Pesos</a></li></ul>
                 </li>
                            
                 <!--CERRAR SESION!!!1-->
@@ -35,40 +35,27 @@
             </ul>
         </nav>
         
-        <main id ="consultarActi">
+        <main id ="consultarPesos">
             <div align="center">
-                <a> Consultar las actividades: </a>
-                <section id="FormularioCA">
+                <a> Consultar las calorias </a>
+                <section id="FormularioCp">
                     <form name="informacion" method="get" action="procesar.php">
                         <p>Desde: <input type="datetime-local" name="fecha" > Hasta: <input type="datetime-local" name="fecha" ></p>
                         <p><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
-                <!--QUE SE VISUALICEN LAS ACTIVIDADEEEEEEEES-->
-                <article id="tablaCA">
+                <!--QUE SE VISUALICEN LOS PESOS-->
+                <article id="tablaCP">
                     <table width="50%">
-                        <caption>Actividades realizadas durante las fechas seleccionadas:</caption>
+                        <p></p>
+                        <caption>Aqui apareceran los diferentes pesos durante las fechas seleccionadas:</caption>
                         <tr>
                             <th>Fecha</th>
-                            <th>Actividad</th>
-                            <th>Calorias</th>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo1</td>
-                            <td>Correr</td>
-                             <td>300</td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo2</td>
-                            <td>Bici</td>
-                            <td>350</td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo3</td>
-                            <td>Pesas</td>
-                            <td>250</td>
+                            <th>Peso</th>
                         </tr>
                     </table>
+                    <img src ="img/error.png"/>
+                    <p> ESTA SECCIÓN AÚN NO ESTÁ DISPONIBLE, SENTIMOS LAS MOLESTIAS.</p>
                 </article>
             </div>
         </main>
@@ -79,3 +66,4 @@
         </footer>
     </body>
 </html>
+

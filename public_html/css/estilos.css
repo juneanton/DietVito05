@@ -140,12 +140,13 @@ img.mediana{
 }
 
 body{
-    background-color: whites;
+    background-color: white;
 }
 /*div#menu{z-index:0 !important;} PARA QUE EL MENU NO QUEDE DETRAS DE NADA, NO FUNCIONA*/
 
 th {
-  background-color: #128B3E;
+  /*background-color: #128B3E;*/
+  background-color: black;
   color: white;
 }
 
