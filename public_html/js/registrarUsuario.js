@@ -4,17 +4,18 @@
  * and open the template in the editor.
  */
 
-//window.addEventListener('load', inicio, false);
-//
-//function inicio() {
-//    document.getElementById('archivo').addEventListener('change', cargar, false);               
-//}
-//
-//function cargar(ev) {
-//    var arch=new FileReader();
-//    arch.addEventListener('load',leer,false);
-//    arch.readAsDataURL(ev.target.files[0]);
-//}
-//
-//function leer(ev) {
-//    document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+//PARA PREVISUALIZAR LA FOTO
+window.addEventListener('load', inicio, false);
+function inicio() {
+    document.getElementById('archivo').addEventListener('change', cargar, false);               
+}
+
+function cargar(ev) {
+    var arch=new FileReader();
+    arch.addEventListener('load',leer,false);
+    arch.readAsDataURL(ev.target.files[0]);
+}
+
+function leer(ev) {
+    document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+}
