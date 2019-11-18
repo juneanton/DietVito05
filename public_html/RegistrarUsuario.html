@@ -17,14 +17,21 @@
         
         <nav id = "menuprincipal">
             <ul class="menu">
-                <!--EL MENU CREO QUE NO ES EL CORRECTO PARA AQUI ES EL DE DIETISTA CUIDADO!-->
-                <!--EL MENU ESTA MAL NO ES ESTE!!!!!!!!!!!!-->
-                <!--CAMBIAR MENU-->
                 <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
-                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png"/></a></li>
-                <li><a href="ConsultarCaloriasConsumidas.html">Consultar alimentos consumidos por...</a></li>
-                <li><a href="Actividades.html">Consultar actividades realizadas por...</a></li>
-                <li style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Iniciar sesión</a></li>
+                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png" /></a></li>
+               
+                <li id = "item"><a href="#">Registrar</a>
+                    <ul id = "desple"><li><a href="RegistrarUsuario.html">Clientes</a></li>
+                        <li><a href="RegistrarPesos.html">Pesos</a></li></ul> 
+                        
+                <li id = "item"><a href="#">Consultar</a>
+                    <ul id = "desple"><li><a href="ConsultarActividadesRealizadasUsuario.html">Actividades realizadas por...</a></li>
+                        <li><a href="ConsultarCaloriasConsumidasUsuario.html">Alimentos consumidos por...</a></li>  
+                        <li><a href="ConsultarPesosUsuario.html">Pesos de...</a></li></ul>
+                </li>
+                
+                <!--CERRAR SESION!!!! NO ESTA HECHO-->
+                <li id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
             </ul>
         </nav>
         
