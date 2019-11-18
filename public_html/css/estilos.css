@@ -150,3 +150,14 @@ th {
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
+
+#caja {
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  border: 5px dashed green;
+  border-radius: 4px;
+  background: rgb(230,230,230);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
