@@ -136,3 +136,4 @@ img.mediana{
     width: 40px; height: 40px;
 }
 
+/*div#menu{z-index:0 !important;} PARA QUE EL MENU NO QUEDE DETRAS DE NADA, NO FUNCIONA*/

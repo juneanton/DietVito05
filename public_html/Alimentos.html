@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cliente-DietVito</title>
+        <title>DietVito-Alimentos</title>
         <meta charset="UTF-8">
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
-    <body>
+    <body background="img/comida1.png">
         <header id="cabecera">
             <div>
-                <!--<h1>DietVito</h1>-->
                 <img src="img/dietvito.png">
             </div>
         </header>
@@ -18,25 +17,20 @@
         <nav id = "menuprincipal">
             <ul class="menu">
                 <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
-                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png" /></a></li>
-                
-                <li id = "item"><a href="#">Registrar</a>
-                    <ul id = "desple"><li><a href="RegistrarActividad.html">Actividades</a></li>
-                        <li><a href="#">Alimentos</a></li></ul> 
-                        
-                <li id = "item"><a href="#">Consultar</a>
-                    <ul id = "desple"><li><a href="Actividades.html">Actividades</a></li>
-                        <li><a href="Alimentos.html">Alimentos</a></li>  
-                        <li><a href="#">Pesos</a></li></ul>
-                </li>
-                           
-                <!--CERRAR SESION!!!1-->
-                <li id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
+                <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png"/></a></li>
+                <li><a href="Alimentos.html">Consultar alimentos</a></li>
+                <li><a href="Actividades.html">Consultar actividades</a></li>
+                <li style="float:right" ><a href="IniciarSesion.html" ><img class ="pequeña" src = "img/usuario.png">  Iniciar sesión</a></li>
             </ul>
         </nav>
         
         <main>
-            
+            <div align="center">
+                <p></p>
+                <!--TABLA DE LAS ALIMENTOS VOLCADA DESDE LA BD-->
+                <P> Aqui apareceran los alimentos, descripcion y calorias :) </P>
+                <img src ="img/error.png"/>
+            </div>
         </main>
         
         <footer id="pie">

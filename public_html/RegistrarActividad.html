@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="css/estilos.css">
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
-    <body>
+    <body> <!-- background="img/correrFondo.png">-->
         <header id="cabecera">
             <div>
                 <!--<h1>DietVito</h1>-->
@@ -26,17 +26,20 @@
                         
                 <li id = "item"><a href="#">Consultar</a>
                     <ul id = "desple"><li><a href="Actividades.html">Actividades</a></li>
-                        <li><a href="#">Alimentos</a></li>  
+                        <li><a href="Alimentos.html">Alimentos</a></li>  
                         <li><a href="#">Pesos</a></li></ul>
                 </li>
                            
                 <!--CERRAR SESION!!!1-->
-                <li id = "CS" style="float:right" ><a href="IniciarSesion.html">Cerrar sesión</a></li>
+                <li id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
             </ul>
         </nav>
         
-        <main >
+        <main id ="registrarActi">
             <div align="center">
+                <p></p>
+                <p id = "imagenUsuario" ><img src = "img/deportes.png"/></p> 
+                <p></p>
                 <a> Registra las actividades que has realizado hoy: </a>
                 <section id="FormularioRA">
                     <form name="informacion" method="get" action="procesar.php">
