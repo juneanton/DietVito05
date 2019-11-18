@@ -100,16 +100,17 @@ nav li:hover>ul{
 
 #pie {
     width: 96%;
-    padding: 2%;
+    padding: 0%;
     /*background-color: #C6FAA6;*/
     /*background-color: white;*/
     background-color: white;
-    position: absolute;
+    /*position: absolute;*/
+    position: fixed;
     bottom: 0;
 }
 #pie > div {
     width: 96%;
-    padding: 2%;
+    padding: 0%;
     /*background-color: #C6FAA6;*/
     /*background-color: white;*/
     background-color: white;
