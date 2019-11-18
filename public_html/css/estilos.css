@@ -48,7 +48,7 @@ ul {
     padding: 0;
     overflow: hidden;
     /*background-color: #C1E3AB;*/ /* COLOR ANTERIOR*/
-    background-color: #128B3E; /* COLOR DEL LOGO*/
+    background-color: #128B3E;  /*COLOR DEL LOGO*/
     /*background-color: rgba(163,197,124,1); /* COLOR DEL FINAL DEL DEGRADADO*/
     text-align: center;
     border-top: 1px solid #094660;
@@ -103,7 +103,7 @@ nav li:hover>ul{
     padding: 2%;
     /*background-color: #C6FAA6;*/
     /*background-color: white;*/
-    background-color: lightgrey;
+    background-color: white;
     position: absolute;
     bottom: 0;
 }
@@ -112,7 +112,7 @@ nav li:hover>ul{
     padding: 2%;
     /*background-color: #C6FAA6;*/
     /*background-color: white;*/
-    background-color: lightgrey;
+    background-color: white;
     border-radius: 10px;
 }
 
@@ -140,6 +140,13 @@ img.mediana{
 }
 
 body{
-    background-color: lightgrey;
+    background-color: whites;
 }
 /*div#menu{z-index:0 !important;} PARA QUE EL MENU NO QUEDE DETRAS DE NADA, NO FUNCIONA*/
+
+th {
+  background-color: #128B3E;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
