@@ -32,8 +32,8 @@ header {
     /* BUENO background: linear-gradient(to right, rgba(163,197,124,1) 0%, rgba(149,233,53,1) 24%, rgba(252,252,252,1) 50%, rgba(149,233,53,1) 78%, rgba(163,197,124,1) 100%);*/
     /* MAS OSCURO QUE EL ANTERIOR*/ 
     /*background: linear-gradient(to right, rgba(52,61,53,1) 0%, rgba(40,168,49,1) 30%, rgba(99,240,115,1) 50%, rgba(40,168,49,1) 70%, rgba(52,61,53,1) 100%);*/
-    /*background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 100%);*/
-    background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(5,138,5,1) 15%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 85%, rgba(5,138,5,1) 100%);
+    background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 100%);
+    /*background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(5,138,5,1) 15%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 85%, rgba(5,138,5,1) 100%);*/
 }
 
 img{
