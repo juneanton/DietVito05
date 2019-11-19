@@ -10,9 +10,14 @@ https://htmlcolorcodes.com/es/
 
 /*COLOR DIETVITO #128B3E*/
 
+*{
+    margin:0px;
+    padding:0px;
+}
+
 header {
     width: 96%;
-    padding: 2%;
+    padding: 0% 2%;
     text-align: center;
     /*VERDE*/
     /*background-color: #C6FAA6;*/
@@ -27,22 +32,41 @@ header {
     /* BUENO background: linear-gradient(to right, rgba(163,197,124,1) 0%, rgba(149,233,53,1) 24%, rgba(252,252,252,1) 50%, rgba(149,233,53,1) 78%, rgba(163,197,124,1) 100%);*/
     /* MAS OSCURO QUE EL ANTERIOR*/ background: linear-gradient(to right, rgba(52,61,53,1) 0%, rgba(40,168,49,1) 30%, rgba(99,240,115,1) 50%, rgba(40,168,49,1) 70%, rgba(52,61,53,1) 100%);
 }
-    
-#menuprincipal a {
-    font: bold 18px Arial, sans-serif;
-    /*color: #333333;*/
-    color: black;
-    /*QUEDA MEJOR EN BLANCO PERO CUANOD TE PONES ENCIMA QUE SE CAMBIE A NEGRO*/
-    text-decoration: none;
-}
 
 img{
-    width: 90px;
+    width: 100px;
     align-items: center;
 }
 
+#menuprincipal {
+    width: 96%;
+    /*height: 50px;*/
+    padding: 2%;
+    background-color: #128B3E;
+    border-top: 1px solid #094660;
+    border-bottom: 1px solid #094660;
+}
+/*#menuprincipal > div {
+    width: 960px;
+    margin: 0px auto;
+}*/
+#menuprincipal li {
+    display: inline-block;
+    /*height: 35px;*/
+    /*padding: 15px 10px 0px 10px;*/
+    margin-right: 5px;
+}
+/*#menuprincipal li:hover {
+    background-color: #6FACC6;
+}*/
+#menuprincipal a {
+    font: bold 18px Arial, sans-serif;
+    color: black;
+    text-decoration: none;
+}
+
 /*Mejor cambiar el nombre a menuprincipal para evitar problemas futuros con ul (me salen bolas negras)*/
-ul {
+#desple {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -51,13 +75,12 @@ ul {
     background-color: #128B3E;  /*COLOR DEL LOGO*/
     /*background-color: rgba(163,197,124,1); /* COLOR DEL FINAL DEL DEGRADADO*/
     text-align: center;
-    border-top: 1px solid #094660;
-    border-bottom: 1px solid #094660;
+    /*border-top: 1px solid #094660;*/
+    /*border-bottom: 1px solid #094660;*/
 }
-
-li {
+/*li {
     float: left;
-}
+}*/
 li a {
     display: block;
     color: black;
@@ -67,6 +90,7 @@ li a {
 }
 li a:hover {
     background-color: #C6FAA6;
+    
 }
 nav a{
     text-decoration:none;
@@ -87,8 +111,8 @@ nav li>ul{
 nav li:hover>ul{
       display:block;
       position:absolute;
-      top:30px;
-      left:0px;
+      /*top:30px;*/
+      /*left:0px;*/
 }
 
 #menuprincipal #desple{
@@ -98,6 +122,7 @@ nav li:hover>ul{
     display: block;
 }
 
+/*-----------PIE DE PAGINA-----------*/
 #pie {
     width: 96%;
     padding: 0%;
@@ -117,6 +142,7 @@ nav li:hover>ul{
     border-radius: 10px;
 }
 
+/*-----------COLORES FORMULARIO-----------*/
 /*Mostraremos los campos requeridos de color amarillo*/
 form input:required {
     border:2px solid yellow;
@@ -130,6 +156,7 @@ form input:focus:invalid{
     border:2px solid red;
 }
 
+/*-----------TAMAÑO IMAGEN-----------*/
 img.pequeña{
   width: 20px; height: 20px;
 }
@@ -140,20 +167,25 @@ img.mediana{
     width: 40px; height: 40px;
 }
 
+
+/*-----------BODY-----------*/
 body{
     background-color: white;
 }
-/*div#menu{z-index:0 !important;} PARA QUE EL MENU NO QUEDE DETRAS DE NADA, NO FUNCIONA*/
 
+
+/*-----------TABLAS-----------*/
 th {
-  /*background-color: #128B3E;*/
-  background-color: black;
-  color: white;
+    /*background-color: #128B3E;*/
+    background-color: black;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {background-color: #f2f2f2;}
 
-
+/*-----------INSERTAR FOTO-----------*/
 /*QUE SE ADAPTE LA PUTA FOTO A LA CAJA*/
 #caja {
   margin: 10px;
