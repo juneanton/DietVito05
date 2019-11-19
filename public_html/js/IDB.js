@@ -369,30 +369,30 @@ function comprobarEmail(pEmail)
     }
 }
 
-function comprobarContraseña(pContraseña)
-{
-    var er = /^[a-zA-Z0-9]{4,16}$/;
+//function comprobarContraseña(pContraseña)
+//{
+//    var er = /^[a-zA-Z0-9]{4,16}$/;
+//
+//    if (er.test(pContraseña) || pContraseña === '')
+//    {
+//        contraseña.style.background = '#FFFFFF';
+//        return true;
+//    } else
+//    {
+//        contraseña.style.background = '#FFDDDD';
+//        return false;
+//    }
+//}
 
-    if (er.test(pContraseña) || pContraseña === '')
-    {
-        contraseña.style.background = '#FFFFFF';
-        return true;
-    } else
-    {
-        contraseña.style.background = '#FFDDDD';
-        return false;
-    }
-}
-
+//----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail()
 {
     var emailABuscar = document.getElementById("email").value;
-    var passwordABuscar = document.getElementById("contraseña").value;
-    //var passwordABuscar = md5( document.getElementById("contraseña").value );
+    var contraseñaABuscar = document.getElementById("contraseña").value;
 
     //----------- CONECTAR A LA BD ----------------   
-    var transaccion = bd.transaction(["clientes"], "readonly");
-    var almacen = transaccion.objectStore("clientes");
+    var transaccion = bd.transaction(["usuarios"], "readonly");
+    var almacen = transaccion.objectStore("usuarios");
     var puntero = almacen.openCursor();
     var elementos = [];
     //---------------------------------------------
@@ -412,12 +412,11 @@ function buscarEmail()
         var i = 0;
         while (i < elementos.length && !encontrado)
         {
-            if (elementos[i].email === emailABuscar && elementos[i].contraseña === passwordABuscar)
+            if (elementos[i].email === emailABuscar && elementos[i].contraseña === contraseñaABuscar)
             {
                 alert("Contraseña verificada");
                 encontrado = true;
 
-//                var usuario = document.getElementById("nick").value;
                 var clave = elementos[i].email;
                 var contraseña = elementos[i].contraseña;
 
@@ -431,22 +430,17 @@ function buscarEmail()
                 //en localStorage cuando cierras la pestaña si se guarda la info
                 window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
 
-//                //en sessionStorage cuando cierras la pestaña no se guarda la info
-//                window.sessionStorage[ clave ] = usuario; 
-//                //en localStorage cuando cierras la pestaña si se guarda la info
-//                window.localStorage[ window.localStorage.length ] = usuario;
-
                 var usuario = elementos[i].nombre;
-
-                //alert("usuaaariiiioooo");
 
                 document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
 
-            } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== passwordABuscar)
+            } 
+            else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
                 alert("Contraseña incorrecta!!!!");
                 encontrado = true;
-            } else
+            } 
+            else
             {
                 i++;
             }
@@ -454,10 +448,10 @@ function buscarEmail()
 
         if (!encontrado)
             alert("El email no esta en la BD");
-
     };
 }
 
+//----------------CERRAR SESION----------------
 function cerrarSesion(){ //HECHO!
     alert("cierra sesion");
     sessionStorage.clear();
