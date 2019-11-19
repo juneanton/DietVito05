@@ -6,6 +6,7 @@
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="css/estilos.css">
         <script src="js/registrarUsuario.js"></script>
+        <script src="js/IBD.js"></script>
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
     <body>
@@ -47,7 +48,7 @@
                         <p><label>Altura: <input type="number" name="altura" id="altura" required></label></p>
                         
                         <p>Lectura de una imagen almacenada en el disco duro.</p><input type="file" id="archivo"><br><div id="caja"></div>
-                        <p><button type="button" id="enviar">Aceptar</button></p>
+                        <p onclick="agregarClientes()"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
             </div>

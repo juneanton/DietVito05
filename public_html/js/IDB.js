@@ -140,28 +140,21 @@ function comenzar(evento)
     bd = evento.target.result;
 }
 
+//----------------CREAR LA BD----------------
 function crearbd(evento) {
     var basededatos = evento.target.result;
 
     var almacen = basededatos.createObjectStore("clientes", {keyPath: "email"});
     almacen.createIndex("porEmail", "email", {unique: true});
 
-    var almacen1 = basededatos.createObjectStore("coches", {keyPath: "matricula"});
-    almacen1.createIndex("porMatricula", "matricula", {unique: true});
+    var almacen1 = basededatos.createObjectStore("actividades", {keyPath: "actividad"});
+    almacen1.createIndex("actividades", "actividad", {unique: true});
 
-    almacen1.add({matricula: "4444", marca: "honda"});
-    almacen1.add({matricula: "5555", marca: "bmw"});
-    almacen1.add({matricula: "7777", marca: "ford"});
-    almacen1.add({matricula: "1111", marca: "audi"});
-
-
-    var almacen2 = basededatos.createObjectStore("reservas", {keyPath: "coche"});
-    almacen2.createIndex("porCoche", "coche", {unique: false});
-
-//    almacen2.createIndex("porEmail", "email", {unique: false});
-//    almacen2.createIndex("porFecha", "fecha", {unique: false});
-
-
+    almacen1.add({nombre: "correr", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({nombre: "nadar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({nombre: "andar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({nombre: "basket", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({nombre: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 }
 
 function sesionStorage()
@@ -197,19 +190,20 @@ function sesionStorage()
 
     //---------------------------------------
 }
-
+//----------------REGISTRA A LOS USUARIOS----------------
 function agregarClientes() {
     alert("agregar clientes");
     if (comprobacionRegistro() === true)
     {
-        var transaccion = bd.transaction(["clientes"], "readwrite");
-        var almacen = transaccion.objectStore("clientes");
+        var transaccion = bd.transaction(["usuarios"], "readwrite");
+        var almacen = transaccion.objectStore("usuarios");
+        
         var email = document.getElementById("email").value;
         var contraseña = document.getElementById("contraseña").value;
         var nombre = document.getElementById("nombre").value;
-        var dni = document.getElementById("dni").value;
-        var movil = document.getElementById("movil").value;
-        // transaccion.addEventListener("complete", mostrar);
+        var pesoInicial = document.getElementById("pesoInicial").value;
+        var altura = document.getElementById("altura").value;
+        var foto = document.getElementById("foto").value;
 
         var consulta = almacen.openCursor(email);
         consulta.onsuccess = function (e)
@@ -220,7 +214,7 @@ function agregarClientes() {
                 alert("Ya existe ese usuario!");
             } else
             {
-                almacen.add({email: email, contraseña: contraseña, nombre: nombre, dni: dni, movil: movil});
+                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoInicial, altura: altura, foto: foto});
                 alert("Se ha insertado correctamente");
                 var datos = new Array(); //Creamos un nuevo array vacío
                 datos[0] = nombre;
@@ -238,7 +232,23 @@ function agregarClientes() {
         alert("Introduce datos correctos");
     }
 }
+function comprobacionRegistro() //CAMBIAR
+{
+    comprobarNombre(nombre.value);
+    comprobarDNI(dni.value);
+    comprobarMovil(movil.value);
+    comprobarEmail(email.value);
+    comprobarContraseña(contraseña.value);
+    
+    if(comprobarNombre(nombre.value)&& comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
+            && comprobarContraseña(contraseña.value) === true)
+    {
+        return true;
+    }
+    
+}
 
+//----------------LLENA LA TABLA ACTIVIDADES---------------- (NO LO HACE)
 function agregarActividades()
 {
     var transaccion = bd.transaction(["actividades"], "readwrite");
@@ -251,7 +261,6 @@ function agregarActividades()
     almacen1.add({nombre: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 }
 
-
 function agregarUsuario()
 {
     alert("Entra a agregar usuario");
@@ -261,7 +270,6 @@ function agregarUsuario()
 
     //var transaccion1 = bd.transaction(["coches"], "readonly");
     //var almacen1 = transaccion1.objectStore("coches");
-
 
     var nombre = document.getElementsByName("coche").value;
     var email = document.getElementById("fechaI").value;
@@ -290,7 +298,8 @@ function agregarUsuario()
 
 }
 
-function obtActividades()
+//----------------MUESTRA LA TABLA DE ACTIVIDADES---------------- (NO LO HACE)
+function obtActividades() //CAMBIADO A NUESTROS DATOS PARA OBTENER LA TABLA ACTIVIDADES
 {
 
     var active = db.result;
@@ -320,7 +329,8 @@ function obtActividades()
                     "</tr>";
         }
         elements = [];
-        document.querySelector("").innerHTML = outerHTML;
+        //document.querySelector("").innerHTML = outerHTML; LINEA QUE HABIA ANTES
+        document.getElementById("tablaActi").querySelector("").innerHTML = 'Hola, ' + usuario; //LINEA NUEVAQUE NO FUNCIONA
     };
 
 }
@@ -369,20 +379,20 @@ function comprobarEmail(pEmail)
     }
 }
 
-//function comprobarContraseña(pContraseña)
-//{
-//    var er = /^[a-zA-Z0-9]{4,16}$/;
-//
-//    if (er.test(pContraseña) || pContraseña === '')
-//    {
-//        contraseña.style.background = '#FFFFFF';
-//        return true;
-//    } else
-//    {
-//        contraseña.style.background = '#FFDDDD';
-//        return false;
-//    }
-//}
+function comprobarContraseña(pContraseña)
+{
+    var er = /^[a-zA-Z0-9]{4,16}$/;
+
+    if (er.test(pContraseña) || pContraseña === '')
+    {
+        contraseña.style.background = '#FFFFFF';
+        return true;
+    } else
+    {
+        contraseña.style.background = '#FFDDDD';
+        return false;
+    }
+}
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail()
