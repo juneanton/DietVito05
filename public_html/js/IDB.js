@@ -21,7 +21,7 @@ function iniciar() {
         sesionStorage();
     }
 
-    if (document.title === "Registro") {
+    if (document.title === "RegistrarUsuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
         nombre = document.getElementById("nombre");
@@ -128,8 +128,6 @@ function iniciar() {
 
 }
 
-
-
 function mostrarerror(evento) {
     alert("Error: " + evento.code + " " + evento.message);
 }
@@ -187,8 +185,6 @@ function sesionStorage()
         document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
 
     }
-
-    //---------------------------------------
 }
 //----------------REGISTRA A LOS USUARIOS----------------
 function agregarClientes() {
