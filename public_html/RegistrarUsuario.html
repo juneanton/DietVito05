@@ -11,7 +11,6 @@
     <body>
         <header id="cabecera">
             <div>
-                <!--<h1>DietVito</h1>-->
                 <img src="img/dietvito.png">
             </div>
         </header>
@@ -41,16 +40,12 @@
                 <a> Registra al nuevo usuario de DietVito con sus datos: </a>
                 <section id="FormularioRU">
                     <form name="informacion" method="get" action="procesar.php">
-                        <!--ADIIIII No poner type email, sino crear nuestro patrón-->
-                        <!--NO SE SI ESTA TODO O FALTA ALGO-->
                         <p><label>Correo: <input type="email" name="correo" id="correo" required></label></p>
                         <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" required></label></p>
                         <p><label>Nombre: <input type="text" name="nombre" id="nombre" required></label></p>
                         <p><label>Peso Inicial: <input type="number" name="peso" id="peso" required></label></p>
                         <p><label>Altura: <input type="number" name="altura" id="altura" required></label></p>
                         
-                        <!--<p><label>Foto: <input type="image" name="foto" id="foto" required></label></p> SIN HACER CUIDADO!!!!!-->
-                        <!--FALTA EL JS PARA LA FUNCIONALIDAD (lo tengo guardado en fav del HTML5-->
                         <p>Lectura de una imagen almacenada en el disco duro.</p><input type="file" id="archivo"><br><div id="caja"></div>
                         <p><button type="button" id="enviar">Aceptar</button></p>
                     </form>

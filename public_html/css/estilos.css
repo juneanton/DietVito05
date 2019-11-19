@@ -25,7 +25,10 @@ header {
     /*https://www.cssmatic.com/es/gradient-generator#'\-moz\-linear\-gradient\%28left\%2C\%20rgba\%28163\%2C197\%2C124\%2C1\%29\%200\%25\%2C\%20rgba\%28149\%2C233\%2C53\%2C1\%29\%2024\%25\%2C\%20rgba\%28252\%2C252\%2C252\%2C1\%29\%2050\%25\%2C\%20rgba\%28149\%2C233\%2C53\%2C1\%29\%2078\%25\%2C\%20rgba\%28163\%2C197\%2C124\%2C1\%29\%20100\%25\%29\%3B'*/
     /*background: linear-gradient(to right, rgba(145,232,46,1) 0%, rgba(145,232,46,1) 24%, rgba(247,247,247,1) 41%, rgba(249,249,249,1) 51%, rgba(250,250,250,1) 60%, rgba(145,232,46,1) 86%, rgba(145,232,46,1) 90%);*/
     /* BUENO background: linear-gradient(to right, rgba(163,197,124,1) 0%, rgba(149,233,53,1) 24%, rgba(252,252,252,1) 50%, rgba(149,233,53,1) 78%, rgba(163,197,124,1) 100%);*/
-    /* MAS OSCURO QUE EL ANTERIOR*/ background: linear-gradient(to right, rgba(52,61,53,1) 0%, rgba(40,168,49,1) 30%, rgba(99,240,115,1) 50%, rgba(40,168,49,1) 70%, rgba(52,61,53,1) 100%);
+    /* MAS OSCURO QUE EL ANTERIOR*/ 
+    /*background: linear-gradient(to right, rgba(52,61,53,1) 0%, rgba(40,168,49,1) 30%, rgba(99,240,115,1) 50%, rgba(40,168,49,1) 70%, rgba(52,61,53,1) 100%);*/
+    /*background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 100%);*/
+    background: linear-gradient(to right, rgba(5,138,5,1) 0%, rgba(5,138,5,1) 15%, rgba(255,255,255,1) 35%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 65%, rgba(5,138,5,1) 85%, rgba(5,138,5,1) 100%);
 }
     
 #menuprincipal a {
@@ -117,9 +120,9 @@ nav li:hover>ul{
     border-radius: 10px;
 }
 
-/*Mostraremos los campos requeridos de color amarillo*/
+/*Mostraremos los campos requeridos de color negro*/
 form input:required {
-    border:2px solid yellow;
+    border:2px solid black;
 }
 /*Si el valor que el usuario escribe es valido, obtendra un color verde*/
 form input:valid{
@@ -163,5 +166,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   border-radius: 4px;
   background: rgb(230,230,230);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 100% 100%;
+  
+  
 }
