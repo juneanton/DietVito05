@@ -15,14 +15,13 @@ function iniciar() {
     solicitud.addEventListener("success", comenzar);
     solicitud.addEventListener("upgradeneeded", crearbd);
 
-    if (document.getElementById("usuario") === null){
+    if (document.getElementById("usuario") === null) {
 
-    } 
-    else{
+    } else {
         sesionStorage();
     }
-    
-    if (document.title === "Registro"){
+
+    if (document.title === "Registro") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
         nombre = document.getElementById("nombre");
@@ -51,8 +50,7 @@ function iniciar() {
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
 
-    } 
-    else if (document.title === "Login")
+    } else if (document.title === "Login")
     {
 //        nick = document.getElementById("nick");
 //        nick.addEventListener("input", comprobacionLogin);
@@ -168,20 +166,6 @@ function crearbd(evento) {
 
 function sesionStorage()
 {
-
-//    var transaccion = bd.transaction(["clientes"],"readwrite");
-//        var almacen = transaccion.objectStore("clientes");
-//        var puntero = almacen.openCursor();
-//        var elementos = [];
-//
-//        puntero.onsuccess = function (e) {
-//            var result = e.target.result;
-//            if (result === null) {
-//                return;
-//            }
-//            elementos.push(result.value);
-//            result.continue();
-//        };
     //--------------Session storage----------------------------
     if (sessionStorage.length === 0)
     {
@@ -220,14 +204,11 @@ function agregarClientes() {
     {
         var transaccion = bd.transaction(["clientes"], "readwrite");
         var almacen = transaccion.objectStore("clientes");
-
         var email = document.getElementById("email").value;
         var contraseña = document.getElementById("contraseña").value;
         var nombre = document.getElementById("nombre").value;
         var dni = document.getElementById("dni").value;
         var movil = document.getElementById("movil").value;
-
-
         // transaccion.addEventListener("complete", mostrar);
 
         var consulta = almacen.openCursor(email);
@@ -241,37 +222,19 @@ function agregarClientes() {
             {
                 almacen.add({email: email, contraseña: contraseña, nombre: nombre, dni: dni, movil: movil});
                 alert("Se ha insertado correctamente");
-
-//                var datos = new Array();//Creamos un nuevo array vacío
-//                datos[0] = nombre;
-//                datos[1] = email;
-//                datos[2] = contraseña;
-//
-//                //en sessionStorage cuando cierras la pestaña no se guarda la info
-//                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
-//                //en localStorage cuando cierras la pestaña si se guarda la info
-//                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-
-                //document.getElementById("usuario").innerHTML = 'Hola, ' + nombre;
-
-//                almacen.add({email: email, contraseña: contraseña, nombre: nombre, dni: dni, movil: movil});
-//                alert("Se ha insertado correctamente");
+                var datos = new Array(); //Creamos un nuevo array vacío
+                datos[0] = nombre;
+                datos[1] = email;
+                datos[2] = contraseña;
+                //en sessionStorage cuando cierras la pestaña no se guarda la info
+                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
+                //en localStorage cuando cierras la pestaña si se guarda la info
+                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
             }
-
-            var datos = new Array();//Creamos un nuevo array vacío
-            datos[0] = nombre;
-            datos[1] = email;
-            datos[2] = contraseña;
-
-            //en sessionStorage cuando cierras la pestaña no se guarda la info
-            window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
-            //en localStorage cuando cierras la pestaña si se guarda la info
-            window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-
-        };
-
-    } else
-    {
+            ;
+        }
+    } 
+    else {
         alert("Introduce datos correctos");
     }
 }
@@ -286,50 +249,26 @@ function agregarActividades()
     almacen1.add({nombre: "andar", descripcion: "correr durante una hora", calorias: "x"});
     almacen1.add({nombre: "basket", descripcion: "correr durante una hora", calorias: "x"});
     almacen1.add({nombre: "futbol", descripcion: "correr durante una hora", calorias: "x"});
-    
-//    
-//    const customerData = [
-//        {matricula: "4444", marca:"honda"},
-//        {matricula: "5555", marca:"bmw"},
-//        {matricula: "7777", marca:"ford"},
-//        {matricula: "1111", marca:"audi"}
-//    ];
-//    
-//    almacen1.transaction.oncomplete = function (event) {
-//        //var customerObjectStore = bd.transaction("coches", "readwrite").objectStore("coches");
-//        for (var i in customerData) {
-//            almacen1.add(customerData[i]);
-//        }
-//    }
-
-    //var almacen1 = transaccion.objectStore("coches");
-//    for (var i in customerData) {
-//        var request = almacen1.push(customerData[i]);
-//        request.onsuccess = function (event) {
-//            event.target.result === customerData[i].matricula;
-//        };
-//    }
-
 }
 
 
-function agregarReserva()
+function agregarUsuario()
 {
-    alert("Entra a agregar reservas");
+    alert("Entra a agregar usuario");
 
-    var transaccion = bd.transaction(["reservas"], "readwrite");
-    var almacen2 = transaccion.objectStore("reservas");
+    var transaccion = bd.transaction(["usuarios"], "readwrite");
+    var almacen2 = transaccion.objectStore("usuarios");
 
-    var transaccion1 = bd.transaction(["coches"], "readonly");
-    var almacen1 = transaccion1.objectStore("coches");
+    //var transaccion1 = bd.transaction(["coches"], "readonly");
+    //var almacen1 = transaccion1.objectStore("coches");
 
 
-    var coche = document.getElementsByName("coche").value;
-    var fechaI = document.getElementById("fechaI").value;
-    var horaI = document.getElementById("horaI").value;
-    var fechaF = document.getElementById("fechaF").value;
-    var horaF = document.getElementById("horaF").value;
-    var lugar = document.getElementsByName("lugar").value;
+    var nombre = document.getElementsByName("coche").value;
+    var email = document.getElementById("fechaI").value;
+    var contraseña = document.getElementById("horaI").value;
+    var pesoInicial = document.getElementById("fechaF").value;
+    var altura = document.getElementById("horaF").value;
+    var foto = document.getElementsByName("lugar").value;
 
 
     var consulta = almacen2.openCursor(coche);
@@ -346,46 +285,17 @@ function agregarReserva()
 
             almacen2.add({coche: coche, fechaI: fechaI, horaI: horaI, fechaF: fechaF, horaF: horaF, lugar: lugar});
             alert("Se ha agregaddd(o reserva");
-
-//                if(true){
-//                    alert("Se va ha agregar reserva");
-//                    
-//                    almacen2.add({coche: coche, fechaI: fechaI, horaI: horaI, fechaF: fechaF, horaF: horaF, lugar: lugar});
-//                    alert("Se ha agregado reserva" );
-//
-//                }
-//                else { 
-//                    alert("La fecha de devolución no puede ser anterior a la de recogida");
-//
-//                }
         }
     };
 
 }
 
-function recuperarReserva()
-{
-    alert("boton reserva");
-
-
-    if (f1.value <= f2.value) {
-        alert("La fecha valida");
-
-        //falta conseguir el email que hace la consulta
-        obtReserva;
-
-    } else {
-        alert("La fecha final no es valida");
-
-    }
-}
-
-function obtReserva()
+function obtActividades()
 {
 
     var active = db.result;
-    var data = active.transaction(["reservas"], "readonly");
-    var object = data.objectStore("reservas");
+    var data = active.transaction(["actividades"], "readonly");
+    var object = data.objectStore("actividades");
     var elements = [];
     //Volcamos la información en un array y luego lo visualizamos
 
@@ -404,12 +314,9 @@ function obtReserva()
         var outerHTML = '';
         for (var key in elements) {
             outerHTML += "<tr>" +
-                    "<td>" + elements[key].coche + "</td>" +
-                    "<td>" + elements[key].fechaI + "</td>" +
-                    "<td>" + elements[key].horaI + "</td>" +
-                    "<td>" + elements[key].fechaF + "</td>" +
-                    "<td>" + elements[key].horaF + "</td>" +
-                    "<td>" + elements[key].lugar + "</td>" +
+                    "<td>" + elements[key].nombre + "</td>" +
+                    "<td>" + elements[key].descripcion + "</td>" +
+                    "<td>" + elements[key].calorias + "</td>" +
                     "</tr>";
         }
         elements = [];
@@ -436,22 +343,6 @@ function mostrar(evento, archivo) {
     var imagen = document.createElement("img");
     imagen.src = url;
     cajadatos.appendChild(imagen);
-
-}
-
-function comprobacionRegistro()
-{
-    comprobarNombre(nombre.value);
-    comprobarDNI(dni.value);
-    comprobarMovil(movil.value);
-    comprobarEmail(email.value);
-    comprobarContraseña(contraseña.value);
-
-    if (comprobarNombre(nombre.value) && comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
-            && comprobarContraseña(contraseña.value) === true)
-    {
-        return true;
-    }
 
 }
 
@@ -493,85 +384,6 @@ function comprobarContraseña(pContraseña)
     }
 }
 
-//function comprobarMovil(pMovil)
-//{
-//    var er = /^[0-9]{9}$/;
-//
-//    if (er.test(pMovil) || pMovil === '')
-//    {
-//        movil.style.background = '#FFFFFF';
-//        return true;
-//    } else
-//    {
-//        movil.style.background = '#FFDDDD';
-//        return false;
-//    }
-//}
-
-//function comprobarDNI(pDNI)
-//{
-//    var er = /^[0-9]{8}$/;
-//
-//    if (er.test(pDNI) || pDNI === '')
-//    {
-//        dni.style.background = '#FFFFFF';
-//        return true;
-//    } else
-//    {
-//        dni.style.background = '#FFDDDD';
-//        return false;
-//    }
-//}
-
-function comprobarNombre(pNombre)
-{
-    var er = /^[a-zA-Z]{3,12}$/;
-
-    if (er.test(pNombre) || pNombre === '')
-    {
-        nombre.style.background = '#FFFFFF';
-        return true;
-    } else
-    {
-        nombre.style.background = '#FFDDDD';
-        return false;
-    }
-}
-function comprobarFecha()
-{
-    if (document.title === "Inicio" || document.title === "Reserva")
-    {
-        if (fechaI.value < fechaF.value)
-        {
-            alert("fecha introducida correcta");
-            return true;
-        } else if (fechaI.value === fechaF.value)
-        {
-            if (horaI.value < horaF.value)
-            {
-                alert("hora correcta");
-                return true;
-            } else
-            {
-                alert("la hora de devolución no puede ser anterior a la entrega");
-            }
-        } else
-        {
-            alert("la fecha de devolución no puede ser anterior a la de entrega");
-        }
-    } else if (document.title === "ConsultarReserva")
-    {
-        if (fechaI.value < fechaF.value)
-        {
-            alert("fecha introducida correcta");
-            return true;
-        } else
-        {
-            alert("la hora de devolución no puede ser anterior a la entrega");
-        }
-    }
-
-}
 function buscarEmail()
 {
     var emailABuscar = document.getElementById("email").value;
@@ -646,9 +458,10 @@ function buscarEmail()
     };
 }
 
-function buscarCoche()
-{
-
+function cerrarSesion(){ //HECHO!
+    alert("cierra sesion");
+    sessionStorage.clear();
+    localStorage.clear();
 }
 
 window.addEventListener("load", iniciar);
