@@ -216,6 +216,9 @@ function agregarClientes() {
                 datos[0] = nombre;
                 datos[1] = email;
                 datos[2] = contraseña;
+                datos[3] = pesoInicial;
+                datos[4] = altura;
+                datos[5] = foto;
                 //en sessionStorage cuando cierras la pestaña no se guarda la info
                 window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
                 //en localStorage cuando cierras la pestaña si se guarda la info
@@ -225,7 +228,7 @@ function agregarClientes() {
         }
     } 
     else {
-        alert("Introduce datos correctos");
+        alert("Introduce los datos correctamente");
     }
 }
 function comprobacionRegistro() //CAMBIAR
