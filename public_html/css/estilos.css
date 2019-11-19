@@ -40,7 +40,7 @@ img{
 
 #menuprincipal {
     width: 96%;
-    /*height: 50px;*/
+    height: 50px;
     padding: 2%;
     background-color: #128B3E;
     /*border-top: 1px solid #094660;*/
@@ -52,7 +52,7 @@ img{
 }*/
 #menuprincipal li {
     display: inline-block;
-    /*height: 35px;*/
+    height: 35px;
     /*padding: 15px 10px 0px 10px;*/
     margin-right: 5px;
 }
