@@ -41,14 +41,14 @@
                 <a> Registra al nuevo usuario de DietVito con sus datos: </a>
                 <section id="FormularioRU">
                     <form name="informacion" method="get" action="procesar.php">
-                        <p><label>Correo: <input type="email" name="correo" id="correo" required></label></p>
+                        <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></label></p>
                         <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" required></label></p>
                         <p><label>Nombre: <input type="text" name="nombre" id="nombre" required></label></p>
                         <p><label>Peso Inicial: <input type="number" name="peso" id="peso" required></label></p>
                         <p><label>Altura: <input type="number" name="altura" id="altura" required></label></p>
                         
-                        <p>Lectura de una imagen almacenada en el disco duro.</p><input type="file" id="archivo"><br><div id="caja"></div>
-                        <p onclick="agregarClientes()"><button type="button" id="enviar">Aceptar</button></p>
+                        <p>Añada una imagen suya:</p><input type="file" id="archivo"><p onclick="agregarClientes()"><button type="button" id="enviar">Aceptar</button></p><div id="caja"></div>
+                        
                     </form>
                 </section>
             </div>
