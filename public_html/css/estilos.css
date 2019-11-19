@@ -69,8 +69,6 @@ img{
     color: black;
     text-decoration: none;
 }
-
-/*Mejor cambiar el nombre a menuprincipal para evitar problemas futuros con ul (me salen bolas negras)*/
 #desple {
     list-style-type: none;
     margin: 0;
@@ -94,7 +92,8 @@ li a {
     text-decoration: none;
 }
 li a:hover {
-    background-color: #C6FAA6
+    /*background-color: #C6FAA6;*/
+    background-color: white;
 }
 nav a{
     text-decoration:none;
