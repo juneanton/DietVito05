@@ -6,20 +6,20 @@
 /* global db */
 
 var bd, cajadatos;
-var indexedDB = window.indexedDB;
-var database;
+var indexedDB = window.indexedDB; //MIO
+var database = null; //MIO
 
 function iniciar() {
 
     //abre la conexion de la bd dietvito-05
     database = indexedDB.open("DietVito-05", 1);
-    database.onupgradeneeded = function (e){
+    database.onupgradeneeded = function (e){//MIO
         crearbd();
     };
-    database.onsuccess = function (e){
+    database.onsuccess = function (e){//MIO
         alert('Database loaded');
     };
-    database.onerror = function(e){
+    database.onerror = function(e){ //MIO
         alert('Error loading database');
     };
     //solicitud.addEventListener("error", mostrarerror);
@@ -150,22 +150,52 @@ function comenzar(evento)
 }
 
 //----------------CREAR LA BD----------------
-function crearbd(evento) {
+function crearbd() {
     var active = database.result;
 
-    //var almacen = active.createObjectStore("cliente", {keyPath: "email", autoincrement: false});
-    //almacen.createIndex("porEmail", "email", {unique: true});
+    var almacen = active.createObjectStore("cliente", {keyPath: "email"});
+    almacen.createIndex("porEmail", "email", {unique: true});
 
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
-    almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
-    almacen1.createIndex("porCalorias", "calorias", {unique:false});
+    //almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
+    //almacen1.createIndex("porCalorias", "calorias", {unique:false});
 
-    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+//    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
+//    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
+//    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
+//    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
+//    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+}
+function add(){ //MIO
+    alert('1');
+    var active = database.result;
+    alert('ok' + active);
+    var data = active.transaction(["cliente"],"readwrite"); //esta linea da fallo en la transaction
+    object = data.objectStore("cliente");
+    
+    //insert into
+    var request = object.put({
+        email:document.querySelector('#correo').value,
+        contraseña:document.querySelector('#contraseña').value,
+        nombre:document.querySelector('#nombre').value,
+        peso: document.querySelector('#peso').value,
+        altura: document.querySelector('#altura').value,
+        foto: document.querySelector('#foto').value
+    });
+    request.onerror = function(e){
+        alert(request.error.name + '\n\n' + request.error.message);
+    };
+    data.oncomplete = function(e){
+        //para que se borren los campos para poder registrar otro
+        document.querySelector('#correo').value = '';
+        document.querySelector('#contraseña').value = '';
+        document.querySelector('#nombre').value = '';
+        document.querySelector('#peso').value = '';
+        document.querySelector('#altura').value = '';
+        document.querySelector('#foto').value = '';
+        alert ('se agrego correctamente el objeto');      
+    };
 }
 
 function sesionStorage()
