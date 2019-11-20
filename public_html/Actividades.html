@@ -5,10 +5,10 @@
         <meta charset="UTF-8">
         <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
         <link rel="stylesheet" href="css/estilos.css">
-        <script src="js/IBD.js"></script>
+        <script src="js/IDB.js"></script>
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
-    <body>
+    <body onload='iniciar();'>
         <header id="cabecera">
             <div>
                 <img src="img/dietvito.png">
@@ -35,9 +35,9 @@
                 <p></p>
                 
                 <!--<label id = "tablaActi"> </label> PA QUE PONGA LA TABLA ACTI (NOSE SI ESTA BIEN)-->
-                <label id = "tablaActi"><a><button type="button" id="enviar"> Mostrar actividades</button></a></label>
-
+                <label id = "tablaActi" onclick="agregarActividades()"><a><button type="button" id="enviar"> Mostrar actividades</button></a></label>
                 <p> HAY QUE HACERLO!! </p>
+               
             </div>
         </main>
         <footer id="pie">

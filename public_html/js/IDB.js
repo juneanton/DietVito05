@@ -6,14 +6,25 @@
 /* global db */
 
 var bd, cajadatos;
-var idb = [];
+var indexedDB = window.indexedDB;
+var database;
 
 function iniciar() {
 
-    var solicitud = window.indexedDB.open("DietVito-05", 1);
-    solicitud.addEventListener("error", mostrarerror);
-    solicitud.addEventListener("success", comenzar);
-    solicitud.addEventListener("upgradeneeded", crearbd);
+    //abre la conexion de la bd dietvito-05
+    database = indexedDB.open("DietVito-05", 1);
+    database.onupgradeneeded = function (e){
+        crearbd();
+    };
+    database.onsuccess = function (e){
+        alert('Database loaded');
+    };
+    database.onerror = function(e){
+        alert('Error loading database');
+    };
+    //solicitud.addEventListener("error", mostrarerror);
+    //solicitud.addEventListener("success", comenzar);
+    //solicitud.addEventListener("upgradeneeded", crearbd);
 
     if (document.getElementById("usuario") === null) {
 
@@ -140,19 +151,21 @@ function comenzar(evento)
 
 //----------------CREAR LA BD----------------
 function crearbd(evento) {
-    var basededatos = evento.target.result;
+    var active = database.result;
 
-    var almacen = basededatos.createObjectStore("clientes", {keyPath: "email"});
-    almacen.createIndex("porEmail", "email", {unique: true});
+    //var almacen = active.createObjectStore("cliente", {keyPath: "email", autoincrement: false});
+    //almacen.createIndex("porEmail", "email", {unique: true});
 
-    var almacen1 = basededatos.createObjectStore("actividades", {keyPath: "actividad"});
-    almacen1.createIndex("actividades", "actividad", {unique: true});
+    var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
+    almacen1.createIndex("porActividad", "actividad", {unique: true});
+    almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
+    almacen1.createIndex("porCalorias", "calorias", {unique:false});
 
-    almacen1.add({nombre: "correr", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({nombre: "nadar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({nombre: "andar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({nombre: "basket", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({nombre: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 }
 
 function sesionStorage()
