@@ -31,13 +31,30 @@
                 <p id ="imagenActi"><img class="grande" src = "img/deporte2.png"/></p> 
                 <!--TABLA DE LAS ACTIVIDADES VOLCADA DESDE LA BD-->
                 <p></p>
-                <P> Aqui apareceran las actividades, descripcion y calorias que quemas</P>
-                <p></p>
                 
                 <!--<label id = "tablaActi"> </label> PA QUE PONGA LA TABLA ACTI (NOSE SI ESTA BIEN)-->
                 <label id = "tablaActi" onclick="agregarActividades()"><a><button type="button" id="enviar"> Mostrar actividades</button></a></label>
-                <p> HAY QUE HACERLO!! </p>
-               
+                           
+                <div id="elements">
+                    <table>
+                        <caption>Actividades</caption>
+                         <thead>
+                             <tr>
+                                <th>Ejercicio</th>
+                                <th>Descripción</th>
+                                <th>Calorías</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody id="elementsList">
+                            <tr>
+                                <td colspan="3">No hay datos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button type="botonOrdenar" onclick="loadAllByName();">Ordenar por ...</button>
+                <p></p>                
             </div>
         </main>
         <footer id="pie">
