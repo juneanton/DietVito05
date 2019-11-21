@@ -13,14 +13,14 @@ function iniciar() {
 
     //abre la conexion de la bd dietvito-05
     database = indexedDB.open("DietVito-05", 1);
-    database.onupgradeneeded = function (e){//MIO
+    database.onupgradeneeded = function (e) {//MIO
         crearbd();
     };
-    database.onsuccess = function (e){//MIO
+    database.onsuccess = function (e) {//MIO
         alert('Database loaded');
         //loadAll();
     };
-    database.onerror = function(e){ //MIO
+    database.onerror = function (e) { //MIO
         alert('Error loading database');
     };
     //solicitud.addEventListener("error", mostrarerror);
@@ -157,6 +157,8 @@ function crearbd() {
     var almacen = active.createObjectStore("cliente", {keyPath: "email"});
     almacen.createIndex("porEmail", "email", {unique: true});
 
+    almacen.add({email: "diet@diet.eus", contraseña: "diet2019"});
+
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
     //almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
@@ -167,26 +169,30 @@ function crearbd() {
     almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
     almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
     almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+
+    var almacen2 = active.createObjectStore("pesoCliente", {keyPath: "idUsuario" && "fecha"}); //NO ESTA BIEN
+
+    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: "idUsuario" && "fecha" && "idActi"}); //NO ESTA BIEN
 }
-function add(){ //MIO
+function add() { //MIO
     var active = database.result;
     alert('ok' + active);
-    var data = active.transaction(["cliente"],"readwrite"); 
+    var data = active.transaction(["cliente"], "readwrite");
     object = data.objectStore("cliente");
-    
+
     //insert into
     var request = object.put({
-        email:document.querySelector('#correo').value,
-        contraseña:document.querySelector('#contraseña').value,
-        nombre:document.querySelector('#nombre').value,
+        email: document.querySelector('#correo').value,
+        contraseña: document.querySelector('#contraseña').value,
+        nombre: document.querySelector('#nombre').value,
         peso: document.querySelector('#peso').value,
         altura: document.querySelector('#altura').value,
         foto: document.querySelector('#foto').value
     });
-    request.onerror = function(e){
+    request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
     };
-    request.oncomplete = function(e){
+    request.oncomplete = function (e) {
         //para que se borren los campos para poder registrar otro
         document.querySelector('#correo').value = '';
         document.querySelector('#contraseña').value = '';
@@ -194,24 +200,25 @@ function add(){ //MIO
         document.querySelector('#peso').value = '';
         document.querySelector('#altura').value = '';
         document.querySelector('#foto').value = '';
-        alert ('se agrego correctamente el objeto');      
+        alert('se agrego correctamente el objeto');
     };
 }
 
-function addDietista(){
+function addDietista() {
     var active = database.result;
-    var data = active.transaction(["cliente"],"readwrite");
+    var data = active.transaction(["cliente"], "readwrite");
 //    object = data.objectStore("cliente");
     //insert into
     data.add({email: "diet@diet.com", contraseña: "diet"});
-    
-    data.onerror = function(e){
+
+    data.onerror = function (e) {
         alert(data.error.name + '\n\n' + data.error.message);
     };
-    data.oncomplete = function(e){
-        alert ('dietista añadido');      
+    data.oncomplete = function (e) {
+        alert('dietista añadido');
     };
-};
+}
+;
 
 function sesionStorage()
 {
@@ -251,7 +258,7 @@ function agregarClientes() {
     {
         var transaccion = bd.transaction(["usuarios"], "readwrite");
         var almacen = transaccion.objectStore("usuarios");
-        
+
         var email = document.getElementById("email").value;
         var contraseña = document.getElementById("contraseña").value;
         var nombre = document.getElementById("nombre").value;
@@ -284,8 +291,7 @@ function agregarClientes() {
             }
             ;
         }
-    } 
-    else {
+    } else {
         alert("Introduce los datos correctamente");
     }
 }
@@ -296,13 +302,13 @@ function comprobacionRegistro() //CAMBIAR
     comprobarMovil(movil.value);
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
-    
-    if(comprobarNombre(nombre.value)&& comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
+
+    if (comprobarNombre(nombre.value) && comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
             && comprobarContraseña(contraseña.value) === true)
     {
         return true;
     }
-    
+
 }
 
 //----------------LLENA LA TABLA ACTIVIDADES---------------- (NO LO HACE)
@@ -316,23 +322,23 @@ function agregarActividades()
     var almacen1 = transaccion.objectStore("actividades");
     var index = almacen1.index('porActividad');
     var elements = [];
-    
+
     index.openCursor().onsuccess = function (e) {
         var result = e.target.result;
-        
-        if(result === null) {
+
+        if (result === null) {
             return;
         }
-        
+
         elements.push(result.value);
         result.continue();
     };
-    
-    transaccion.complete = function() {
+
+    transaccion.complete = function () {
         var outerHTML = '';
-        
-        for(var key in elements) {
-            
+
+        for (var key in elements) {
+
             outerHTML += '\n\
             <tr>\n\
                 <td>' + elements[key].actividad + '</td>\n\
@@ -342,9 +348,9 @@ function agregarActividades()
                     <button type="button" onclick="load(' + elements[key].actividad + ');">Details</button>\n\
 //                    <button type="button" onclick="loadByDni(' + elements[key].dni + ');">Details DNI</button>\n\
                 </td>\n\
-            </tr>';       
+            </tr>';
         }
-        
+
         elements = [];
         document.querySelector("#elementsList").innerHTML = outerHTML;
     };
@@ -611,13 +617,11 @@ function buscarEmail()
 
                 document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
 
-            } 
-            else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
+            } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
                 alert("Contraseña incorrecta!!!!");
                 encontrado = true;
-            } 
-            else
+            } else
             {
                 i++;
             }
@@ -629,7 +633,7 @@ function buscarEmail()
 }
 
 //----------------CERRAR SESION----------------
-function cerrarSesion(){ //HECHO!
+function cerrarSesion() { //HECHO!
     alert("cierra sesion");
     sessionStorage.clear();
     localStorage.clear();
