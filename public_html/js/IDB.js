@@ -6,21 +6,22 @@
 /* global db */
 
 var bd, cajadatos;
-var indexedDB = window.indexedDB; //MIO
+var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 var database = null; //MIO
 
 function iniciar() {
 
     //abre la conexion de la bd dietvito-05
     database = indexedDB.open("DietVito-05", 1);
-    database.onupgradeneeded = function (e){//MIO
+    database.onupgradeneeded = function (e) {//MIO
         crearbd();
     };
-    database.onsuccess = function (e){//MIO
+    database.onsuccess = function (e) {//MIO
         alert('Database loaded');
-        //loadAll();
+        //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
+        loadAll();
     };
-    database.onerror = function(e){ //MIO
+    database.onerror = function (e) { //MIO
         alert('Error loading database');
     };
     //solicitud.addEventListener("error", mostrarerror);
@@ -159,35 +160,33 @@ function crearbd() {
 
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
-    //almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
-    //almacen1.createIndex("porCalorias", "calorias", {unique:false});
 
-    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
-    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "Correr", descripcion: "Correr durante una hora", calorias: "500"});
+    almacen1.add({actividad: "Nadar", descripcion: "Nadar durante una hora", calorias: "450"});
+    almacen1.add({actividad: "Andar", descripcion: "Andar durante una hora", calorias: "200"});
+    almacen1.add({actividad: "Basket", descripcion: "Basket durante una hora", calorias: "300"});
+    almacen1.add({actividad: "Fútbol", descripcion: "Fútbol durante una hora", calorias: "350"});
 }
-function add(){ //MIO
+function add() { //MIO
     alert('1');
     var active = database.result;
     alert('ok' + active);
-    var data = active.transaction(["cliente"],"readwrite"); //esta linea da fallo en la transaction
+    var data = active.transaction(["cliente"], "readwrite"); //esta linea da fallo en la transaction
     object = data.objectStore("cliente");
-    
+
     //insert into
     var request = object.put({
-        email:document.querySelector('#correo').value,
-        contraseña:document.querySelector('#contraseña').value,
-        nombre:document.querySelector('#nombre').value,
+        email: document.querySelector('#correo').value,
+        contraseña: document.querySelector('#contraseña').value,
+        nombre: document.querySelector('#nombre').value,
         peso: document.querySelector('#peso').value,
         altura: document.querySelector('#altura').value,
         foto: document.querySelector('#foto').value
     });
-    request.onerror = function(e){
+    request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
     };
-    data.oncomplete = function(e){
+    data.oncomplete = function (e) {
         //para que se borren los campos para poder registrar otro
         document.querySelector('#correo').value = '';
         document.querySelector('#contraseña').value = '';
@@ -195,7 +194,7 @@ function add(){ //MIO
         document.querySelector('#peso').value = '';
         document.querySelector('#altura').value = '';
         document.querySelector('#foto').value = '';
-        alert ('se agrego correctamente el objeto');      
+        alert('se agrego correctamente el objeto');
     };
 }
 
@@ -237,7 +236,7 @@ function agregarClientes() {
     {
         var transaccion = bd.transaction(["usuarios"], "readwrite");
         var almacen = transaccion.objectStore("usuarios");
-        
+
         var email = document.getElementById("email").value;
         var contraseña = document.getElementById("contraseña").value;
         var nombre = document.getElementById("nombre").value;
@@ -270,8 +269,7 @@ function agregarClientes() {
             }
             ;
         }
-    } 
-    else {
+    } else {
         alert("Introduce los datos correctamente");
     }
 }
@@ -282,137 +280,84 @@ function comprobacionRegistro() //CAMBIAR
     comprobarMovil(movil.value);
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
-    
-    if(comprobarNombre(nombre.value)&& comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
+
+    if (comprobarNombre(nombre.value) && comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
             && comprobarContraseña(contraseña.value) === true)
     {
         return true;
     }
-    
+
 }
 
 //----------------LLENA LA TABLA ACTIVIDADES---------------- (NO LO HACE)
 //Mirar ejemplo index3. El html llama al add(), y el add() al loadAll(). 
 ////Y el loadAll() en las lineas 138-139 especifica a qué load (o loadByDNI) referencia.
 //Así que falta organisasion
-function agregarActividades()
-{
-    var active = bd.result;
-    var transaccion = active.transaction(["actividades"], "readwrite");
-    var almacen1 = transaccion.objectStore("actividades");
-    var index = almacen1.index('porActividad');
+
+function mostrarActividades() {
+
+
+}
+//Dame todas las actividades que haya en la base de datos
+function loadAll(){
+    //Recuperar la conexión que tenemos activa sobre nuestra bd
+    var active = database.result;
+    //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
+    var data = active.transaction(['actividades', "readwrite"]); //DUDA: es actividades o almacen1????????
+    //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
+    var object = data.objectStore('actividades');
+    //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
     
-    index.openCursos().onsuccess = function (e) {
+    //Recorrer los elementos del almacenamiento actividades --> Bucle
+    //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
+    //del almacen actividades para recorrerlo entero
+    object.openCursor().onsuccess= function(e){
+        //El codigo que se va a ejecutar por cada uno de los objetos del almacen
+        //Recuperar la info
         var result = e.target.result;
-        
-        if(result == null) {
+        //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
+        if(result === null){
             return;
         }
-        
+        //Para agregar el objeto al array que luego mostraremos
         elements.push(result.value);
+        //Continuamos el bucle
         result.continue();
-    };
-    
-    transaccion.complete = function() {
-        var outerHTML = '';
+    }; 
+    //Si la transacción ocurre correctamente
+    data.oncomplete = function(){
+        //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
+        var outerHTML = ''; //Cadena vacía
         
+        //Por cada elemento del array
         for(var key in elements) {
-            
+            //Incorporarle una
             outerHTML += '\n\
             <tr>\n\
-                <td>' + elements[key].actividad + '</td>\n\
-                <td>' + elements[key].descripcion + '</td>\n\
-                <td>' + elements[key].calorias + '</td>\n\
-                <td>\n\
-                    <button type="button" onclick="load(' + elements[key].actividad + ');">Details</button>\n\
-//                    <button type="button" onclick="loadByDni(' + elements[key].dni + ');">Details DNI</button>\n\
-                </td>\n\
-            </tr>';       
+                <td>' +elements[key].actividad + '</td>\n\
+                <td>' +elements[key].descripcion + '</td>\n\
+                <td>' +elements[key].calorias + '</td>\n\
+            </tr>';    
         }
         
+        //Vaciamos elements
         elements = [];
-        document.querySelector("#elementsList").innerHTML = outerHTML;
-    };
-//
-//    almacen1.add({nombre: "correr", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({nombre: "nadar", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({nombre: "andar", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({nombre: "basket", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({nombre: "futbol", descripcion: "correr durante una hora", calorias: "x"});
-//    //alert('Actividades añadidas a la base de datos');
-//    loadAll();
-//    
-//    function load(actividad) {
-//
-////        var active = dataBase.result;
-////        TRANSACCION  var data = active.transaction(["actividades"], "readonly");
-////        ALMACEN1  var object = data.objectStore("actividades");
-//
-//        var request = object.get(parseInt(actividad));
-//
-//        request.onsuccess = function () {
-//
-//            var result = request.result;
-//
-//            if (result !== undefined) {
-//                alert("ACTIVIDAD: " + result.actividad + "\n\
-//                Actividad: " + result.nombre + "\n\
-//                Descripción: " + result.descripcion + "\n\
-//                Calorías: " + result.calorias);
-//            }
-//        };
-//    }
-//    
-//    function loadAll() {
-//       // var active = dataBase.result;
-//                //var data = active.transaction(["people"], "readonly");
-//               // var object = data.objectStore("people");
-//                
-//                var elements = [];
-//                
-//                object.openCursor().onsuccess = function (e) {
-//                    
-//                    var result = e.target.result;
-//                    
-//                    if (result === null) {
-//                        return;
-//                    }
-//                    
-//                    //Trae de la base de datos
-//                    elements.push(result.value);
-//                    result.continue();
-//                    
-//                };
-//                
-//                data.oncomplete = function() {
-//                    
-//                    var outerHTML = '';
-//                    
-//                    //Recorrer el array
-//                    for (var key in elements) {
-//                        
-//                        //Se crean tablas para visualizar (no es obligatorio pero SÍ recomendable
-//                        outerHTML += '\n\
-//                        <tr>\n\
-//                            <td>' + elements[key].actividad + '</td>\n\
-//                            <td>' + elements[key].descripcion + '</td>\n\
-//                            <td>' + elements[key].calorias + '</td>\n\
-//                            <td>\n\
-//                                <button type="button" onclick="load(' + elements[key].actividad + ');">Details</button>\n\
-//                                <button type="button" onclick="loadByDni(' + elements[key].dni + ');">Details DNI</button>\n\
-//                            </td>\n\
-//                        </tr>';                        
-//                    }
-//                    
-//                    elements = [];
-//                    
-//                    //Lo vuelca en el querySelector
-//                    document.querySelector("#elementsList").innerHTML = outerHTML;
-//                };             
-//    }
-//                   
+        //Para que a elementsList le asigne el valor de outerHTML
+        document.querySelector('#elementsList').innerHTML = outerHTML;
+    }
 }
+
+
+//SUPER ADI!!! Cuando vayamos a registrar una nueva actividad tendremos que poner loadAll() para que visualice de nuevo con la nueva
+//actividad agregada
+
+//CAMBIO: Este método para cuando agregemos actividades que hemos reaizado
+function agregarActividades(){
+
+}
+;
+
 
 function agregarUsuario()
 {
@@ -597,13 +542,11 @@ function buscarEmail()
 
                 document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
 
-            } 
-            else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
+            } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
                 alert("Contraseña incorrecta!!!!");
                 encontrado = true;
-            } 
-            else
+            } else
             {
                 i++;
             }
@@ -615,7 +558,7 @@ function buscarEmail()
 }
 
 //----------------CERRAR SESION----------------
-function cerrarSesion(){ //HECHO!
+function cerrarSesion() { //HECHO!
     alert("cierra sesion");
     sessionStorage.clear();
     localStorage.clear();
