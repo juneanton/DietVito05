@@ -223,7 +223,7 @@ function addActividad() {
 
     //insert into
     var request = object.put({
-        //idUsuario: , COMO LO PONES SI ERES TU??
+        idUsuario: '1', //COMO LO PONES SI ERES TU??
         actividad: document.querySelector('#listado').value,
         fecha: document.querySelector('#fecha').value
     });
@@ -270,50 +270,50 @@ function sesionStorage()
 
     }
 }
-//----------------REGISTRA A LOS USUARIOS----------------
-function agregarClientes() {
-    alert("agregar clientes");
-    if (comprobacionRegistro() === true)
-    {
-        var transaccion = bd.transaction(["usuarios"], "readwrite");
-        var almacen = transaccion.objectStore("usuarios");
-
-        var email = document.getElementById("email").value;
-        var contraseña = document.getElementById("contraseña").value;
-        var nombre = document.getElementById("nombre").value;
-        var pesoInicial = document.getElementById("pesoInicial").value;
-        var altura = document.getElementById("altura").value;
-        var foto = document.getElementById("foto").value;
-
-        var consulta = almacen.openCursor(email);
-        consulta.onsuccess = function (e)
-        {
-            var cursor = e.target.result;
-            if (cursor)
-            { // el email ya existe
-                alert("Ya existe ese usuario!");
-            } else
-            {
-                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoInicial, altura: altura, foto: foto});
-                alert("Se ha insertado correctamente");
-                var datos = new Array(); //Creamos un nuevo array vacío
-                datos[0] = nombre;
-                datos[1] = email;
-                datos[2] = contraseña;
-                datos[3] = pesoInicial;
-                datos[4] = altura;
-                datos[5] = foto;
-                //en sessionStorage cuando cierras la pestaña no se guarda la info
-                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
-                //en localStorage cuando cierras la pestaña si se guarda la info
-                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-            }
-            ;
-        }
-    } else {
-        alert("Introduce los datos correctamente");
-    }
-}
+////----------------REGISTRA A LOS USUARIOS----------------
+//function agregarClientes() {
+//    alert("agregar clientes");
+//    if (comprobacionRegistro() === true)
+//    {
+//        var transaccion = bd.transaction(["usuarios"], "readwrite");
+//        var almacen = transaccion.objectStore("usuarios");
+//
+//        var email = document.getElementById("email").value;
+//        var contraseña = document.getElementById("contraseña").value;
+//        var nombre = document.getElementById("nombre").value;
+//        var pesoInicial = document.getElementById("pesoInicial").value;
+//        var altura = document.getElementById("altura").value;
+//        var foto = document.getElementById("foto").value;
+//
+//        var consulta = almacen.openCursor(email);
+//        consulta.onsuccess = function (e)
+//        {
+//            var cursor = e.target.result;
+//            if (cursor)
+//            { // el email ya existe
+//                alert("Ya existe ese usuario!");
+//            } else
+//            {
+//                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoInicial, altura: altura, foto: foto});
+//                alert("Se ha insertado correctamente");
+//                var datos = new Array(); //Creamos un nuevo array vacío
+//                datos[0] = nombre;
+//                datos[1] = email;
+//                datos[2] = contraseña;
+//                datos[3] = pesoInicial;
+//                datos[4] = altura;
+//                datos[5] = foto;
+//                //en sessionStorage cuando cierras la pestaña no se guarda la info
+//                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
+//                //en localStorage cuando cierras la pestaña si se guarda la info
+//                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
+//            }
+//            ;
+//        }
+//    } else {
+//        alert("Introduce los datos correctamente");
+//    }
+//}
 function comprobacionRegistro() //CAMBIAR
 {
     comprobarNombre(nombre.value);
@@ -453,42 +453,42 @@ function agregarActividades()
 //                   
 }
 
-function agregarUsuario()
-{
-    alert("Entra a agregar usuario");
-
-    var transaccion = bd.transaction(["usuarios"], "readwrite");
-    var almacen2 = transaccion.objectStore("usuarios");
-
-    //var transaccion1 = bd.transaction(["coches"], "readonly");
-    //var almacen1 = transaccion1.objectStore("coches");
-
-    var nombre = document.getElementsByName("coche").value;
-    var email = document.getElementById("fechaI").value;
-    var contraseña = document.getElementById("horaI").value;
-    var pesoInicial = document.getElementById("fechaF").value;
-    var altura = document.getElementById("horaF").value;
-    var foto = document.getElementsByName("lugar").value;
-
-
-    var consulta = almacen2.openCursor(coche);
-    consulta.onsuccess = function (e)
-    {
-        alert("cursor");
-        var cursor = e.target.result;
-        if (cursor)
-        {
-            alert("coche ya reservado");
-        } else
-        {
-            alert("Se va ha agregar reserva");
-
-            almacen2.add({coche: coche, fechaI: fechaI, horaI: horaI, fechaF: fechaF, horaF: horaF, lugar: lugar});
-            alert("Se ha agregaddd(o reserva");
-        }
-    };
-
-}
+//function agregarUsuario()
+//{
+//    alert("Entra a agregar usuario");
+//
+//    var transaccion = bd.transaction(["usuarios"], "readwrite");
+//    var almacen2 = transaccion.objectStore("usuarios");
+//
+//    //var transaccion1 = bd.transaction(["coches"], "readonly");
+//    //var almacen1 = transaccion1.objectStore("coches");
+//
+//    var nombre = document.getElementsByName("coche").value;
+//    var email = document.getElementById("fechaI").value;
+//    var contraseña = document.getElementById("horaI").value;
+//    var pesoInicial = document.getElementById("fechaF").value;
+//    var altura = document.getElementById("horaF").value;
+//    var foto = document.getElementsByName("lugar").value;
+//
+//
+//    var consulta = almacen2.openCursor(coche);
+//    consulta.onsuccess = function (e)
+//    {
+//        alert("cursor");
+//        var cursor = e.target.result;
+//        if (cursor)
+//        {
+//            alert("coche ya reservado");
+//        } else
+//        {
+//            alert("Se va ha agregar reserva");
+//
+//            almacen2.add({coche: coche, fechaI: fechaI, horaI: horaI, fechaF: fechaF, horaF: horaF, lugar: lugar});
+//            alert("Se ha agregaddd(o reserva");
+//        }
+//    };
+//
+//}
 
 //----------------MUESTRA LA TABLA DE ACTIVIDADES---------------- (NO LO HACE)
 function obtActividades() //CAMBIADO A NUESTROS DATOS PARA OBTENER LA TABLA ACTIVIDADES

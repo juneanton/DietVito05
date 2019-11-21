@@ -8,7 +8,7 @@
         <script src="js/IDB.js"></script>
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
-    <body> <!-- background="img/correrFondo.png">-->
+    <body onload='iniciar();'> <!-- background="img/correrFondo.png">-->
         <header id="cabecera">
             <div>
                 <!--<h1>DietVito</h1>-->
@@ -55,7 +55,7 @@
                         </p>
                         <p>Fecha y hora de la actividad: <input type="datetime-local" name="fecha" id ="fecha" required></p>
                         
-                        <p><button type="button" id="enviar">Aceptar</button></p>
+                        <p onclick="addActividad();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
             </div>
