@@ -162,11 +162,11 @@ function crearbd() {
     //almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
     //almacen1.createIndex("porCalorias", "calorias", {unique:false});
 
-//    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
-//    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "correr", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "nadar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "andar", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
+    almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 }
 function add(){ //MIO
     alert('1');
