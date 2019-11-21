@@ -62,24 +62,24 @@ function iniciar() {
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
 
-    } else if (document.title === "Login")
-    {
-//        nick = document.getElementById("nick");
-//        nick.addEventListener("input", comprobacionLogin);
+    }
 
-        email = document.getElementById("email");
+    //INICIAR SESION---------------------------------------------
+    else if (document.title === "DietVito-Iniciar sesión") //EN ELLO
+    {
+        email = document.getElementById("#email");
         email.addEventListener("input", comprobacionLogin);
 
-        contraseña = document.getElementById("contraseña");
+        contraseña = document.getElementById("#contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
 
-        var botonLogin = document.getElementById("btLogin");
+        var botonLogin = document.getElementById("#btLogin");
         botonLogin.addEventListener("click", buscarEmail);
+        
+        //CUANDO SEA EL DIETISTA COMO ABRIMOS UNA PAGINA Y CUANDO EL CLIENTE LA OTRA???
 
 //        var botonLogin = document.getElementById("btLogin");
 //        botonLogin.addEventListener("click", sessionStorage);
-
-
 
     } else if (document.title === "Inicio")
     {
@@ -177,7 +177,7 @@ function crearbd() {
     almacen2.createIndex("porUsuario", ["idUsuario", "fecha"], {unique: true});
 
     //----------------TABLA REGISTRO ACTIVIDADES----------------
-    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]}); 
+    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]});
     almacen3.createIndex("porUsuario", ["idUsuario", "idActi", "fecha"], {unique: true});
 }
 function add() { //MIO
@@ -548,15 +548,14 @@ function mostrar(evento, archivo) {
 
 }
 
-function comprobacionLogin()
+function comprobacionLogin() //NECESARIO
 {
     comprobarEmail(email.value);
-
     comprobarContraseña(contraseña.value);
 
 }
 
-function comprobarEmail(pEmail)
+function comprobarEmail(pEmail) //NECESARIO
 {
     var ex = /^([a-zA-Z]+[a-zA-Z0-9._-]*)@{1}([a-zA-Z0-9\.]{2,})\.([a-zA-Z]{2,3})$/;
 
@@ -571,7 +570,7 @@ function comprobarEmail(pEmail)
     }
 }
 
-function comprobarContraseña(pContraseña)
+function comprobarContraseña(pContraseña) //NECESARIO
 {
     var er = /^[a-zA-Z0-9]{4,16}$/;
 
