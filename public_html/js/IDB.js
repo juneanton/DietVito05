@@ -154,11 +154,13 @@ function comenzar(evento)
 function crearbd() {
     var active = database.result;
 
+    //----------------TABLA CLIENTE----------------
     var almacen = active.createObjectStore("cliente", {keyPath: "email"});
     almacen.createIndex("porEmail", "email", {unique: true});
 
     almacen.add({email: "diet@diet.eus", contraseña: "diet2019"});
 
+    //----------------TABLA ACTIVIDADES----------------
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
     //almacen1.createIndex("porDescripcion", "descripcion", {unique:false});
@@ -170,8 +172,10 @@ function crearbd() {
     almacen1.add({actividad: "basket", descripcion: "correr durante una hora", calorias: "x"});
     almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 
+    //----------------TABLA PESOS----------------
     var almacen2 = active.createObjectStore("pesoCliente", {keyPath: "idUsuario" && "fecha"}); //NO ESTA BIEN
 
+    //----------------TABLA REGISTRO ACTIVIDADES----------------
     var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: "idUsuario" && "fecha" && "idActi"}); //NO ESTA BIEN
 }
 function add() { //MIO
@@ -192,7 +196,7 @@ function add() { //MIO
     request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
     };
-    request.oncomplete = function (e) {
+    request.oncomplete = function (e) { //NO SE VACIAN LOS CAMPOS 
         //para que se borren los campos para poder registrar otro
         document.querySelector('#correo').value = '';
         document.querySelector('#contraseña').value = '';
