@@ -44,8 +44,8 @@
                         <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></label></p>
                         <p><label>Contraseña: <input type="password" name="contraseña" id="contraseña" autocomplete="off" required></label></p>
                         <p><label>Nombre: <input type="text" name="nombre" id="nombre" required></label></p>
-                        <p><label>Peso Inicial: <input type="number" name="peso" id="peso" required></label></p>
-                        <p><label>Altura: <input type="number" name="altura" id="altura" required></label></p>
+                        <p><label>Peso Inicial: <input type="number" name="peso" id="peso" step="0.001" required></label></p>
+                        <p><label>Altura: <input type="number" name="altura" id="altura" step="0.001" required></label></p>
 
                         <p>Añada una imagen suya:</p><input type="file" name="foto" id="foto">
                         <p onclick="add();"><button type="button" id="enviar">Aceptar</button></p>

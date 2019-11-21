@@ -396,6 +396,7 @@ function agregarUsuario()
 
 }
 
+//Creo que sobra je
 //----------------MUESTRA LA TABLA DE ACTIVIDADES---------------- (NO LO HACE)
 function obtActividades() //CAMBIADO A NUESTROS DATOS PARA OBTENER LA TABLA ACTIVIDADES
 {
