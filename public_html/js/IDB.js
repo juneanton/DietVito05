@@ -68,10 +68,10 @@ function iniciar() {
     else if (document.title === "DietVito-Iniciar sesión") //EN ELLO
     {
         email = document.getElementById("#email");
-        email.addEventListener("input", comprobacionLogin);
+        email.addEventListener("#email", comprobacionLogin);
 
         contraseña = document.getElementById("#contraseña");
-        contraseña.addEventListener("input", comprobacionLogin);
+        contraseña.addEventListener("#contraseña", comprobacionLogin);
 
         var botonLogin = document.getElementById("#btLogin");
         botonLogin.addEventListener("click", buscarEmail);
@@ -81,54 +81,58 @@ function iniciar() {
 //        var botonLogin = document.getElementById("btLogin");
 //        botonLogin.addEventListener("click", sessionStorage);
 
-    } else if (document.title === "Inicio")
-    {
-        alert("inicio");
-        lugar = document.getElementsByName("lugar");
-        //lugar.addEventListener("select", );
+    } 
+//    else if (document.title === "Inicio")
+//    {
+//        alert("inicio");
+//        lugar = document.getElementsByName("lugar");
+//        //lugar.addEventListener("select", );
+//
+//        fechaI = document.getElementById("fechaI");
+//        //fechaI.addEventListener("input", );
+//
+//        horaI = document.getElementById("horaI");
+//        //horaI.addEventListener("input", );
+//
+//        fechaF = document.getElementById("fechaF");
+//        //fechaF.addEventListener("input", );
+//
+//        horaF = document.getElementById("horaF");
+//        //horaF.addEventListener("input", );
+//
+//
+//        if (fechaI.value <= fechaF.value)
+//        {
+//            var botonBuscarCoche = document.getElementById("buton");
+//            botonBuscarCoche.addEventListener("click", buscarCoche);
+//        }
+//    } else if (document.title === "Reserva")
+//    {
+//        alert("Entra a reservas");
+//        coche = document.getElementsByName("coche").value;
+//        //lugar.addEventListener("select", );
+//
+//        fechaI = document.getElementById("fechaI").value;
+////        fechaI.addEventListener("input", comprobarFecha);
+//
+//        horaI = document.getElementById("horaI").value;
+////        horaI.addEventListener("input", comprobarFecha);
+//
+//        fechaF = document.getElementById("fechaF").value;
+////        fechaF.addEventListener("input", comprobarFecha);
+//
+//        horaF = document.getElementById("horaF").value;
+////        horaF.addEventListener("input", comprobarFecha);
+//
+//        lugar = document.getElementsByName("lugar").value;
+//        //lugar.addEventListener("select", );
+//
+//        var reserva = document.getElementById("btReserva");
+//        reserva.addEventListener("click", agregarReserva);
+//    } 
 
-        fechaI = document.getElementById("fechaI");
-        //fechaI.addEventListener("input", );
-
-        horaI = document.getElementById("horaI");
-        //horaI.addEventListener("input", );
-
-        fechaF = document.getElementById("fechaF");
-        //fechaF.addEventListener("input", );
-
-        horaF = document.getElementById("horaF");
-        //horaF.addEventListener("input", );
-
-
-        if (fechaI.value <= fechaF.value)
-        {
-            var botonBuscarCoche = document.getElementById("buton");
-            botonBuscarCoche.addEventListener("click", buscarCoche);
-        }
-    } else if (document.title === "Reserva")
-    {
-        alert("Entra a reservas");
-        coche = document.getElementsByName("coche").value;
-        //lugar.addEventListener("select", );
-
-        fechaI = document.getElementById("fechaI").value;
-//        fechaI.addEventListener("input", comprobarFecha);
-
-        horaI = document.getElementById("horaI").value;
-//        horaI.addEventListener("input", comprobarFecha);
-
-        fechaF = document.getElementById("fechaF").value;
-//        fechaF.addEventListener("input", comprobarFecha);
-
-        horaF = document.getElementById("horaF").value;
-//        horaF.addEventListener("input", comprobarFecha);
-
-        lugar = document.getElementsByName("lugar").value;
-        //lugar.addEventListener("select", );
-
-        var reserva = document.getElementById("btReserva");
-        reserva.addEventListener("click", agregarReserva);
-    } else if (document.title === "ConsultarReserva")
+    //PAGINAS DE CONSULTA!!!!
+    else if (document.title === "ConsultarReserva")
     {
         alert("Entra a reservas");
         fechaI = document.getElementById("fechaRI");
