@@ -173,10 +173,12 @@ function crearbd() {
     almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 
     //----------------TABLA PESOS----------------
-    var almacen2 = active.createObjectStore("pesoCliente", {keyPath: "idUsuario" && "fecha"}); //NO ESTA BIEN
+    var almacen2 = active.createObjectStore("pesoCliente", {keyPath: ["idUsuario", "fecha"]});
+    almacen2.createIndex("porUsuario", ["idUsuario", "fecha"], {unique: true});
 
     //----------------TABLA REGISTRO ACTIVIDADES----------------
-    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: "idUsuario" && "fecha" && "idActi"}); //NO ESTA BIEN
+    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]}); 
+    almacen3.createIndex("porUsuario", ["idUsuario", "idActi", "fecha"], {unique: true});
 }
 function add() { //MIO
     var active = database.result;
@@ -207,19 +209,32 @@ function add() { //MIO
         alert('se agrego correctamente el objeto');
     };
 }
+;
 
-function addDietista() {
+function addPeso() {
+    //ESTA SIN HACER EL FORMULARIO
+}
+;
+
+function addActividad() {
     var active = database.result;
-    var data = active.transaction(["cliente"], "readwrite");
-//    object = data.objectStore("cliente");
-    //insert into
-    data.add({email: "diet@diet.com", contraseña: "diet"});
+    var data = active.transaction(["actividadDiaria"], "readwrite");
+    object = data.objectStore("actividadDiaria");
 
-    data.onerror = function (e) {
-        alert(data.error.name + '\n\n' + data.error.message);
+    //insert into
+    var request = object.put({
+        //idUsuario: , COMO LO PONES SI ERES TU??
+        actividad: document.querySelector('#listado').value,
+        fecha: document.querySelector('#fecha').value
+    });
+    request.onerror = function (e) {
+        alert(request.error.name + '\n\n' + request.error.message);
     };
-    data.oncomplete = function (e) {
-        alert('dietista añadido');
+    request.oncomplete = function (e) { //NO SE VACIAN LOS CAMPOS 
+        //para que se borren los campos para poder registrar otro
+        document.querySelector('#listado').value = '';
+        document.querySelector('#fecha').value = '';
+        alert('se agrego correctamente el objeto');
     };
 }
 ;
