@@ -169,10 +169,9 @@ function crearbd() {
     almacen1.add({actividad: "futbol", descripcion: "correr durante una hora", calorias: "x"});
 }
 function add(){ //MIO
-    alert('1');
     var active = database.result;
     alert('ok' + active);
-    var data = active.transaction(["cliente"],"readwrite"); //esta linea da fallo en la transaction
+    var data = active.transaction(["cliente"],"readwrite"); 
     object = data.objectStore("cliente");
     
     //insert into
@@ -187,7 +186,7 @@ function add(){ //MIO
     request.onerror = function(e){
         alert(request.error.name + '\n\n' + request.error.message);
     };
-    data.oncomplete = function(e){
+    request.oncomplete = function(e){
         //para que se borren los campos para poder registrar otro
         document.querySelector('#correo').value = '';
         document.querySelector('#contraseña').value = '';
@@ -198,6 +197,21 @@ function add(){ //MIO
         alert ('se agrego correctamente el objeto');      
     };
 }
+
+function addDietista(){
+    var active = database.result;
+    var data = active.transaction(["cliente"],"readwrite");
+//    object = data.objectStore("cliente");
+    //insert into
+    data.add({email: "diet@diet.com", contraseña: "diet"});
+    
+    data.onerror = function(e){
+        alert(data.error.name + '\n\n' + data.error.message);
+    };
+    data.oncomplete = function(e){
+        alert ('dietista añadido');      
+    };
+};
 
 function sesionStorage()
 {
@@ -297,16 +311,16 @@ function comprobacionRegistro() //CAMBIAR
 //Así que falta organisasion
 function agregarActividades()
 {
-    var active = bd.result;
+    var active = database.result;
     var transaccion = active.transaction(["actividades"], "readwrite");
     var almacen1 = transaccion.objectStore("actividades");
     var index = almacen1.index('porActividad');
     var elements = [];
     
-    index.openCursos().onsuccess = function (e) {
+    index.openCursor().onsuccess = function (e) {
         var result = e.target.result;
         
-        if(result == null) {
+        if(result === null) {
             return;
         }
         

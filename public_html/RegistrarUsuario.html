@@ -15,27 +15,27 @@
                 <img src="img/dietvito.png">
             </div>
         </header>
-        
+
         <nav id = "menuprincipal">
             <ul class="menu">
                 <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
                 <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png" /></a></li>
-               
+
                 <li id = "item"><a href="#">Registrar</a>
                     <ul id = "desple"><li><a href="RegistrarUsuario.html">Clientes</a></li>
                         <li><a href="RegistrarPesos.html">Pesos</a></li></ul> 
-                        
+
                 <li id = "item"><a href="#">Consultar</a>
                     <ul id = "desple"><li><a href="ConsultarActividadesRealizadasUsuario.html">Actividades realizadas por...</a></li>
                         <li><a href="ConsultarCaloriasConsumidasUsuario.html">Alimentos consumidos por...</a></li>  
                         <li><a href="ConsultarPesosUsuario.html">Pesos de...</a></li></ul>
                 </li>
-                
+
                 <!--CERRAR SESION!!!! NO ESTA HECHO-->
                 <li onclick="cerrarSesion()" id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
             </ul>
         </nav>
-        
+
         <main >
             <div align="center">
                 <a> Registra al nuevo usuario de DietVito con sus datos: </a>
@@ -46,19 +46,19 @@
                         <p><label>Nombre: <input type="text" name="nombre" id="nombre" required></label></p>
                         <p><label>Peso Inicial: <input type="number" name="peso" id="peso" required></label></p>
                         <p><label>Altura: <input type="number" name="altura" id="altura" required></label></p>
-                        
+
                         <p>Añada una imagen suya:</p><input type="file" name="foto" id="foto">
                         <p onclick="add();"><button type="button" id="enviar">Aceptar</button></p>
                         <div id="caja"></div>
-                        
+
                     </form>
                 </section>
             </div>
         </main>
         <footer id="pie">
             <hr/>
-         &copy; Grupo 05. Análisis y diseño de sistemas de información
-         <a href="AcercaDe.html">Acerca de </a><img class="pequeña" src="img/FB.png"/><img class="pequeña" src="img/TW.png"/><img class="pequeña" src="img/insta.png"/>
+            &copy; Grupo 05. Análisis y diseño de sistemas de información
+            <a href="AcercaDe.html">Acerca de </a><img class="pequeña" src="img/FB.png"/><img class="pequeña" src="img/TW.png"/><img class="pequeña" src="img/insta.png"/>
         </footer>
     </body>
 </html>
