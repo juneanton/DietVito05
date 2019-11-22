@@ -72,7 +72,7 @@ function iniciar() {
     }
 
     //----------------PANTALLA INICIAR SESION----------------
-    else if (document.title === "DietVito-Iniciar sesión") 
+    else if (document.title === "DietVito-Iniciar sesión")
     {
         email = document.getElementById("correo");
         email.addEventListener("input", comprobacionLogin);
@@ -94,7 +94,7 @@ function iniciar() {
 //        }
     }
     //----------------PANTALLA ACTIVIDADES----------------
-    else if (document.title === "DietVito-Actividades") 
+    else if (document.title === "DietVito-Actividades")
     {
         //abre la conexion de la bd dietvito-05
         database = indexedDB.open("DietVito-05", 1);
@@ -104,7 +104,6 @@ function iniciar() {
         database.onsuccess = function (e) {
             alert('Database loaded');
             mostrarActividades();
-            desplegableActi();
         };
         database.onerror = function (e) {
             alert('Error loading database');
@@ -117,7 +116,7 @@ function iniciar() {
         correo = document.getElementById("correo");
         if (correo !== null)
             correo.addEventListener("input", comprobacionRegistroPeso);
-        
+
         peso = document.getElementById("peso");
 //        if (peso !== null)
 //            peso.addEventListener("input", comprobacionRegistroPeso);
@@ -134,10 +133,11 @@ function iniciar() {
     }
     //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
     else if (document.title === "DietVito-Registrar Actividad") {
-        
-        
+
+
         //HACER
         //DESPLEGABLE ESTA SIN HACER 
+        //desplegableActi();
 
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", addActividad());
@@ -145,7 +145,13 @@ function iniciar() {
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", sesionStorage);
     }
-    
+
+    //----------------PANTALLA CONSULTAR ACTIVIDADES----------------
+    else if (document.title === "DietVito-Consultar Actividad") {
+
+        var botonAceptar = document.getElementById("enviar");
+        botonAceptar.addEventListener("click", comprobarFecha);
+    }
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
 
@@ -176,8 +182,8 @@ function crearbd() {
 }
 
 //----------------REGISTRAR EL CLIENTE EN LA BD----------------
-function add() { 
-    
+function add() {
+
     var active = database.result;
     //alert('ok' + active);
     var data = active.transaction(["cliente"], "readwrite");
@@ -234,7 +240,7 @@ function addPeso() {
     };
 }
 
-function addActividad(){
+function addActividad() {
     //HACER EL REGISTRO DE ACTIVIDAD CUANDO ESTE EL DESPLEGABLE HECHO
 }
 
@@ -285,12 +291,12 @@ function comprobacionRegistro()
     }
 }
 
-function comprobacionRegistroPeso(){
+function comprobacionRegistroPeso() {
     comprobarEmail(email.vaule);
     //comprobarPeso(peso.value);
     //comprobarFecha(fecha.value);
-    
-    if(comprobarEmail(email.value)) //&& comprobarPeso(peso.value) && comprobarFecha(fecha.value))
+
+    if (comprobarEmail(email.value)) //&& comprobarPeso(peso.value) && comprobarFecha(fecha.value))
     {
         return true;
     }
@@ -405,13 +411,13 @@ function mostrarActividades() {
 //
 //}
 
-function comprobacionLogin() 
+function comprobacionLogin()
 {
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
 }
 
-function comprobarEmail(pEmail) 
+function comprobarEmail(pEmail)
 {
     var ex = /^([a-zA-Z]+[a-zA-Z0-9._-]*)@{1}([a-zA-Z0-9\.]{2,})\.([a-zA-Z]{2,3})$/;
 
@@ -441,18 +447,17 @@ function comprobarContraseña(pContraseña)
     }
 }
 
-function comprobarFecha() 
+function comprobarFecha()
 {
     //Para los html siguientes:
-    if(document.title === "ConsultarActividadesRealizadas" || document.title ==="ConsultarActividadesRealizadasUsuario")
+    if (document.title === "ConsultarActividadesRealizadas" || document.title === "ConsultarActividadesRealizadasUsuario")
     {
         //Si la "desde" <= "hasta"
-        if(fechaI.value<=FechaF.value){
+        if (fechaI.value <= FechaF.value) {
             alert("fecha bien introducida");
             return true;
-        }
-        else {
-            alert("fechaI no puede ser mayor que fechaF")
+        } else {
+            alert("fechaI no puede ser mayor que fechaF");
         }
     }
 }
@@ -531,7 +536,7 @@ function buscarEmail()
 }
 
 //----------------CERRAR SESION----------------
-function cerrarSesion() { 
+function cerrarSesion() {
     alert("cierra sesion");
     sessionStorage.clear();
     localStorage.clear();
