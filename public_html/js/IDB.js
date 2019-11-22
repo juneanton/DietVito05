@@ -102,7 +102,6 @@ function iniciar() {
         horaF = document.getElementById("horaF");
         //horaF.addEventListener("input", );
 
-
         if (fechaI.value <= fechaF.value)
         {
             var botonBuscarCoche = document.getElementById("buton");
@@ -140,7 +139,6 @@ function iniciar() {
         var consultaReserva = document.getElementById("btConsulta");
         consultaReserva.addEventListener("click", recuperarReserva);
     }
-
 }
 
 function mostrarerror(evento) {
@@ -173,7 +171,7 @@ function add() { //MIO
     alert('1');
     var active = database.result;
     alert('ok' + active);
-    var data = active.transaction(["cliente"], "readwrite"); //esta linea da fallo en la transaction
+    var data = active.transaction(["cliente"], "readwrite");
     object = data.objectStore("cliente");
 
     //insert into
@@ -185,7 +183,7 @@ function add() { //MIO
         altura: document.querySelector('#altura').value,
         foto: document.getElementById('foto').files[0].name
         
-    });alert('foto');
+    });
     request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
     };
@@ -208,14 +206,14 @@ function sesionStorage()
     {
         if (localStorage.length === 0)
         {
-            document.getElementById("usuario").innerHTML = "";
+            document.getElementById("correo").innerHTML = "";
         } else
         {
             var datos = window.localStorage[ window.localStorage.length - 1];
 
             datos = JSON.parse(datos);
 
-            document.getElementById("usuario").innerHTML = 'Hola, ' + datos[0];
+            document.getElementById("correo").innerHTML = 'Hola, ' + datos[0];
         }
     } else
     {
@@ -229,7 +227,6 @@ function sesionStorage()
 
         var usuario = datos[0];
         document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
-
     }
 }
 //----------------REGISTRA A LOS USUARIOS----------------
@@ -269,9 +266,8 @@ function agregarClientes() {
                 window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
                 //en localStorage cuando cierras la pestaña si se guarda la info
                 window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-            }
-            ;
-        }
+            };
+        };
     } else {
         alert("Introduce los datos correctamente");
     }
@@ -289,7 +285,6 @@ function comprobacionRegistro() //CAMBIAR
     {
         return true;
     }
-
 }
 
 function desplegableActi () {
@@ -388,9 +383,8 @@ function mostrarActividades(){
         elements = [];
         //Para que a elementsList le asigne el valor de outerHTML
         document.querySelector('#elementsList').innerHTML = outerHTML;
-    }
+    };
 }
-
 
 //SUPER ADI!!! Cuando vayamos a registrar una nueva actividad tendremos que poner mostrarActividades() para que visualice de nuevo con la nueva
 //actividad agregada
@@ -398,9 +392,7 @@ function mostrarActividades(){
 //CAMBIO: Este método para cuando agregemos actividades que hemos reaizado
 function agregarActividades(){
 
-}
-;
-
+};
 
 function agregarUsuario()
 {
@@ -419,7 +411,6 @@ function agregarUsuario()
     var altura = document.getElementById("horaF").value;
     var foto = document.getElementsByName("lugar").value;
 
-
     var consulta = almacen2.openCursor(coche);
     consulta.onsuccess = function (e)
     {
@@ -436,9 +427,7 @@ function agregarUsuario()
             alert("Se ha agregaddd(o reserva");
         }
     };
-
 }
-
 
 function procesar(evento) {
 
@@ -450,7 +439,6 @@ function procesar(evento) {
         mostrar(evento, archivo);
     });
     lector.readAsBinaryString(archivo);
-
 }
 
 function mostrar(evento, archivo) {
@@ -462,15 +450,13 @@ function mostrar(evento, archivo) {
 
 }
 
-function comprobacionLogin()
+function comprobacionLogin() //BIEN
 {
     comprobarEmail(email.value);
-
     comprobarContraseña(contraseña.value);
-
 }
 
-function comprobarEmail(pEmail)
+function comprobarEmail(pEmail) //BIEN
 {
     var ex = /^([a-zA-Z]+[a-zA-Z0-9._-]*)@{1}([a-zA-Z0-9\.]{2,})\.([a-zA-Z]{2,3})$/;
 
@@ -485,7 +471,7 @@ function comprobarEmail(pEmail)
     }
 }
 
-function comprobarContraseña(pContraseña)
+function comprobarContraseña(pContraseña) //BIEN
 {
     var er = /^[a-zA-Z0-9]{4,16}$/;
 
@@ -501,14 +487,14 @@ function comprobarContraseña(pContraseña)
 }
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
-function buscarEmail()
+function buscarEmail() //BIEN
 {
-    var emailABuscar = document.getElementById("email").value;
+    var emailABuscar = document.getElementById("correo").value;
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
     //----------- CONECTAR A LA BD ----------------   
-    var transaccion = bd.transaction(["usuarios"], "readonly");
-    var almacen = transaccion.objectStore("usuarios");
+    var transaccion = bd.transaction(["cliente"], "readonly");
+    var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
     //---------------------------------------------
@@ -548,7 +534,7 @@ function buscarEmail()
 
                 var usuario = elementos[i].nombre;
 
-                document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
+                document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
             } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
