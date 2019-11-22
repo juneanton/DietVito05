@@ -201,3 +201,8 @@ tr:nth-child(even) {
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
+#textoInicial{
+    font-family:Monaco,Georgia,Times,serif;
+    color: green;
+    /*font-family:Helvetica,Futura,Arial,Verdana,sans-serif;*/
+}
