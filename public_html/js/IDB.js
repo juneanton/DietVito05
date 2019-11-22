@@ -79,19 +79,22 @@ function iniciar() {
 
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
-
+        
+        //CREO QUE VA ABAJO DONDE BUSCAREMAIL
+        if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
+            //href = "Dietista.html";
+            window.open("Dietista.html");
+        } else { //NO LO HACE
+            href = "Cliente.html";
+        }
+        
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", buscarEmail);
-
+        
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", sessionStorage);
 
-        //CREO QUE VA ABAJO DONDE BUSCAREMAIL
-//        if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
-//            href = "Dietista.html";
-//        } else { //NO LO HACE
-//            href = "Cliente.html";
-//        }
+        
     }
     //----------------PANTALLA ACTIVIDADES----------------
     else if (document.title === "DietVito-Actividades") 
@@ -384,17 +387,17 @@ function mostrarActividades() {
     };
 }
 
-//function procesar(evento) {
-//
-//    cajadatos.innerHTML = "";
-//    var archivos = evento.target.files;
-//    var archivo = archivos[0];
-//    var lector = new FileReader();
-//    lector.addEventListener("load", function (evento) {
-//        mostrar(evento, archivo);
-//    });
-//    lector.readAsBinaryString(archivo);
-//}
+function procesar(evento) { //NOSE QUE ES NI QUE HACE
+
+    cajadatos.innerHTML = "";
+    var archivos = evento.target.files;
+    var archivo = archivos[0];
+    var lector = new FileReader();
+    lector.addEventListener("load", function (evento) {
+        mostrar(evento, archivo);
+    });
+    lector.readAsBinaryString(archivo);
+}
 
 //function mostrar(archivo) {
 //
@@ -494,11 +497,11 @@ function buscarEmail()
                 holaU = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
                 //CREO QUE VA AQUI Y NO ARRIBA PERO NO LLEGA HASTA AQUI
-                if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
-                    href = "Dietista.html";
-                } else { //NO LO HACE
-                    href = "Cliente.html";
-                }
+//                if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
+//                    href = "Dietista.html";
+//                } else { //NO LO HACE
+//                    href = "Cliente.html";
+//                }
 
             } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
