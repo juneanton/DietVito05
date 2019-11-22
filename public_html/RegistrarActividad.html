@@ -15,27 +15,27 @@
                 <img src="img/dietvito.png">
             </div>
         </header>
-        
+
         <nav id = "menuprincipal">
             <ul class="menu">
                 <li><a style ="float:left" href="javascript:history.back()"><img class="pequeña" src="img/flecha.png" /></a></li>
                 <li><a id = "casa" title = "casa" href="index.html"><img class="pequeña" src="img/casa.png" /></a></li>
-                
+
                 <li id = "item"><a href="#">Registrar</a>
                     <ul id = "desple"><li><a href="RegistrarActividad.html">Actividades</a></li>
                         <li><a href="RegistrarAlimento.html">Alimentos</a></li></ul> 
-                        
+
                 <li id = "item"><a href="#">Consultar</a>
                     <ul id = "desple"><li><a href="ConsultarActividadesRealizadas.html">Actividades realizadas</a></li>
                         <li><a href="ConsultarCaloriasConsumidas.html">Alimentos consumidos</a></li>  
                         <li><a href="ConsultarPesos.html">Pesos</a></li></ul>
                 </li>
-                           
+
                 <!--CERRAR SESION!!!1-->
                 <li onclick="cerrarSesion()" id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
             </ul>
         </nav>
-        
+
         <main id ="registrarActi">
             <div align="center">
                 <p></p>
@@ -45,16 +45,19 @@
                 <section id="FormularioRA">
                     <form name="informacion" method="get" action="procesar.php">
                         <p><label for="listado">Actividades: </label>
-                            <select name="actividad" id="listado" required>
-                                <option selected value="0" disabled> Seleccione una: </option>
-<!--                            <option value="1">Correr</option>
-                                <option value="2">Caminata</option>
-                                <option value="3">Bici</option>
-                                <option value="4">Pesas</option>-->
-                            </select>
+                             <select id="opt" name="opt" required></select>
+                                
+
+                        <!--                            <select name="actividad" id="listado" required>
+                                                        <option selected value="0" disabled> Seleccione una: </option>
+                                                    <option value="1">Correr</option>
+                                                        <option value="2">Caminata</option>
+                                                        <option value="3">Bici</option>
+                                                        <option value="4">Pesas</option>
+                                                    </select>-->
                         </p>
                         <p>Fecha y hora de la actividad: <input type="datetime-local" name="fecha" id ="fecha" required></p>
-                        
+
                         <p onclick="addActividad();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
@@ -62,8 +65,8 @@
         </main>
         <footer id="pie">
             <hr/>
-         &copy; Grupo 05. Análisis y diseño de sistemas de información
-         <a href="AcercaDe.html">Acerca de </a><img class="pequeña" src="img/FB.png"/><img class="pequeña" src="img/TW.png"/><img class="pequeña" src="img/insta.png"/>
+            &copy; Grupo 05. Análisis y diseño de sistemas de información
+            <a href="AcercaDe.html">Acerca de </a><img class="pequeña" src="img/FB.png"/><img class="pequeña" src="img/TW.png"/><img class="pequeña" src="img/insta.png"/>
         </footer>
     </body>
 </html>
