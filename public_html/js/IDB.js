@@ -20,21 +20,22 @@ function iniciar() {
         alert('Database loaded');
         //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
         mostrarActividades();
+        //LO HACE EN TODAS LAS PAGINAS Y SE RAYA SOLO LO TIENE QUE HACER EN ACTIVIDADES!!!!!
     };
     database.onerror = function (e) { //MIO
         alert('Error loading database');
     };
-    //solicitud.addEventListener("error", mostrarerror);
-    //solicitud.addEventListener("success", comenzar);
-    //solicitud.addEventListener("upgradeneeded", crearbd);
-
+  
     if (document.getElementById("correo") === null) {
 
     } 
     else {
         sesionStorage();
     }
-
+    
+    //HACER CON TODAS LAS PANTALLAS
+    
+    //----------------PANTALLA REGISTRAR USUARIO---------------- (SIN HACER)
     if (document.title === "DietVito-Registrar Usuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
@@ -63,8 +64,10 @@ function iniciar() {
 
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
-
-    } else if (document.title === "DietVito-Iniciar sesión") //YO
+    }
+    
+    //----------------PANTALLA INICIAR SESION----------------
+    else if (document.title === "DietVito-Iniciar sesión") //YO
     {        
         email = document.getElementById("correo");
         email.addEventListener("input", comprobacionLogin);
@@ -72,83 +75,74 @@ function iniciar() {
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
         
-        var botonLogin = document.getElementById("btnIS");
-        botonLogin.addEventListener("click", buscarEmail);
+        var botonIniciarSesion = document.getElementById("btnIS");
+        botonIniciarSesion.addEventListener("click", buscarEmail);
         
-        //var botonLogin = document.getElementById("btnIS");
-        //botonLogin.addEventListener("click", sessionStorage);
+        var botonIniciarSesion = document.getElementById("btnIS");
+        botonIniciarSesion.addEventListener("click", sessionStorage);
         
-        if(buscarEmail(email) === "diet@diet.eus"){
+        if(buscarEmail(email) === "diet@diet.eus"){ //NO LO HACE
             href = "Dietista.html";
         }
-        else{
+        else{ //NO LO HACE
             href = "Cliente.html";
         }
-    } else if (document.title === "Inicio")
-    {
-        alert("inicio");
-        lugar = document.getElementsByName("lugar");
-        //lugar.addEventListener("select", );
-
-        fechaI = document.getElementById("fechaI");
-        //fechaI.addEventListener("input", );
-
-        horaI = document.getElementById("horaI");
-        //horaI.addEventListener("input", );
-
-        fechaF = document.getElementById("fechaF");
-        //fechaF.addEventListener("input", );
-
-        horaF = document.getElementById("horaF");
-        //horaF.addEventListener("input", );
-
-        if (fechaI.value <= fechaF.value)
-        {
-            var botonBuscarCoche = document.getElementById("buton");
-            botonBuscarCoche.addEventListener("click", buscarCoche);
-        }
-    } else if (document.title === "Reserva")
-    {
-        alert("Entra a reservas");
-        coche = document.getElementsByName("coche").value;
-        //lugar.addEventListener("select", );
-
-        fechaI = document.getElementById("fechaI").value;
-//        fechaI.addEventListener("input", comprobarFecha);
-
-        horaI = document.getElementById("horaI").value;
-//        horaI.addEventListener("input", comprobarFecha);
-
-        fechaF = document.getElementById("fechaF").value;
-//        fechaF.addEventListener("input", comprobarFecha);
-
-        horaF = document.getElementById("horaF").value;
-//        horaF.addEventListener("input", comprobarFecha);
-
-        lugar = document.getElementsByName("lugar").value;
-        //lugar.addEventListener("select", );
-
-        var reserva = document.getElementById("btReserva");
-        reserva.addEventListener("click", agregarReserva);
-    } else if (document.title === "ConsultarReserva")
-    {
-        alert("Entra a reservas");
-        fechaI = document.getElementById("fechaRI");
-        fechaF = document.getElementById("fechaRF");
-
-        var consultaReserva = document.getElementById("btConsulta");
-        consultaReserva.addEventListener("click", recuperarReserva);
-    }
-}
-
-function mostrarerror(evento) {
-    alert("Error: " + evento.code + " " + evento.message);
-}
-
-function comenzar(evento)
-{
-    alert("Comienza");
-    bd = evento.target.result;
+    } 
+//    else if (document.title === "Inicio")
+//    {
+//        alert("inicio");
+//        lugar = document.getElementsByName("lugar");
+//        //lugar.addEventListener("select", );
+//
+//        fechaI = document.getElementById("fechaI");
+//        //fechaI.addEventListener("input", );
+//
+//        horaI = document.getElementById("horaI");
+//        //horaI.addEventListener("input", );
+//
+//        fechaF = document.getElementById("fechaF");
+//        //fechaF.addEventListener("input", );
+//
+//        horaF = document.getElementById("horaF");
+//        //horaF.addEventListener("input", );
+//
+//        if (fechaI.value <= fechaF.value)
+//        {
+//            var botonBuscarCoche = document.getElementById("buton");
+//            botonBuscarCoche.addEventListener("click", buscarCoche);
+//        }
+//    } else if (document.title === "Reserva")
+//    {
+//        alert("Entra a reservas");
+//        coche = document.getElementsByName("coche").value;
+//        //lugar.addEventListener("select", );
+//
+//        fechaI = document.getElementById("fechaI").value;
+////        fechaI.addEventListener("input", comprobarFecha);
+//
+//        horaI = document.getElementById("horaI").value;
+////        horaI.addEventListener("input", comprobarFecha);
+//
+//        fechaF = document.getElementById("fechaF").value;
+////        fechaF.addEventListener("input", comprobarFecha);
+//
+//        horaF = document.getElementById("horaF").value;
+////        horaF.addEventListener("input", comprobarFecha);
+//
+//        lugar = document.getElementsByName("lugar").value;
+//        //lugar.addEventListener("select", );
+//
+//        var reserva = document.getElementById("btReserva");
+//        reserva.addEventListener("click", agregarReserva);
+//    } else if (document.title === "ConsultarReserva")
+//    {
+//        alert("Entra a reservas");
+//        fechaI = document.getElementById("fechaRI");
+//        fechaF = document.getElementById("fechaRF");
+//
+//        var consultaReserva = document.getElementById("btConsulta");
+//        consultaReserva.addEventListener("click", recuperarReserva);
+//    }
 }
 
 //----------------CREAR LA BD----------------
@@ -167,10 +161,11 @@ function crearbd() {
     almacen1.add({actividad: "Basket", descripcion: "Basket durante una hora", calorias: "300"});
     almacen1.add({actividad: "Fútbol", descripcion: "Fútbol durante una hora", calorias: "350"});
 }
+//----------------REGISTRAR EL CLIENTE EN LA BD----------------
 function add() { //MIO
-    alert('1');
+    //alert('1');
     var active = database.result;
-    alert('ok' + active);
+    //alert('ok' + active);
     var data = active.transaction(["cliente"], "readwrite");
     object = data.objectStore("cliente");
 
@@ -194,7 +189,7 @@ function add() { //MIO
         document.querySelector('#nombre').value = '';
         document.querySelector('#peso').value = '';
         document.querySelector('#altura').value = '';
-        document.querySelector('#foto').value = '';
+        document.getElementById('foto').files[0].name;
         alert('se agrego correctamente el objeto');
     };
 }
@@ -215,7 +210,8 @@ function sesionStorage()
 
             document.getElementById("correo").innerHTML = 'Hola, ' + datos[0];
         }
-    } else
+    } 
+    else
     {
         //el sesionStorage esta vacio, asi que cogemos datos
         //del localStorage del ultimo usuario que ha entrado
