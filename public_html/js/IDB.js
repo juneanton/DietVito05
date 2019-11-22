@@ -19,7 +19,7 @@ function iniciar() {
     database.onsuccess = function (e) {//MIO
         alert('Database loaded');
         //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
-        mostrarActividades();
+        //mostrarActividades();
         //LO HACE EN TODAS LAS PAGINAS Y SE RAYA SOLO LO TIENE QUE HACER EN ACTIVIDADES!!!!!
     };
     database.onerror = function (e) { //MIO
@@ -92,6 +92,23 @@ function iniciar() {
 //        } else { //NO LO HACE
 //            href = "Cliente.html";
 //        }
+    }
+    //----------------PANTALLA INICIAR SESION----------------
+    else if (document.title === "DietVito-Actividades") //YO
+    {
+        //abre la conexion de la bd dietvito-05
+        database = indexedDB.open("DietVito-05", 1);
+        database.onupgradeneeded = function (e) {//MIO
+            crearbd();
+        };
+        database.onsuccess = function (e) {//MIO
+            alert('Database loaded');
+            //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
+            mostrarActividades();
+        };
+        database.onerror = function (e) { //MIO
+            alert('Error loading database');
+        };
     }
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
@@ -446,7 +463,7 @@ function buscarEmail() //BIEN
             {
                 alert("Contraseña verificada");
                 encontrado = true;
-                
+
                 var clave = elementos[i].email;
                 var contraseña = elementos[i].contraseña;
 
