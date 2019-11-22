@@ -171,6 +171,32 @@ function add() { //MIO
     };
 }
 
+function addPeso() { //MIO
+    //alert('1');
+    var active = database.result;
+    //alert('ok' + active);
+    var data = active.transaction(["pesoCliente"], "readwrite");
+    object = data.objectStore("pesoCliente");
+
+    //insert into
+    var request = object.put({
+        idUsuario: document.querySelector('#correo').value,
+        fecha: document.querySelector('#fecha').value,
+        pesa: document.querySelector('#peso').value
+
+    });
+    request.onerror = function (e) {
+        alert(request.error.name + '\n\n' + request.error.message);
+    };
+    data.oncomplete = function (e) {
+        //para que se borren los campos para poder registrar otro
+        document.querySelector('#correo').value = '';
+        document.querySelector('#fecha').value = '';
+        document.querySelector('#peso').value = '';
+        alert('se agrego correctamente el objeto');
+    };
+}
+
 //----------------REGISTRA A LOS USUARIOS---------------- ESTE LO COMPRUEBA EL NUESTRO NO! CAMBIAR
 //function agregarClientes() {
 //    alert("agregar clientes");
@@ -437,7 +463,7 @@ function buscarEmail() //BIEN
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
     //----------- CONECTAR A LA BD ----------------   
-    var transaccion = bd.transaction(["cliente"], "readonly");
+    var transaccion = bd.transaction(["cliente"], "readonly"); //FALLA AQUI 
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
