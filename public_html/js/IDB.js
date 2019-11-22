@@ -225,7 +225,7 @@ function sesionStorage()
         document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
     }
 }
-//----------------REGISTRA A LOS USUARIOS----------------
+//----------------REGISTRA A LOS USUARIOS---------------- ESTE LO COMPRUEBA EL NUESTRO NO! CAMBIAR
 function agregarClientes() {
     alert("agregar clientes");
     if (comprobacionRegistro() === true)
@@ -236,7 +236,7 @@ function agregarClientes() {
         var email = document.getElementById("email").value;
         var contraseña = document.getElementById("contraseña").value;
         var nombre = document.getElementById("nombre").value;
-        var pesoInicial = document.getElementById("pesoInicial").value;
+        var pesoI = document.getElementById("pesoInicial").value;
         var altura = document.getElementById("altura").value;
         var foto = document.getElementById("foto").value;
 
@@ -249,7 +249,7 @@ function agregarClientes() {
                 alert("Ya existe ese usuario!");
             } else
             {
-                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoInicial, altura: altura, foto: foto});
+                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoI, altura: altura, foto: foto});
                 alert("Se ha insertado correctamente");
                 var datos = new Array(); //Creamos un nuevo array vacío
                 datos[0] = nombre;
@@ -270,14 +270,15 @@ function agregarClientes() {
 }
 function comprobacionRegistro() //CAMBIAR
 {
-    comprobarNombre(nombre.value);
-    comprobarDNI(dni.value);
-    comprobarMovil(movil.value);
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
+    comprobarNombre(nombre.value);
+    comprobarPeso(pesoI.value);
+    comprobarAltura(altura.value);
+    comprobarFoto(foto.value);
 
-    if (comprobarNombre(nombre.value) && comprobarDNI(dni.value) && comprobarMovil(movil.value) && comprobarEmail(email.value)
-            && comprobarContraseña(contraseña.value) === true)
+    if (comprobarEmail(email.value) && comprobarContraseña(contraseña.value) && comprobarNombre(nombre.value)
+          && comprobarPeso(pesoI.value) &&  comprobarAltura(altura.value) && comprobarFoto(foto.value))
     {
         return true;
     }
@@ -390,41 +391,6 @@ function agregarActividades(){
 
 };
 
-function agregarUsuario()
-{
-    alert("Entra a agregar usuario");
-
-    var transaccion = bd.transaction(["usuarios"], "readwrite");
-    var almacen2 = transaccion.objectStore("usuarios");
-
-    //var transaccion1 = bd.transaction(["coches"], "readonly");
-    //var almacen1 = transaccion1.objectStore("coches");
-
-    var nombre = document.getElementsByName("coche").value;
-    var email = document.getElementById("fechaI").value;
-    var contraseña = document.getElementById("horaI").value;
-    var pesoInicial = document.getElementById("fechaF").value;
-    var altura = document.getElementById("horaF").value;
-    var foto = document.getElementsByName("lugar").value;
-
-    var consulta = almacen2.openCursor(coche);
-    consulta.onsuccess = function (e)
-    {
-        alert("cursor");
-        var cursor = e.target.result;
-        if (cursor)
-        {
-            alert("coche ya reservado");
-        } else
-        {
-            alert("Se va ha agregar reserva");
-
-            almacen2.add({coche: coche, fechaI: fechaI, horaI: horaI, fechaF: fechaF, horaF: horaF, lugar: lugar});
-            alert("Se ha agregaddd(o reserva");
-        }
-    };
-}
-
 function procesar(evento) {
 
     cajadatos.innerHTML = "";
@@ -437,7 +403,7 @@ function procesar(evento) {
     lector.readAsBinaryString(archivo);
 }
 
-function mostrar(evento, archivo) {
+function mostrar(archivo) {
 
     var url = URL.createObjectURL(archivo);
     var imagen = document.createElement("img");
@@ -531,18 +497,19 @@ function buscarEmail() //BIEN
 
                 var usuario = elementos[i].nombre;
 
-                document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
+                holaU = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
-            } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
+            } 
+            else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
                 alert("Contraseña incorrecta!!!!");
                 encontrado = true;
-            } else
+            } 
+            else
             {
                 i++;
             }
         }
-
         if (!encontrado)
             alert("El email no esta en la BD");
     };
