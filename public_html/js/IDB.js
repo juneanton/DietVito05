@@ -34,7 +34,7 @@ function iniciar() {
 
     //HACER CON TODAS LAS PANTALLAS
 
-    //----------------PANTALLA REGISTRAR USUARIO---------------- (SIN HACER)
+    //----------------PANTALLA REGISTRAR USUARIO----------------
     if (document.title === "DietVito-Registrar Usuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
@@ -65,7 +65,7 @@ function iniciar() {
         foto.addEventListener("change", procesar);
 
         var botonRegistrarse = document.getElementById("registrarse");
-        botonRegistrarse.addEventListener("click", add);
+        botonRegistrarse.addEventListener("click", add());
 
         var botonRegistrarse = document.getElementById("registrarse");
         botonRegistrarse.addEventListener("click", sesionStorage);
@@ -109,6 +109,28 @@ function iniciar() {
         database.onerror = function (e) {
             alert('Error loading database');
         };
+    }
+    //----------------PANTALLA REGISTRAR PESOS----------------
+    else if (document.title === "DietVito-Registrar Peso") {
+        //cajadatos = document.getElementById("cajadatos");
+        alert("estamos en registro de pesos");
+        correo = document.getElementById("correo");
+        if (correo !== null)
+            correo.addEventListener("input", comprobacionRegistroPeso);
+        
+        peso = document.getElementById("peso");
+//        if (peso !== null)
+//            peso.addEventListener("input", comprobacionRegistroPeso);
+
+        fecha = document.getElementById("fecha");
+//        if (fecha !== null)
+//            fecha.addEventListener("input", comprobacionRegistroPeso);
+
+        var botonRegistrarPeso = document.getElementById("enviarPeso");
+        botonRegistrarPeso.addEventListener("click", addPeso());
+
+        var botonRegistrarPeso = document.getElementById("enviarPeso");
+        botonRegistrarPeso.addEventListener("click", sesionStorage);
     }
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
@@ -286,6 +308,17 @@ function comprobacionRegistro() //CAMBIAR
 
     if (comprobarEmail(email.value) && comprobarContraseña(contraseña.value) && comprobarNombre(nombre.value)
             && comprobarPeso(pesoI.value) && comprobarAltura(altura.value) && comprobarFoto(foto.value))
+    {
+        return true;
+    }
+}
+
+function comprobacionRegistroPeso(){
+    comprobarEmail(email.vaule);
+    //comprobarPeso(peso.value);
+    //comprobarFecha(fecha.value);
+    
+    if(comprobarEmail(email.value)) //&& comprobarPeso(peso.value) && comprobarFecha(fecha.value))
     {
         return true;
     }
