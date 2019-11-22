@@ -444,6 +444,22 @@ function comprobarContraseña(pContraseña)
     }
 }
 
+function comprobarFecha() 
+{
+    //Para los html siguientes:
+    if(document.title === "ConsultarActividadesRealizadas" || document.title ==="ConsultarActividadesRealizadasUsuario")
+    {
+        //Si la "desde" <= "hasta"
+        if(fechaI.value<=FechaF.value){
+            alert("fecha bien introducida");
+            return true;
+        }
+        else {
+            alert("fechaI no puede ser mayor que fechaF")
+        }
+    }
+}
+
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail()
 {
