@@ -67,8 +67,8 @@ function iniciar() {
         var botonRegistrarse = document.getElementById("registrarse");
         botonRegistrarse.addEventListener("click", add);
 
-//        var botonRegistrarse = document.getElementById("registrarse");
-//        botonRegistrarse.addEventListener("click", sesionStorage);
+        var botonRegistrarse = document.getElementById("registrarse");
+        botonRegistrarse.addEventListener("click", sesionStorage);
     }
 
     //----------------PANTALLA INICIAR SESION----------------
@@ -83,8 +83,8 @@ function iniciar() {
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", buscarEmail);
 
-//        var botonIniciarSesion = document.getElementById("btnIS");
-//        botonIniciarSesion.addEventListener("click", sessionStorage);
+        var botonIniciarSesion = document.getElementById("btnIS");
+        botonIniciarSesion.addEventListener("click", sessionStorage);
 
         //CREO QUE VA ABAJO DONDE BUSCAREMAIL
 //        if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
@@ -93,20 +93,19 @@ function iniciar() {
 //            href = "Cliente.html";
 //        }
     }
-    //----------------PANTALLA INICIAR SESION----------------
-    else if (document.title === "DietVito-Actividades") //YO
+    //----------------PANTALLA ACTIVIDADES----------------
+    else if (document.title === "DietVito-Actividades") 
     {
         //abre la conexion de la bd dietvito-05
         database = indexedDB.open("DietVito-05", 1);
-        database.onupgradeneeded = function (e) {//MIO
+        database.onupgradeneeded = function (e) {
             crearbd();
         };
-        database.onsuccess = function (e) {//MIO
+        database.onsuccess = function (e) {
             alert('Database loaded');
-            //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
             mostrarActividades();
         };
-        database.onerror = function (e) { //MIO
+        database.onerror = function (e) {
             alert('Error loading database');
         };
     }
