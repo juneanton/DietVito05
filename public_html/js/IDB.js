@@ -104,6 +104,7 @@ function iniciar() {
         database.onsuccess = function (e) {
             alert('Database loaded');
             mostrarActividades();
+            desplegableActi();
         };
         database.onerror = function (e) {
             alert('Error loading database');
@@ -317,26 +318,15 @@ function desplegableActi() {
     };
     //Si la transacción ocurre correctamente
     data.oncomplete = function () {
-        //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
-        var outerHTML = ''; //Cadena vacía
-
-        //BUSCARCOCHE EMAIL MIRAAAAR
-
-        //Por cada elemento del array
         for (var key in elements) {
-            //Incorporarle una
-            outerHTML += '\n\
-            <tr>\n\
-                <td>' + elements[key].actividad + '</td>\n\
-                <td>' + elements[key].descripcion + '</td>\n\
-                <td>' + elements[key].calorias + '</td>\n\
-            </tr>';
+            var ejer = document.getElementById('opt');
+            var option = document.createElement('option');
+            //Duda de si es value, keys o lo que
+            option.value = elements[key].result.keys();
+            var optionText = document.createTextNode(elements[key].result.keys());
+            option.appendChild(optionText);
+            ejer.appendChild(option);
         }
-
-        //Vaciamos elements
-        elements = [];
-        //Para que a elementsList le asigne el valor de outerHTML
-        document.querySelector('#elementsList').innerHTML = outerHTML;
     };
 }
 
