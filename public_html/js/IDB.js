@@ -25,45 +25,44 @@ function iniciar() {
     database.onerror = function (e) { //MIO
         alert('Error loading database');
     };
-  
+
     if (document.getElementById("correo") === null) {
 
-    } 
-    else {
+    } else {
         sesionStorage();
     }
-    
+
     //HACER CON TODAS LAS PANTALLAS
-    
+
     //----------------PANTALLA REGISTRAR USUARIO---------------- (SIN HACER)
     if (document.title === "DietVito-Registrar Usuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
         correo = document.getElementById("correo");
-        if(correo !== null)
+        if (correo !== null)
             correo.addEventListener("input", comprobacionRegistro);
-        
+
         contraseña = document.getElementById("contraseña");
-        if(contraseña !== null)
+        if (contraseña !== null)
             contraseña.addEventListener("input", comprobacionRegistro);
-        
+
         nombre = document.getElementById("nombre");
-        if(nombre !== null)
+        if (nombre !== null)
             nombre.addEventListener("input", comprobacionRegistro);
 
         pesoI = document.getElementById("peso");
-        if(pesoI !== null)
+        if (pesoI !== null)
             pesoI.addEventListener("input", comprobacionRegistro);
 
         altura = document.getElementById("altura");
-        if(altura !== null)
+        if (altura !== null)
             altura.addEventListener("input", comprobacionRegistro);
 
 //        foto = document.getElementById("foto");
 //        foto.addEventListener("input", comprobacionRegistro);
 //
-//        var archivos = document.getElementById("imagen");
-//        archivos.addEventListener("change", procesar);
+        var foto = document.getElementById("foto");
+        foto.addEventListener("change", procesar);
 
         var botonRegistrarse = document.getElementById("registrarse");
         botonRegistrarse.addEventListener("click", add);
@@ -71,29 +70,29 @@ function iniciar() {
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
     }
-    
+
     //----------------PANTALLA INICIAR SESION----------------
     else if (document.title === "DietVito-Iniciar sesión") //YO
-    {        
+    {
         email = document.getElementById("correo");
         email.addEventListener("input", comprobacionLogin);
-        
+
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
-        
+
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", buscarEmail);
-        
-        var botonIniciarSesion = document.getElementById("btnIS");
-        botonIniciarSesion.addEventListener("click", sessionStorage);
-        
-        if(email === "diet@diet.eus" && comprobacionLogin){ //NO LO HACE
-            href = "Dietista.html";
-        }
-        else{ //NO LO HACE
-            href = "Cliente.html";
-        }
-    } 
+
+//        var botonIniciarSesion = document.getElementById("btnIS");
+//        botonIniciarSesion.addEventListener("click", sessionStorage);
+
+        //CREO QUE VA ABAJO DONDE BUSCAREMAIL
+//        if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
+//            href = "Dietista.html";
+//        } else { //NO LO HACE
+//            href = "Cliente.html";
+//        }
+    }
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
 
@@ -103,6 +102,7 @@ function crearbd() {
 
     var almacen = active.createObjectStore("cliente", {keyPath: "email"});
     almacen.createIndex("porEmail", "email", {unique: true});
+    almacen.add({email: "diet@diet.eus", contraseña: "diet2019"});
 
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
@@ -112,13 +112,13 @@ function crearbd() {
     almacen1.add({actividad: "Andar", descripcion: "Andar durante una hora", calorias: "200"});
     almacen1.add({actividad: "Basket", descripcion: "Basket durante una hora", calorias: "300"});
     almacen1.add({actividad: "Fútbol", descripcion: "Fútbol durante una hora", calorias: "350"});
-    
+
     //----------------TABLA PESOS----------------
     var almacen2 = active.createObjectStore("pesoCliente", {keyPath: ["idUsuario", "fecha"]});
     almacen2.createIndex("porUsuario", ["idUsuario", "fecha"], {unique: true});
 
     //----------------TABLA REGISTRO ACTIVIDADES----------------
-    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]}); 
+    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]});
     almacen3.createIndex("porUsuario", ["idUsuario", "idActi", "fecha"], {unique: true});
 }
 
@@ -138,7 +138,7 @@ function add() { //MIO
         peso: document.querySelector('#peso').value,
         altura: document.querySelector('#altura').value,
         foto: document.getElementById('foto').files[0].name
-        
+
     });
     request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
@@ -217,8 +217,7 @@ function sesionStorage()
 
             document.getElementById("correo").innerHTML = 'Hola, ' + datos[0];
         }
-    } 
-    else
+    } else
     {
         //el sesionStorage esta vacio, asi que cogemos datos
         //del localStorage del ultimo usuario que ha entrado
@@ -243,55 +242,55 @@ function comprobacionRegistro() //CAMBIAR
     comprobarFoto(foto.value);
 
     if (comprobarEmail(email.value) && comprobarContraseña(contraseña.value) && comprobarNombre(nombre.value)
-          && comprobarPeso(pesoI.value) &&  comprobarAltura(altura.value) && comprobarFoto(foto.value))
+            && comprobarPeso(pesoI.value) && comprobarAltura(altura.value) && comprobarFoto(foto.value))
     {
         return true;
     }
 }
 
-function desplegableActi () {
+function desplegableActi() {
     //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
     //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
-    var data = active.transaction(["actividades"], "readonly"); 
+    var data = active.transaction(["actividades"], "readonly");
     //Sobre que almacen? SOLO EL NOMBRE DE LA ACTIVIDAD
     //------------------------------------------------------ DUDA DE SI KEYPATH O NO
     var object = data.objectStore("actividades.keyPath");
     //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
-     //Recorrer los elementos del almacenamiento actividades --> Bucle
+    //Recorrer los elementos del almacenamiento actividades --> Bucle
     //El cursor es como un puntero. Le decimos qeu se coloque a la entrada del almacen actividades para recorrerlo entero
-    object.openCursor().onsuccess= function(e){
+    object.openCursor().onsuccess = function (e) {
         //El codigo que se va a ejecutar por cada uno de los objetos del almacen
         //Recuperar la info
         var result = e.target.result;
         //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
-        if(result === null){
+        if (result === null) {
             return;
         }
         //Para agregar el objeto al array que luego mostraremos
         elements.push(result.value);
         //Continuamos el bucle
         result.continue();
-    }; 
+    };
     //Si la transacción ocurre correctamente
-    data.oncomplete = function(){
+    data.oncomplete = function () {
         //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
         var outerHTML = ''; //Cadena vacía
-        
+
         //BUSCARCOCHE EMAIL MIRAAAAR
-        
+
         //Por cada elemento del array
-        for(var key in elements) {
+        for (var key in elements) {
             //Incorporarle una
             outerHTML += '\n\
             <tr>\n\
-                <td>' +elements[key].actividad + '</td>\n\
-                <td>' +elements[key].descripcion + '</td>\n\
-                <td>' +elements[key].calorias + '</td>\n\
-            </tr>';    
+                <td>' + elements[key].actividad + '</td>\n\
+                <td>' + elements[key].descripcion + '</td>\n\
+                <td>' + elements[key].calorias + '</td>\n\
+            </tr>';
         }
-        
+
         //Vaciamos elements
         elements = [];
         //Para que a elementsList le asigne el valor de outerHTML
@@ -299,7 +298,7 @@ function desplegableActi () {
     };
 }
 
-function mostrarActividades(){
+function mostrarActividades() {
     //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
     //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
@@ -308,39 +307,39 @@ function mostrarActividades(){
     var object = data.objectStore("actividades");
     //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
-    
+
     //Recorrer los elementos del almacenamiento actividades --> Bucle
     //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
     //del almacen actividades para recorrerlo entero
-    object.openCursor().onsuccess= function(e){
+    object.openCursor().onsuccess = function (e) {
         //El codigo que se va a ejecutar por cada uno de los objetos del almacen
         //Recuperar la info
         var result = e.target.result;
         //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
-        if(result === null){
+        if (result === null) {
             return;
         }
         //Para agregar el objeto al array que luego mostraremos
         elements.push(result.value);
         //Continuamos el bucle
         result.continue();
-    }; 
+    };
     //Si la transacción ocurre correctamente
-    data.oncomplete = function(){
+    data.oncomplete = function () {
         //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
         var outerHTML = ''; //Cadena vacía
-        
+
         //Por cada elemento del array
-        for(var key in elements) {
+        for (var key in elements) {
             //Incorporarle una
             outerHTML += '\n\
             <tr>\n\
-                <td>' +elements[key].actividad + '</td>\n\
-                <td>' +elements[key].descripcion + '</td>\n\
-                <td>' +elements[key].calorias + '</td>\n\
-            </tr>';    
+                <td>' + elements[key].actividad + '</td>\n\
+                <td>' + elements[key].descripcion + '</td>\n\
+                <td>' + elements[key].calorias + '</td>\n\
+            </tr>';
         }
-        
+
         //Vaciamos elements
         elements = [];
         //Para que a elementsList le asigne el valor de outerHTML
@@ -352,9 +351,10 @@ function mostrarActividades(){
 //actividad agregada
 
 //CAMBIO: Este método para cuando agregemos actividades que hemos reaizado
-function agregarActividades(){
+function agregarActividades() {
 
-};
+}
+;
 
 function procesar(evento) {
 
@@ -416,7 +416,7 @@ function comprobarContraseña(pContraseña) //BIEN
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail() //BIEN
 {
-    alert ('buscando el email');
+    alert('buscando el email');
     var emailABuscar = document.getElementById("correo").value;
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
@@ -446,7 +446,7 @@ function buscarEmail() //BIEN
             {
                 alert("Contraseña verificada");
                 encontrado = true;
-
+                
                 var clave = elementos[i].email;
                 var contraseña = elementos[i].contraseña;
 
@@ -464,13 +464,18 @@ function buscarEmail() //BIEN
 
                 holaU = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
-            } 
-            else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
+                //CREO QUE VA AQUI Y NO ARRIBA PERO NO LLEGA HASTA AQUI
+                if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
+                    href = "Dietista.html";
+                } else { //NO LO HACE
+                    href = "Cliente.html";
+                }
+
+            } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
                 alert("Contraseña incorrecta!!!!");
                 encontrado = true;
-            } 
-            else
+            } else
             {
                 i++;
             }
