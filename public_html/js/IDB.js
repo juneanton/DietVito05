@@ -66,7 +66,7 @@ function iniciar() {
 
     } else if (document.title === "DietVito-Iniciar sesión") //YO
     {        
-        email = document.getElementById("email");
+        email = document.getElementById("correo");
         email.addEventListener("input", comprobacionLogin);
         
         contraseña = document.getElementById("contraseña");
@@ -78,7 +78,7 @@ function iniciar() {
         //var botonLogin = document.getElementById("btnIS");
         //botonLogin.addEventListener("click", sessionStorage);
         
-        if(email === "diet@diet.eus"){
+        if(buscarEmail(email) === "diet@diet.eus"){
             href = "Dietista.html";
         }
         else{
@@ -439,6 +439,7 @@ function comprobarContraseña(pContraseña) //BIEN
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail() //BIEN
 {
+    alert ('buscando el email');
     var emailABuscar = document.getElementById("correo").value;
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
