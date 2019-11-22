@@ -28,13 +28,14 @@ function iniciar() {
     //solicitud.addEventListener("success", comenzar);
     //solicitud.addEventListener("upgradeneeded", crearbd);
 
-    if (document.getElementById("usuario") === null) {
+    if (document.getElementById("correo") === null) {
 
-    } else {
+    } 
+    else {
         sesionStorage();
     }
 
-    if (document.title === "RegistrarUsuario") {
+    if (document.title === "DietVito-Registrar Usuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
         nombre = document.getElementById("nombre");
@@ -182,8 +183,9 @@ function add() { //MIO
         nombre: document.querySelector('#nombre').value,
         peso: document.querySelector('#peso').value,
         altura: document.querySelector('#altura').value,
-        foto: document.querySelector('#foto').value
-    });
+        foto: document.getElementById('foto').files[0].name
+        
+    });alert('foto');
     request.onerror = function (e) {
         alert(request.error.name + '\n\n' + request.error.message);
     };
