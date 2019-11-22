@@ -7,22 +7,22 @@
 
 var bd, cajadatos;
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-var database = null; //MIO
+var database = null;
 
 function iniciar() {
 
     //abre la conexion de la bd dietvito-05
     database = indexedDB.open("DietVito-05", 1);
-    database.onupgradeneeded = function (e) {//MIO
+    database.onupgradeneeded = function (e) {
         crearbd();
     };
-    database.onsuccess = function (e) {//MIO
+    database.onsuccess = function (e) {
         alert('Database loaded');
         //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
         //mostrarActividades();
         //LO HACE EN TODAS LAS PAGINAS Y SE RAYA SOLO LO TIENE QUE HACER EN ACTIVIDADES!!!!!
     };
-    database.onerror = function (e) { //MIO
+    database.onerror = function (e) {
         alert('Error loading database');
     };
 
@@ -72,7 +72,7 @@ function iniciar() {
     }
 
     //----------------PANTALLA INICIAR SESION----------------
-    else if (document.title === "DietVito-Iniciar sesión") //YO
+    else if (document.title === "DietVito-Iniciar sesión") 
     {
         email = document.getElementById("correo");
         email.addEventListener("input", comprobacionLogin);
@@ -132,6 +132,20 @@ function iniciar() {
         var botonRegistrarPeso = document.getElementById("enviarPeso");
         botonRegistrarPeso.addEventListener("click", sesionStorage);
     }
+    //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
+    else if (document.title === "DietVito-Registrar Actividad") {
+        
+        
+        //HACER
+        //DESPLEGABLE ESTA SIN HACER 
+
+        var botonRegistrarActi = document.getElementById("enviarActi");
+        botonRegistrarActi.addEventListener("click", addActividad());
+
+        var botonRegistrarActi = document.getElementById("enviarActi");
+        botonRegistrarActi.addEventListener("click", sesionStorage);
+    }
+    
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
 
@@ -162,8 +176,8 @@ function crearbd() {
 }
 
 //----------------REGISTRAR EL CLIENTE EN LA BD----------------
-function add() { //MIO
-    //alert('1');
+function add() { 
+    
     var active = database.result;
     //alert('ok' + active);
     var data = active.transaction(["cliente"], "readwrite");
@@ -194,7 +208,7 @@ function add() { //MIO
     };
 }
 
-function addPeso() { //MIO
+function addPeso() {
     //alert('1');
     var active = database.result;
     //alert('ok' + active);
@@ -220,52 +234,10 @@ function addPeso() { //MIO
     };
 }
 
-//----------------REGISTRA A LOS USUARIOS---------------- ESTE LO COMPRUEBA EL NUESTRO NO! CAMBIAR
-//function agregarClientes() {
-//    alert("agregar clientes");
-//    if (comprobacionRegistro() === true)
-//    {
-//        var transaccion = bd.transaction(["clliente"], "readwrite");
-//        var almacen = transaccion.objectStore("cliente");
-//        
-//        var email = document.querySelector('#correo').value;
-//        var contraseña = document.querySelector('#contraseña').value;
-//        var nombre = document.querySelector('#nombre').value;
-//        var pesoI = document.querySelector('#peso').value;
-//        var altura = document.querySelector('#altura').value;
-//        var foto = document.getElementById('foto').files[0].name;
-//
-//        var consulta = almacen.openCursor(email);
-//        consulta.onsuccess = function (e)
-//        {
-//            var cursor = e.target.result;
-//            if (cursor)
-//            { // el email ya existe
-//                alert("Ya existe ese usuario!");
-//            } 
-//            else
-//            {
-//                almacen.add({email: email, contraseña: contraseña, nombre: nombre, 
-//                    pesoInicial: pesoI, altura: altura, foto: foto});
-//                alert("El cliente se ha insertado correctamente");
-//                var datos = new Array(); //Creamos un nuevo array vacío
-//                datos[0] = nombre;
-//                datos[1] = email;
-//                datos[2] = contraseña;
-//                datos[3] = pesoI;
-//                datos[4] = altura;
-//                datos[5] = foto;
-//                //en sessionStorage cuando cierras la pestaña no se guarda la info
-//                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
-//                //en localStorage cuando cierras la pestaña si se guarda la info
-//                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-//            };
-//        };
-//    } 
-//    else {
-//        alert("Introduce los datos correctamente");
-//    }
-//}
+function addActividad(){
+    //HACER EL REGISTRO DE ACTIVIDAD CUANDO ESTE EL DESPLEGABLE HECHO
+}
+
 function sesionStorage()
 {
     //--------------Session storage----------------------------
@@ -297,7 +269,7 @@ function sesionStorage()
     }
 }
 
-function comprobacionRegistro() //CAMBIAR
+function comprobacionRegistro()
 {
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
@@ -412,43 +384,34 @@ function mostrarActividades() {
     };
 }
 
-//SUPER ADI!!! Cuando vayamos a registrar una nueva actividad tendremos que poner mostrarActividades() para que visualice de nuevo con la nueva
-//actividad agregada
+//function procesar(evento) {
+//
+//    cajadatos.innerHTML = "";
+//    var archivos = evento.target.files;
+//    var archivo = archivos[0];
+//    var lector = new FileReader();
+//    lector.addEventListener("load", function (evento) {
+//        mostrar(evento, archivo);
+//    });
+//    lector.readAsBinaryString(archivo);
+//}
 
-//CAMBIO: Este método para cuando agregemos actividades que hemos reaizado
-function agregarActividades() {
+//function mostrar(archivo) {
+//
+//    var url = URL.createObjectURL(archivo);
+//    var imagen = document.createElement("img");
+//    imagen.src = url;
+//    cajadatos.appendChild(imagen);
+//
+//}
 
-}
-;
-
-function procesar(evento) {
-
-    cajadatos.innerHTML = "";
-    var archivos = evento.target.files;
-    var archivo = archivos[0];
-    var lector = new FileReader();
-    lector.addEventListener("load", function (evento) {
-        mostrar(evento, archivo);
-    });
-    lector.readAsBinaryString(archivo);
-}
-
-function mostrar(archivo) {
-
-    var url = URL.createObjectURL(archivo);
-    var imagen = document.createElement("img");
-    imagen.src = url;
-    cajadatos.appendChild(imagen);
-
-}
-
-function comprobacionLogin() //BIEN
+function comprobacionLogin() 
 {
     comprobarEmail(email.value);
     comprobarContraseña(contraseña.value);
 }
 
-function comprobarEmail(pEmail) //BIEN
+function comprobarEmail(pEmail) 
 {
     var ex = /^([a-zA-Z]+[a-zA-Z0-9._-]*)@{1}([a-zA-Z0-9\.]{2,})\.([a-zA-Z]{2,3})$/;
 
@@ -463,7 +426,7 @@ function comprobarEmail(pEmail) //BIEN
     }
 }
 
-function comprobarContraseña(pContraseña) //BIEN
+function comprobarContraseña(pContraseña)
 {
     var er = /^[a-zA-Z0-9]{4,16}$/;
 
@@ -495,14 +458,15 @@ function comprobarFecha()
 }
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
-function buscarEmail() //BIEN
+function buscarEmail()
 {
     alert('buscando el email');
     var emailABuscar = document.getElementById("correo").value;
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
-    //----------- CONECTAR A LA BD ----------------   
-    var transaccion = bd.transaction(["cliente"], "readonly"); //FALLA AQUI 
+    //----------- CONECTAR A LA BD ----------------  
+    var active = database.result;
+    var transaccion = active.transaction(["cliente"], "readonly");  //AQUI FALLA
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
@@ -567,7 +531,7 @@ function buscarEmail() //BIEN
 }
 
 //----------------CERRAR SESION----------------
-function cerrarSesion() { //HECHO!
+function cerrarSesion() { 
     alert("cierra sesion");
     sessionStorage.clear();
     localStorage.clear();
