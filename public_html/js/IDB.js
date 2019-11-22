@@ -19,7 +19,7 @@ function iniciar() {
     database.onsuccess = function (e) {//MIO
         alert('Database loaded');
         //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
-        loadAll();
+        //loadAll();
     };
     database.onerror = function (e) { //MIO
         alert('Error loading database');
@@ -63,25 +63,26 @@ function iniciar() {
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
 
-    } else if (document.title === "Login")
-    {
-//        nick = document.getElementById("nick");
-//        nick.addEventListener("input", comprobacionLogin);
-
+    } else if (document.title === "DietVito-Iniciar sesión") //YO
+    {        
         email = document.getElementById("email");
         email.addEventListener("input", comprobacionLogin);
-
+        
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
-
-        var botonLogin = document.getElementById("btLogin");
+        
+        var botonLogin = document.getElementById("btnIS");
         botonLogin.addEventListener("click", buscarEmail);
-
-//        var botonLogin = document.getElementById("btLogin");
-//        botonLogin.addEventListener("click", sessionStorage);
-
-
-
+        
+        //var botonLogin = document.getElementById("btnIS");
+        //botonLogin.addEventListener("click", sessionStorage);
+        
+        if(email === "diet@diet.eus"){
+            href = "Dietista.html";
+        }
+        else{
+            href = "Cliente.html";
+        }
     } else if (document.title === "Inicio")
     {
         alert("inicio");
