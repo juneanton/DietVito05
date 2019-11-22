@@ -19,7 +19,7 @@ function iniciar() {
     database.onsuccess = function (e) {//MIO
         alert('Database loaded');
         //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
-        //loadAll();
+        mostrarActividades();
     };
     database.onerror = function (e) { //MIO
         alert('Error loading database');
