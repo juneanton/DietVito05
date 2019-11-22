@@ -149,9 +149,7 @@ function iniciar() {
     else if (document.title=== "ResponsableSucursal")
     {
         alert("estamos en rs");
-        
-        
-        
+
         alert("Entra a responsable sucursal");
         
         email = document.getElementById("email"); 
@@ -169,8 +167,6 @@ function iniciar() {
     }
     
 }
-
-
 
 function mostrarerror(evento) {
     alert("Error: " + evento.code + " " + evento.message);
