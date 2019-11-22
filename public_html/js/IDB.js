@@ -448,8 +448,9 @@ function buscarEmail()
     var emailABuscar = document.getElementById("correo").value;
     var contraseñaABuscar = document.getElementById("contraseña").value;
 
-    //----------- CONECTAR A LA BD ----------------   
-    var transaccion = bd.transaction(["cliente"], "readonly"); //FALLA AQUI--------------------------------------------------------------------------- 
+    //----------- CONECTAR A LA BD ----------------  
+    var active = database.result;
+    var transaccion = active.transaction(["cliente"], "readonly");  //AQUI FALLA
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
