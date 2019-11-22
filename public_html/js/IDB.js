@@ -39,28 +39,34 @@ function iniciar() {
     if (document.title === "DietVito-Registrar Usuario") {
         //cajadatos = document.getElementById("cajadatos");
         alert("estamos en registro");
-        nombre = document.getElementById("nombre");
-        nombre.addEventListener("input", comprobacionRegistro);
-
-        dni = document.getElementById("dni");
-        dni.addEventListener("input", comprobacionRegistro);
-
-        movil = document.getElementById("movil");
-        movil.addEventListener("input", comprobacionRegistro);
-
-        email = document.getElementById("email");
-        email.addEventListener("input", comprobacionRegistro);
-
+        correo = document.getElementById("correo");
+        if(correo !== null)
+            correo.addEventListener("input", comprobacionRegistro);
+        
         contraseña = document.getElementById("contraseña");
-        contraseña.addEventListener("input", comprobacionRegistro);
+        if(contraseña !== null)
+            contraseña.addEventListener("input", comprobacionRegistro);
+        
+        nombre = document.getElementById("nombre");
+        if(nombre !== null)
+            nombre.addEventListener("input", comprobacionRegistro);
 
-        cajadatos = document.getElementById("cajadatos");
+        pesoI = document.getElementById("peso");
+        if(pesoI !== null)
+            pesoI.addEventListener("input", comprobacionRegistro);
 
-        var archivos = document.getElementById("imagen");
-        archivos.addEventListener("change", procesar);
+        altura = document.getElementById("altura");
+        if(altura !== null)
+            altura.addEventListener("input", comprobacionRegistro);
+
+//        foto = document.getElementById("foto");
+//        foto.addEventListener("input", comprobacionRegistro);
+//
+//        var archivos = document.getElementById("imagen");
+//        archivos.addEventListener("change", procesar);
 
         var botonRegistrarse = document.getElementById("registrarse");
-        botonRegistrarse.addEventListener("click", agregarClientes);
+        botonRegistrarse.addEventListener("click", add);
 
 //        var botonRegistrarse = document.getElementById("registrarse");
 //        botonRegistrarse.addEventListener("click", sesionStorage);
@@ -81,7 +87,7 @@ function iniciar() {
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", sessionStorage);
         
-        if(buscarEmail(email) === "diet@diet.eus"){ //NO LO HACE
+        if(email === "diet@diet.eus" && comprobacionLogin){ //NO LO HACE
             href = "Dietista.html";
         }
         else{ //NO LO HACE
@@ -115,6 +121,7 @@ function crearbd() {
     var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]}); 
     almacen3.createIndex("porUsuario", ["idUsuario", "idActi", "fecha"], {unique: true});
 }
+
 //----------------REGISTRAR EL CLIENTE EN LA BD----------------
 function add() { //MIO
     //alert('1');
@@ -143,11 +150,57 @@ function add() { //MIO
         document.querySelector('#nombre').value = '';
         document.querySelector('#peso').value = '';
         document.querySelector('#altura').value = '';
-        document.getElementById('foto').files[0].name;
+        document.getElementById('foto').value = '';
         alert('se agrego correctamente el objeto');
     };
 }
 
+//----------------REGISTRA A LOS USUARIOS---------------- ESTE LO COMPRUEBA EL NUESTRO NO! CAMBIAR
+//function agregarClientes() {
+//    alert("agregar clientes");
+//    if (comprobacionRegistro() === true)
+//    {
+//        var transaccion = bd.transaction(["clliente"], "readwrite");
+//        var almacen = transaccion.objectStore("cliente");
+//        
+//        var email = document.querySelector('#correo').value;
+//        var contraseña = document.querySelector('#contraseña').value;
+//        var nombre = document.querySelector('#nombre').value;
+//        var pesoI = document.querySelector('#peso').value;
+//        var altura = document.querySelector('#altura').value;
+//        var foto = document.getElementById('foto').files[0].name;
+//
+//        var consulta = almacen.openCursor(email);
+//        consulta.onsuccess = function (e)
+//        {
+//            var cursor = e.target.result;
+//            if (cursor)
+//            { // el email ya existe
+//                alert("Ya existe ese usuario!");
+//            } 
+//            else
+//            {
+//                almacen.add({email: email, contraseña: contraseña, nombre: nombre, 
+//                    pesoInicial: pesoI, altura: altura, foto: foto});
+//                alert("El cliente se ha insertado correctamente");
+//                var datos = new Array(); //Creamos un nuevo array vacío
+//                datos[0] = nombre;
+//                datos[1] = email;
+//                datos[2] = contraseña;
+//                datos[3] = pesoI;
+//                datos[4] = altura;
+//                datos[5] = foto;
+//                //en sessionStorage cuando cierras la pestaña no se guarda la info
+//                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
+//                //en localStorage cuando cierras la pestaña si se guarda la info
+//                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
+//            };
+//        };
+//    } 
+//    else {
+//        alert("Introduce los datos correctamente");
+//    }
+//}
 function sesionStorage()
 {
     //--------------Session storage----------------------------
@@ -179,49 +232,7 @@ function sesionStorage()
         document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
     }
 }
-//----------------REGISTRA A LOS USUARIOS---------------- ESTE LO COMPRUEBA EL NUESTRO NO! CAMBIAR
-function agregarClientes() {
-    alert("agregar clientes");
-    if (comprobacionRegistro() === true)
-    {
-        var transaccion = bd.transaction(["usuarios"], "readwrite");
-        var almacen = transaccion.objectStore("usuarios");
 
-        var email = document.getElementById("email").value;
-        var contraseña = document.getElementById("contraseña").value;
-        var nombre = document.getElementById("nombre").value;
-        var pesoI = document.getElementById("pesoInicial").value;
-        var altura = document.getElementById("altura").value;
-        var foto = document.getElementById("foto").value;
-
-        var consulta = almacen.openCursor(email);
-        consulta.onsuccess = function (e)
-        {
-            var cursor = e.target.result;
-            if (cursor)
-            { // el email ya existe
-                alert("Ya existe ese usuario!");
-            } else
-            {
-                almacen.add({email: email, contraseña: contraseña, nombre: nombre, pesoInicial: pesoI, altura: altura, foto: foto});
-                alert("Se ha insertado correctamente");
-                var datos = new Array(); //Creamos un nuevo array vacío
-                datos[0] = nombre;
-                datos[1] = email;
-                datos[2] = contraseña;
-                datos[3] = pesoInicial;
-                datos[4] = altura;
-                datos[5] = foto;
-                //en sessionStorage cuando cierras la pestaña no se guarda la info
-                window.sessionStorage[ window.sessionStorage.length ] = JSON.stringify(datos);
-                //en localStorage cuando cierras la pestaña si se guarda la info
-                window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
-            };
-        };
-    } else {
-        alert("Introduce los datos correctamente");
-    }
-}
 function comprobacionRegistro() //CAMBIAR
 {
     comprobarEmail(email.value);
