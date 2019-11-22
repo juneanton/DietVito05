@@ -149,7 +149,7 @@ function mostrarerror(evento) {
 
 function comenzar(evento)
 {
-    alert("comienzaaaaa");
+    alert("Comienza");
     bd = evento.target.result;
 }
 
@@ -292,23 +292,15 @@ function comprobacionRegistro() //CAMBIAR
 
 }
 
-//----------------LLENA LA TABLA ACTIVIDADES---------------- (NO LO HACE)
-//Mirar ejemplo index3. El html llama al add(), y el add() al loadAll(). 
-////Y el loadAll() en las lineas 138-139 especifica a qué load (o loadByDNI) referencia.
-//Así que falta organisasion
-
-function mostrarActividades() {
 
 
-}
-//Dame todas las actividades que haya en la base de datos
-function loadAll(){
+function mostrarActividades(){
     //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
     //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
-    var data = active.transaction(['actividades', "readwrite"]); //DUDA: es actividades o almacen1????????
+    var data = active.transaction(["actividades"], "readonly"); //DUDA: es actividades o almacen1????????
     //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
-    var object = data.objectStore('actividades');
+    var object = data.objectStore("actividades");
     //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
     
@@ -352,7 +344,7 @@ function loadAll(){
 }
 
 
-//SUPER ADI!!! Cuando vayamos a registrar una nueva actividad tendremos que poner loadAll() para que visualice de nuevo con la nueva
+//SUPER ADI!!! Cuando vayamos a registrar una nueva actividad tendremos que poner mostrarActividades() para que visualice de nuevo con la nueva
 //actividad agregada
 
 //CAMBIO: Este método para cuando agregemos actividades que hemos reaizado
@@ -399,43 +391,7 @@ function agregarUsuario()
 
 }
 
-//Creo que sobra je
-//----------------MUESTRA LA TABLA DE ACTIVIDADES---------------- (NO LO HACE)
-function obtActividades() //CAMBIADO A NUESTROS DATOS PARA OBTENER LA TABLA ACTIVIDADES
-{
 
-    var active = db.result;
-    var data = active.transaction(["actividades"], "readonly");
-    var object = data.objectStore("actividades");
-    var elements = [];
-    //Volcamos la información en un array y luego lo visualizamos
-
-    object.openCursor().onsuccess = function (e) {
-        var result = e.target.result;
-        //Ha terminado la tabla
-        if (result === null) {
-            return;
-        }
-
-        elements.push(result.value);
-        result.continue();//decir al bucle que continue, puntero al siguiente 
-    };
-    //Una vez recorrido todo
-    data.oncomplete = function () {
-        var outerHTML = '';
-        for (var key in elements) {
-            outerHTML += "<tr>" +
-                    "<td>" + elements[key].nombre + "</td>" +
-                    "<td>" + elements[key].descripcion + "</td>" +
-                    "<td>" + elements[key].calorias + "</td>" +
-                    "</tr>";
-        }
-        elements = [];
-        //document.querySelector("").innerHTML = outerHTML; LINEA QUE HABIA ANTES
-        document.getElementById("tablaActi").querySelector("").innerHTML = 'Hola, ' + usuario; //LINEA NUEVAQUE NO FUNCIONA
-    };
-
-}
 function procesar(evento) {
 
     cajadatos.innerHTML = "";
