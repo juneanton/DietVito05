@@ -542,6 +542,48 @@ function saludarUsuario(){
     saludo = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 };
 
+//---------------BUSCA EL USUARIO EN LA BD PARA MOSTRAR SUS REGISTROS--------
+function buscarEmailParaVerDatos(){
+    var emailABuscar = document.getElementById("correo").value;
+    
+     //----------- CONECTAR A LA BD ----------------  
+    var active = database.result;
+    var transaccion = active.transaction(["cliente"], "readonly");
+    var almacen = transaccion.objectStore("cliente");
+    var puntero = almacen.openCursor();
+    var elementos = [];
+    //---------------------------------------------
+    
+    puntero.onsuccess = function (e) {
+        var result = e.target.result;
+        if (result === null) {
+            return;
+        }
+        elementos.push(result.value);
+        result.continue();
+    };
+    transaccion.oncomplete = function ()
+    {
+        var encontrado = false;
+        var i = 0;
+        //Recorremos todos
+        while (i < elementos.length && !encontrado)
+        {
+            //Sie ecnontramos el usuario
+            if (elementos[i].email === emailABuscar) {
+                alert("Usuario encontrado!!!!");
+                
+            }
+            else i++;
+        }
+        if(!encontrado) {
+            alert("Usuario no encontrado");
+        }
+    }
+    
+    
+}
+
 //----------------CERRAR SESION----------------
 function cerrarSesion() {
     alert("cierra sesion");

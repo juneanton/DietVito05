@@ -44,8 +44,9 @@
                 <section id="FormularioCA">
                     <form name="informacion" method="get" action="procesar.php">
                         <p> Usuario: <input type="number"></p>
+                        <p onclick="buscarEmailParaVerDatos();"><button type="button" id="enviar">Buscar usuario</button></p>
                         <p>Desde: <input type="datetime-local" name="fecha" > Hasta: <input type="datetime-local" name="fecha" ></p>
-                        <p><button type="button" id="enviar">Aceptar</button></p>
+                        <p onclick="comprobarFecha();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
                 <!--QUE SE VISUALICEN LAS ACTIVIDADEEEEEEEES-->
