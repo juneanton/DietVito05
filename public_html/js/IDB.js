@@ -516,11 +516,14 @@ function buscarEmail()
                 holaU = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
                 //CREO QUE VA AQUI Y NO ARRIBA PERO NO LLEGA HASTA AQUI
-//                if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
-//                    href = "Dietista.html";
-//                } else { //NO LO HACE
-//                    href = "Cliente.html";
-//                }
+                if (clave === "diet@diet.eus") { //NO LO HACE
+                    alert('diet');
+                    location.href = "Dietista.html";
+                    //document.location.href=Dietista.html;
+                } else { //NO LO HACE
+                    location.href = "Cliente.html";
+                    //document.location.href=Cliente.html;
+                }
 
             } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
             {
