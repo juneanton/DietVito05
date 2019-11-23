@@ -539,7 +539,12 @@ function buscarEmail()
     };
 }
 function saludarUsuario(){
-    saludo = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
+    //return document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
+    return usuario;
+    alert('saluda');
+};
+function buscarFotoUsuario(){
+    //COMO BUSCO LA FOTOOO????????????
 };
 
 //---------------BUSCA EL USUARIO EN LA BD PARA MOSTRAR SUS REGISTROS--------
