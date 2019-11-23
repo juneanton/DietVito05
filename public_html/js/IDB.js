@@ -150,11 +150,11 @@ function iniciar() {
     }
 
     //----------------PANTALLA CONSULTAR ACTIVIDADES----------------
-    else if (document.title === "DietVito-Consultar Actividad") {
-
-        var botonAceptar = document.getElementById("enviar");
-        botonAceptar.addEventListener("click", comprobarFecha);
-    }
+//    else if (document.title === "DietVito-Consultar Actividad") {
+//        
+//        var botonAceptar = document.getElementById("enviar");
+//        botonAceptar.addEventListener("click", comprobarFecha());
+//    }
     //HAY QUE HACER LAS DEMAS VENTANAS
 }
 
@@ -452,17 +452,15 @@ function comprobarContraseña(pContraseña)
 
 function comprobarFecha()
 {
-    //Para los html siguientes:
-    if (document.title === "ConsultarActividadesRealizadas" || document.title === "ConsultarActividadesRealizadasUsuario")
-    {
-        //Si la "desde" <= "hasta" //DECLARAR
-        if (fechaI.value <= FechaF.value) {
-            alert("fecha bien introducida");
+        fechaI = document.getElementById("fechaI").value;
+        fechaF = document.getElementById("fechaF").value;
+        
+        if (fechaI <= fechaF) {
+            alert('fecha bien introducida');
             return true;
         } else {
-            alert("fechaI no puede ser mayor que fechaF");
+            alert('fechaI no puede ser mayor que fechaF');
         }
-    }
 }
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------

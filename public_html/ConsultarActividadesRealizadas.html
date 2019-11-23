@@ -41,8 +41,8 @@
                 <a> Consultar las actividades: </a>
                 <section id="FormularioCA">
                     <form name="informacion" method="get" action="procesar.php">
-                        <p>Desde: <input type="datetime-local" name="fechaI" id="fechaI" required> Hasta: <input type="datetime-local" name="fechaF" id="fechaF" required></p>
-                        <p><button type="button" id="enviar">Aceptar</button></p>
+                        <p>Desde: <input type="date" name="fechaI" id="fechaI" required> Hasta: <input type="date" name="fechaF" id="fechaF" required></p>
+                        <p onclick="comprobarFecha();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
                 <!--QUE SE VISUALICEN LAS ACTIVIDADEEEEEEEES-->
