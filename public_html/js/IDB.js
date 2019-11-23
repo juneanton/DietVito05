@@ -79,7 +79,7 @@ function iniciar() {
 
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
-        
+
         //CREO QUE VA ABAJO DONDE BUSCAREMAIL
         if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
             //href = "Dietista.html";
@@ -87,14 +87,14 @@ function iniciar() {
         } else { //NO LO HACE
             href = "Cliente.html";
         }
-        
+
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", buscarEmail);
-        
+
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", sessionStorage);
 
-        
+
     }
     //----------------PANTALLA ACTIVIDADES----------------
     else if (document.title === "DietVito-Actividades")
@@ -136,11 +136,10 @@ function iniciar() {
     }
     //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
     else if (document.title === "DietVito-Registrar Actividad") {
-
-
         //HACER
-        //DESPLEGABLE ESTA SIN HACER 
-        //desplegableActi();
+//        //DESPLEGABLE ESTA SIN HACER 
+//        var desple = document.getElementById("opt");
+//        desple .addEventListener("click",desplegableActi());
 
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", addActividad());
@@ -166,6 +165,7 @@ function crearbd() {
     almacen.createIndex("porEmail", "email", {unique: true});
     almacen.add({email: "diet@diet.eus", contraseña: "diet2019"});
 
+    //----------------TABLA ACTIVIDADES
     var almacen1 = active.createObjectStore("actividades", {keyPath: "actividad"});
     almacen1.createIndex("porActividad", "actividad", {unique: true});
 
@@ -180,8 +180,11 @@ function crearbd() {
     almacen2.createIndex("porUsuario", ["idUsuario", "fecha"], {unique: true});
 
     //----------------TABLA REGISTRO ACTIVIDADES----------------
-    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "idActi", "fecha"]});
-    almacen3.createIndex("porUsuario", ["idUsuario", "idActi", "fecha"], {unique: true});
+    var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "fecha", "idActi"]});
+    almacen3.createIndex("porUsuario", ["idUsuario", "fecha", "idActi"], {unique: true});
+//    almacen3.add({idUsuario: "ana@ana.com", fecha: "2018-06-17T19:30", idActi: "Correr"});
+//    almacen3.add({idUsuario: "ana@ana.com", fecha: "2019-06-02T10:30", idActi: "Basket"});
+//    almacen3.add({idUsuario: "paco@paco.com", fecha: "2018-12-23T09:30", idActi: "Andar"});
 }
 
 //----------------REGISTRAR EL CLIENTE EN LA BD----------------
@@ -245,6 +248,30 @@ function addPeso() {
 
 function addActividad() {
     //HACER EL REGISTRO DE ACTIVIDAD CUANDO ESTE EL DESPLEGABLE HECHO
+    //METER CON IDUSU PARA QUE LUEGO SEA MAS FACIL BUSCA --> METER EN LA TABLA DE ACTIVIDADDIARIA QUE SINO MAL PARA BUSCAR
+    var active = database.result;
+    //alert('ok' + active);
+    var data = active.transaction(["actividadDiaria"], "readwrite");
+    object = data.objectStore("actividadDiaria");
+
+    //Insertar
+    var request = object.put({
+        //COMO COGER EL PUTO CORREO HOSTIA
+        idUsuario: document.querySelector('#correo').value,
+        fecha: document.querySelector('#fecha').value,
+        idActi: document.querySelector('#opt').value
+    });
+    
+    request.onerror = function (e) {
+        alert(request.error.name + '\n\n' + request.error.message);
+    };
+    data.oncomplete = function (e) {
+        //Borar campos para registrar otras actividades
+        document.querySelector('#correo').value='';
+        document.querySelector('#fecha').value='';
+        document.querySelector('#opt').value='';
+        alert('actividad correctamente registrada');
+    };
 }
 
 function sesionStorage()
@@ -305,6 +332,7 @@ function comprobacionRegistroPeso() {
     }
 }
 
+//NO VA
 function desplegableActi() {
     //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
@@ -452,15 +480,15 @@ function comprobarContraseña(pContraseña)
 
 function comprobarFecha()
 {
-        fechaI = document.getElementById("fechaI").value;
-        fechaF = document.getElementById("fechaF").value;
-        
-        if (fechaI <= fechaF) {
-            alert('fecha bien introducida');
-            return true;
-        } else {
-            alert('fechaI no puede ser mayor que fechaF');
-        }
+    fechaI = document.getElementById("fechaI").value;
+    fechaF = document.getElementById("fechaF").value;
+
+    if (fechaI <= fechaF) {
+        alert('fecha bien introducida');
+        return true;
+    } else {
+        alert('fechaI no puede ser mayor que fechaF');
+    }
 }
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
@@ -540,17 +568,17 @@ function buscarEmail()
 }
 
 //---------------BUSCA EL USUARIO EN LA BD PARA MOSTRAR SUS REGISTROS--------
-function buscarEmailParaVerDatos(){
+function buscarEmailParaVerDatos() {
     var emailABuscar = document.getElementById("correo").value;
-    
-     //----------- CONECTAR A LA BD ----------------  
+
+    //----------- CONECTAR A LA BD ----------------  
     var active = database.result;
     var transaccion = active.transaction(["cliente"], "readonly");
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
     //---------------------------------------------
-    
+
     puntero.onsuccess = function (e) {
         var result = e.target.result;
         if (result === null) {
@@ -566,19 +594,26 @@ function buscarEmailParaVerDatos(){
         //Recorremos todos
         while (i < elementos.length && !encontrado)
         {
-            //Sie ecnontramos el usuario
+            //Si ecnontramos el usuario
             if (elementos[i].email === emailABuscar) {
                 alert("Usuario encontrado!!!!");
-                
-            }
-            else i++;
+                encontrado = true;
+
+
+                //Array con todos los datos de ESE usuario
+                var datos = new Array();//Creamos un nuevo array vacío
+                datos[0] = elementos[i].idUsuario;
+                datos[1] = elementos[i].idActi;
+                datos[2] = elementos[i].fecha;
+
+
+            } else
+                i++;
         }
-        if(!encontrado) {
+        if (!encontrado) {
             alert("Usuario no encontrado");
         }
-    }
-    
-    
+    };
 }
 
 //----------------CERRAR SESION----------------

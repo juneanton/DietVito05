@@ -45,16 +45,14 @@
                 <section id="FormularioRA">
                     <form name="informacion" method="get" action="procesar.php">
                         <p><label for="listado">Actividades: </label>
-                             <select id="opt" name="opt" required></select>
-                                
-
-                        <!--                            <select name="actividad" id="listado" required>
-                                                        <option selected value="0" disabled> Seleccione una: </option>
-                                                    <option value="1">Correr</option>
-                                                        <option value="2">Caminata</option>
-                                                        <option value="3">Bici</option>
-                                                        <option value="4">Pesas</option>
-                                                    </select>-->
+                            <select id="opt" name="opt" required>
+                                <!-- <select name="actividad" id="listado" required>-->                                                        
+                                <option selected value="0" disabled> Seleccione una: </option>
+                                <option value="1">Correr</option>
+                                <option value="2">Caminata</option>
+                                <option value="3">Bici</option>
+                                <option value="4">Pesas</option>
+                            </select>
                         </p>
                         <p>Fecha y hora de la actividad: <input type="datetime-local" name="fecha" id ="fecha" required></p>
 
