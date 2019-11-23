@@ -8,6 +8,7 @@
 var bd, cajadatos;
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 var database = null;
+var usuario;
 
 function iniciar() {
 
@@ -500,7 +501,7 @@ function buscarEmail()
 
     //----------- CONECTAR A LA BD ----------------  
     var active = database.result;
-    var transaccion = active.transaction(["cliente"], "readonly");  //AQUI FALLA
+    var transaccion = active.transaction(["cliente"], "readonly");
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
@@ -539,18 +540,17 @@ function buscarEmail()
                 //en localStorage cuando cierras la pestaña si se guarda la info
                 window.localStorage[ window.localStorage.length ] = JSON.stringify(datos);
 
-                var usuario = elementos[i].nombre;
+                usuario = elementos[i].nombre;
 
                 holaU = document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
 
-                //CREO QUE VA AQUI Y NO ARRIBA PERO NO LLEGA HASTA AQUI
-                if (clave === "diet@diet.eus") { //NO LO HACE
+                //CAMBIA DE PAGINA SEGUN SEA CLIENTE O DIETISTA
+                if (clave === "diet@diet.eus") {
                     alert('diet');
                     location.href = "Dietista.html";
-                    //document.location.href=Dietista.html;
-                } else { //NO LO HACE
+                } else {
+                    alert('hola, '+usuario);
                     location.href = "Cliente.html";
-                    //document.location.href=Cliente.html;
                 }
 
             } else if (elementos[i].email === emailABuscar && elementos[i].contraseña !== contraseñaABuscar)
@@ -566,6 +566,14 @@ function buscarEmail()
             alert("El email no esta en la BD");
     };
 }
+function saludarUsuario(){
+    //return document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
+    return usuario;
+    alert('saluda');
+};
+function buscarFotoUsuario(){
+    //COMO BUSCO LA FOTOOO????????????
+};
 
 //---------------BUSCA EL USUARIO EN LA BD PARA MOSTRAR SUS REGISTROS--------
 function buscarEmailParaVerDatos() {
