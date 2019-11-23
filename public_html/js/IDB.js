@@ -455,7 +455,7 @@ function comprobarFecha()
     //Para los html siguientes:
     if (document.title === "ConsultarActividadesRealizadas" || document.title === "ConsultarActividadesRealizadasUsuario")
     {
-        //Si la "desde" <= "hasta"
+        //Si la "desde" <= "hasta" //DECLARAR
         if (fechaI.value <= FechaF.value) {
             alert("fecha bien introducida");
             return true;
