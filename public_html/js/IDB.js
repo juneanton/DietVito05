@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/* global db */
 
-var bd, cajadatos;
 var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 var database = null;
 var usuario;
@@ -18,13 +16,10 @@ function iniciar() {
         crearbd();
     };
     database.onsuccess = function (e) {
-        alert('Database loaded');
-        //Para que aparezcan directamente las actividades sin darle al boton (si preferimos eso en vez de pulsar para que aparezcan)
-        //mostrarActividades();
-        //LO HACE EN TODAS LAS PAGINAS Y SE RAYA SOLO LO TIENE QUE HACER EN ACTIVIDADES!!!!!
+        //alert('Database loaded');
     };
     database.onerror = function (e) {
-        alert('Error loading database');
+        //alert('Error loading database');
     };
 
     if (document.getElementById("correo") === null) {
@@ -33,12 +28,10 @@ function iniciar() {
         sesionStorage();
     }
 
-    //HACER CON TODAS LAS PANTALLAS
-
     //----------------PANTALLA REGISTRAR USUARIO----------------
     if (document.title === "DietVito-Registrar Usuario") {
-        //cajadatos = document.getElementById("cajadatos");
-        alert("estamos en registro");
+        //alert("estamos en registro");
+        
         correo = document.getElementById("correo");
         if (correo !== null)
             correo.addEventListener("input", comprobacionRegistro);
@@ -59,15 +52,11 @@ function iniciar() {
         if (altura !== null)
             altura.addEventListener("input", comprobacionRegistro);
 
-//        foto = document.getElementById("foto");
-//        foto.addEventListener("input", comprobacionRegistro);
-//
-        var foto = document.getElementById("foto");
-        foto.addEventListener("change", procesar);
-
+        //guardar en bd
         var botonRegistrarse = document.getElementById("registrarse");
         botonRegistrarse.addEventListener("click", add());
 
+        //guardar en sesion storage
         var botonRegistrarse = document.getElementById("registrarse");
         botonRegistrarse.addEventListener("click", sesionStorage);
     }
@@ -81,22 +70,13 @@ function iniciar() {
         contraseña = document.getElementById("contraseña");
         contraseña.addEventListener("input", comprobacionLogin);
 
-        //CREO QUE VA ABAJO DONDE BUSCAREMAIL
-        if (email === "diet@diet.eus" && comprobacionLogin) { //NO LO HACE
-            //href = "Dietista.html";
-            window.open("Dietista.html");
-        } else { //NO LO HACE
-            href = "Cliente.html";
-        }
-
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", buscarEmail);
 
         var botonIniciarSesion = document.getElementById("btnIS");
         botonIniciarSesion.addEventListener("click", sessionStorage);
-
-
     }
+    
     //----------------PANTALLA ACTIVIDADES----------------
     else if (document.title === "DietVito-Actividades")
     {
@@ -106,17 +86,18 @@ function iniciar() {
             crearbd();
         };
         database.onsuccess = function (e) {
-            alert('Database loaded');
+            //alert('Database loaded');
             mostrarActividades();
         };
         database.onerror = function (e) {
-            alert('Error loading database');
+            //alert('Error loading database');
         };
     }
+    
     //----------------PANTALLA REGISTRAR PESOS----------------
     else if (document.title === "DietVito-Registrar Peso") {
-        //cajadatos = document.getElementById("cajadatos");
-        alert("estamos en registro de pesos");
+        //alert("estamos en registro de pesos");
+        
         correo = document.getElementById("correo");
         if (correo !== null)
             correo.addEventListener("input", comprobacionRegistroPeso);
@@ -129,12 +110,15 @@ function iniciar() {
 //        if (fecha !== null)
 //            fecha.addEventListener("input", comprobacionRegistroPeso);
 
+        //guardar peso en la bd
         var botonRegistrarPeso = document.getElementById("enviarPeso");
         botonRegistrarPeso.addEventListener("click", addPeso());
 
+        //guardar peso en sesion storage
         var botonRegistrarPeso = document.getElementById("enviarPeso");
         botonRegistrarPeso.addEventListener("click", sesionStorage);
     }
+    
     //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
     else if (document.title === "DietVito-Registrar Actividad") {
         //HACER
@@ -142,9 +126,11 @@ function iniciar() {
 //        var desple = document.getElementById("opt");
 //        desple .addEventListener("click",desplegableActi());
 
+        //guardar en la bd la actividad realizada
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", addActividad());
 
+        //guardar en sesion storage
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", sesionStorage);
     }
@@ -222,9 +208,8 @@ function add() {
 }
 
 function addPeso() {
-    //alert('1');
+    
     var active = database.result;
-    //alert('ok' + active);
     var data = active.transaction(["pesoCliente"], "readwrite");
     object = data.objectStore("pesoCliente");
 
@@ -251,14 +236,13 @@ function addActividad() {
     //HACER EL REGISTRO DE ACTIVIDAD CUANDO ESTE EL DESPLEGABLE HECHO
     //METER CON IDUSU PARA QUE LUEGO SEA MAS FACIL BUSCA --> METER EN LA TABLA DE ACTIVIDADDIARIA QUE SINO MAL PARA BUSCAR
     var active = database.result;
-    //alert('ok' + active);
     var data = active.transaction(["actividadDiaria"], "readwrite");
     object = data.objectStore("actividadDiaria");
 
     //Insertar
     var request = object.put({
-        //COMO COGER EL PUTO CORREO HOSTIA
-        idUsuario: document.querySelector('#correo').value,
+        //COMO COGER EL PUTO CORREO HOSTIA, CREO QUE ASI YA ESTA
+        idUsuario: correo,
         fecha: document.querySelector('#fecha').value,
         idActi: document.querySelector('#opt').value
     });
@@ -267,7 +251,7 @@ function addActividad() {
         alert(request.error.name + '\n\n' + request.error.message);
     };
     data.oncomplete = function (e) {
-        //Borar campos para registrar otras actividades
+        //Vaciar campos
         document.querySelector('#correo').value='';
         document.querySelector('#fecha').value='';
         document.querySelector('#opt').value='';
@@ -299,8 +283,6 @@ function sesionStorage()
 
         datos = JSON.parse(datos);
 
-        alert("usuaaariiiioooo");
-
         var usuario = datos[0];
         document.getElementById("usuario").innerHTML = 'Hola, ' + usuario;
     }
@@ -313,10 +295,9 @@ function comprobacionRegistro()
     comprobarNombre(nombre.value);
     comprobarPeso(pesoI.value);
     comprobarAltura(altura.value);
-    comprobarFoto(foto.value);
 
     if (comprobarEmail(email.value) && comprobarContraseña(contraseña.value) && comprobarNombre(nombre.value)
-            && comprobarPeso(pesoI.value) && comprobarAltura(altura.value) && comprobarFoto(foto.value))
+            && comprobarPeso(pesoI.value) && comprobarAltura(altura.value))
     {
         return true;
     }
@@ -324,10 +305,8 @@ function comprobacionRegistro()
 
 function comprobacionRegistroPeso() {
     comprobarEmail(email.vaule);
-    //comprobarPeso(peso.value);
-    //comprobarFecha(fecha.value);
 
-    if (comprobarEmail(email.value)) //&& comprobarPeso(peso.value) && comprobarFecha(fecha.value))
+    if (comprobarEmail(email.value))
     {
         return true;
     }
@@ -422,27 +401,6 @@ function mostrarActividades() {
     };
 }
 
-function procesar(evento) { //NOSE QUE ES NI QUE HACE
-
-    cajadatos.innerHTML = "";
-    var archivos = evento.target.files;
-    var archivo = archivos[0];
-    var lector = new FileReader();
-    lector.addEventListener("load", function (evento) {
-        mostrar(evento, archivo);
-    });
-    lector.readAsBinaryString(archivo);
-}
-
-//function mostrar(archivo) {
-//
-//    var url = URL.createObjectURL(archivo);
-//    var imagen = document.createElement("img");
-//    imagen.src = url;
-//    cajadatos.appendChild(imagen);
-//
-//}
-
 function comprobacionLogin()
 {
     comprobarEmail(email.value);
@@ -505,7 +463,6 @@ function buscarEmail()
     var almacen = transaccion.objectStore("cliente");
     var puntero = almacen.openCursor();
     var elementos = [];
-    //---------------------------------------------
 
     puntero.onsuccess = function (e) {
         var result = e.target.result;
@@ -567,7 +524,6 @@ function buscarEmail()
     };
 }
 function saludarUsuario(){
-    //return document.getElementById("correo").innerHTML = 'Hola, ' + usuario;
     return usuario;
     alert('saluda');
 };
@@ -585,7 +541,6 @@ function buscarEmailParaVerDatos() {
     var almacen = transaccion.objectStore("actividadDiaria");
     var puntero = almacen.openCursor();
     var elementos = [];
-    //---------------------------------------------
 
     puntero.onsuccess = function (e) {
         var result = e.target.result;
