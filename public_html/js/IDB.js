@@ -559,7 +559,105 @@ function existeUsu() {
     };
 }
 
-//-----------------------filtro del usuario y fecha para mostrar actividades----------------
+//-------------BUSCA USUARIO Y COMPUREBA FECHAS OK --> SALEN PESOS-----
+function buscarPesosUsu()
+{
+    var emailABuscar = document.getElementById("correo").value;
+    fechaI = document.getElementById("fechaI").value;
+    fechaF = document.getElementById("fechaF").value;
+    var active = database.result;
+    var transaccion = active.transaction(["cliente"], "readonly");
+    var almacen = transaccion.objectStore("cliente");
+    var puntero = almacen.openCursor();
+    var elementos = [];
+    
+    puntero.onsuccess = function (e) {
+        var result = e.target.result;
+        if (result === null) {
+            return;
+        }
+        elementos.push(result.value);
+        result.continue();
+    };
+     transaccion.oncomplete = function ()
+    {
+        var encontrado = false;
+        var i = 0;
+        while (i < elementos.length && !encontrado)
+        {
+            if(emailABuscar === elementos[i].email){
+                 if (fechaI <= fechaF) {
+                    buscarPesos();
+                    encontrado = true;
+                } 
+                else
+                    alert('fecha incorrecta');
+            }
+            else
+                i++;
+        }
+        
+        if (!encontrado)
+            alert("El email no esta en la BD");
+        else
+            alert("Usuario encontrado;");
+    };
+}
+
+//------------solo filtra el usuario y fecha seleccionado-----
+function buscarPesos() {
+     //Recuperar la conexión que tenemos activa sobre nuestra bd
+    var active = database.result;
+    //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
+    var data = active.transaction(["pesoCliente"], "readonly");
+    //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
+    var object = data.objectStore("pesoCliente");
+    //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
+    var elements = [];
+    //Email y fecha que tenemos que buscar
+    var emailABuscar = document.getElementById("correo").value;
+    var fechaI = document.getElementById("fechaI").value;
+    var fechaF = document.getElementById("fechaF").value;
+
+    //Recorrer los elementos del almacenamiento actividades --> Bucle
+    //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
+    //del almacen actividades para recorrerlo entero
+    object.openCursor().onsuccess = function (e) {
+        //El codigo que se va a ejecutar por cada uno de los objetos del almacen
+        //Recuperar la info
+        var result = e.target.result;
+        //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
+        if (result === null) {
+            return;
+        }
+        //Para agregar el objeto al array que luego mostraremos
+        elements.push(result.value);
+        //Continuamos el bucle
+        result.continue();
+    };
+     //Si la transacción ocurre correctamente
+    data.oncomplete = function () {
+        //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
+        var outerHTML = ''; //Cadena vacía
+        //Por cada elemento del array
+        for (var key in elements) {   
+           //Si el correo coincide y si está entre las fechas
+            if(emailABuscar===elements[key].idUsuario && fechaI < elements[key].fecha < fechaF){
+                //Incorporarle una FECHA Y ACTIVIDAD
+                outerHTML += '\n\
+                <tr>\n\
+                    <td>' + elements[key].fecha + '</td>\n\
+                    <td>' + elements[key].pesa + '</td>\n\
+                </tr>';
+            }
+        }
+        //Vaciamos elements
+        elements = [];
+        //Para que a elementsList le asigne el valor de outerHTML
+        document.querySelector('#elementsList').innerHTML = outerHTML;
+    };
+}
+//-----------------------solo filtra el usuario y fecha seleccionadas----------------
 function buscarActividad() {
      //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;

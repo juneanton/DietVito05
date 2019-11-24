@@ -46,19 +46,25 @@
             <div align="center">
                 <section id="FormularioCp">
                     <form name="informacion" method="get" action="procesar.php">
-                        <p> Consultar las calorias de: <input type="email" name ="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></p>
-                        <p>Desde: <input type="datetime-local" name="fecha" required> Hasta: <input type="datetime-local" name="fecha" required></p>
-                        <p><button type="button" id="enviar">Aceptar</button></p>
+                        <p> Consultar las calorias de: <input type="email" name ="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></p>
+                        <p>Desde: <input type="datetime-local" name="fechaI" id="fechaI" required> Hasta: <input type="datetime-local" name="fechaF" id="fechaF" required></p>
+                        <p onclick="buscarPesosUsu();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
                 <article id="tablaCP">
                     <table width="50%">
-                        <p></p>
                         <caption>Pesos durante las fechas seleccionadas:</caption>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Peso</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Peso</th>
+                            </tr>
+                        </thead>
+                        <tbody id="elementsList">
+                            <tr>
+                                <td colspan="3">No hay datos</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </article>
             </div>
