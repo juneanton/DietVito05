@@ -7,7 +7,7 @@
 //PARA PREVISUALIZAR LA FOTO
 window.addEventListener('load', inicio, false);
 function inicio() {
-    document.getElementById('archivo').addEventListener('change', cargar, false);               
+    document.getElementById('foto').addEventListener('change', cargar, false);               
 }
 
 function cargar(ev) {
