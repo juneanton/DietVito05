@@ -8,16 +8,16 @@
         <script src="js/IDB.js"></script>
         <link rel="icon" type="image/png" href="img/favicondietvito.png">
     </head>
-    <body onload='iniciar();'> <!-- background="img/correrFondo.png">-->
+    <body onload='iniciar();'> 
         <header id="cabecera">
             <div>
-                <!--<h1>DietVito</h1>-->
+               
                 <img src="img/dietvito.png">
                 <div style="float: right">
                     <a id ="holaU"><strong>Hola,  </strong></a> 
-                    <a onload="saludarUsuario();"></a> <!--NO ENTRAR EN EL SALUDAR USUARIO-->
-                    <!--<p onload ="saludarUsuario();"></p>  NO LO HACE-->
-                    <p id ="imagenU">imagen</p>  <!-- CAMBIAR-->
+                    <a onload="saludarUsuario();"></a> 
+                    
+                    <p id ="imagenU">imagen</p> 
                 </div> 
             </div>
         </header>
@@ -37,7 +37,7 @@
                         <li><a href="ConsultarPesos.html">Pesos</a></li></ul>
                 </li>
 
-                <!--CERRAR SESION!!!1-->
+                
                 <li onclick="cerrarSesion()" id = "CS" style="float:right" ><a href="IniciarSesion.html"><img class ="pequeña" src = "img/usuario.png">  Cerrar sesión</a></li>
             </ul>
         </nav>
@@ -55,7 +55,7 @@
                         <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></label></p>
                         <p><label for="listado">Actividades: </label>
                             <select id="opt" name="opt" required>
-                                <!-- <select name="actividad" id="listado" required>-->                                                        
+                                
                                 <option selected value="0" disabled> Seleccione una: </option>
                                 <option value="Correr">Correr</option>
                                 <option value="Nadar">Nadar</option>
