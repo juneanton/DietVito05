@@ -567,7 +567,6 @@ function buscarActividad() {
             <tr>\n\
                 <td>' + elements[key].actividad + '</td>\n\
                 <td>' + elements[key].descripcion + '</td>\n\
-                <td>' + elements[key].calorias + '</td>\n\
             </tr>';
         }
 
