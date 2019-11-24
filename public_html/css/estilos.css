@@ -168,7 +168,9 @@ img.grande{
 img.mediana{
     width: 40px; height: 40px;
 }
-
+img.gigante{
+    width: 900px;
+}
 
 /*-----------BODY-----------*/
 body{
