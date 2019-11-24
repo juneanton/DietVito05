@@ -118,9 +118,6 @@ function iniciar() {
     //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
     else if (document.title === "DietVito-Registrar Actividad") {
 
-        //idUsuario = correo;
-//        if(buscarEmail())
-//            idUsuario = document.getElementById("correo");
         correo = document.getElementById("correo");
         if (correo !== null)
             correo.addEventListener("input", buscarEmail());
@@ -136,13 +133,7 @@ function iniciar() {
         botonRegistrarActi.addEventListener("click", sesionStorage);
     }
 
-    //----------------PANTALLA CONSULTAR ACTIVIDADES----------------
-//    else if (document.title === "DietVito-Consultar Actividad") {
-//        
-//        var botonAceptar = document.getElementById("enviar");
-//        botonAceptar.addEventListener("click", comprobarFecha());
-//    }
-    //HAY QUE HACER LAS DEMAS VENTANAS
+
 }
 
 //----------------CREAR LA BD----------------
@@ -170,9 +161,6 @@ function crearbd() {
     //----------------TABLA REGISTRO ACTIVIDADES----------------
     var almacen3 = active.createObjectStore("actividadDiaria", {keyPath: ["idUsuario", "fecha", "idActi"]});
     almacen3.createIndex("porUsuario", ["idUsuario", "fecha", "idActi"], {unique: true});
-//    almacen3.add({idUsuario: "ana@ana.com", fecha: "2018-06-17T19:30", idActi: "Correr"});
-//    almacen3.add({idUsuario: "ana@ana.com", fecha: "2019-06-02T10:30", idActi: "Basket"});
-//    almacen3.add({idUsuario: "paco@paco.com", fecha: "2018-12-23T09:30", idActi: "Andar"});
 }
 
 //----------------REGISTRAR EL CLIENTE EN LA BD----------------
@@ -310,9 +298,7 @@ function comprobacionRegistroPeso() {
         return true;
     }
 }
-function comprobacionRegistroActi(){
-    
-}
+
 
 //NO VA
 function desplegableActi() {
@@ -437,7 +423,6 @@ function comprobarContraseña(pContraseña)
         return false;
     }
 }
-
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail()
@@ -605,40 +590,24 @@ function buscarPesosUsu()
 
 //------------solo filtra el usuario y fecha seleccionado-----
 function buscarPesos() {
-     //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
-    //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
     var data = active.transaction(["pesoCliente"], "readonly");
-    //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
     var object = data.objectStore("pesoCliente");
-    //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
-    //Email y fecha que tenemos que buscar
     var emailABuscar = document.getElementById("correo").value;
     var fechaI = document.getElementById("fechaI").value;
     var fechaF = document.getElementById("fechaF").value;
 
-    //Recorrer los elementos del almacenamiento actividades --> Bucle
-    //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
-    //del almacen actividades para recorrerlo entero
     object.openCursor().onsuccess = function (e) {
-        //El codigo que se va a ejecutar por cada uno de los objetos del almacen
-        //Recuperar la info
         var result = e.target.result;
-        //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
         if (result === null) {
             return;
         }
-        //Para agregar el objeto al array que luego mostraremos
         elements.push(result.value);
-        //Continuamos el bucle
         result.continue();
     };
-     //Si la transacción ocurre correctamente
     data.oncomplete = function () {
-        //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
-        var outerHTML = ''; //Cadena vacía
-        //Por cada elemento del array
+        var outerHTML = ''; 
         for (var key in elements) {   
            //Si el correo coincide y si está entre las fechas
             if(emailABuscar===elements[key].idUsuario && fechaI < elements[key].fecha < fechaF){
@@ -650,46 +619,29 @@ function buscarPesos() {
                 </tr>';
             }
         }
-        //Vaciamos elements
         elements = [];
-        //Para que a elementsList le asigne el valor de outerHTML
         document.querySelector('#elementsList').innerHTML = outerHTML;
     };
 }
 //-----------------------solo filtra el usuario y fecha seleccionadas----------------
-function buscarActividad() {
-     //Recuperar la conexión que tenemos activa sobre nuestra bd
+function buscarActividad() {//Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
-    //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
     var data = active.transaction(["actividadDiaria"], "readonly");
-    //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
     var object = data.objectStore("actividadDiaria");
-    //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
-    //Email y fecha que tenemos que buscar
     var emailABuscar = document.getElementById("correo").value;
     var fechaI = document.getElementById("fechaI").value;
     var fechaF = document.getElementById("fechaF").value;
 
-    //Recorrer los elementos del almacenamiento actividades --> Bucle
-    //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
-    //del almacen actividades para recorrerlo entero
     object.openCursor().onsuccess = function (e) {
-        //El codigo que se va a ejecutar por cada uno de los objetos del almacen
-        //Recuperar la info
         var result = e.target.result;
-        //Si está vacío es porqeu hemos llegado al final del almacén -> SALIMOS
-        if (result === null) {
+       if (result === null) {
             return;
         }
-        //Para agregar el objeto al array que luego mostraremos
         elements.push(result.value);
-        //Continuamos el bucle
         result.continue();
     };
-     //Si la transacción ocurre correctamente
-    data.oncomplete = function () {
-        //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
+     data.oncomplete = function () {
         var outerHTML = ''; //Cadena vacía
         //Por cada elemento del array
         for (var key in elements) {   
@@ -703,9 +655,7 @@ function buscarActividad() {
                 </tr>';
             }
         }
-        //Vaciamos elements
         elements = [];
-        //Para que a elementsList le asigne el valor de outerHTML
         document.querySelector('#elementsList').innerHTML = outerHTML;
     };
 }
@@ -718,48 +668,6 @@ function buscarFotoUsuario(){
     //COMO BUSCO LA FOTOOO????????????
 };
 
-////---------------BUSCA EMAIL EN LAS ACTI REGIST--------
-//function buscarEmailParaVerDatos() {
-//    var emailABuscar = document.getElementById("correo").value;
-//
-//    //----------- CONECTAR A LA BD ----------------  
-//    var active = database.result;
-//    var transaccion = active.transaction(["actividadDiaria"], "readonly");
-//    var almacen = transaccion.objectStore("actividadDiaria");
-//    var puntero = almacen.openCursor();
-//    var elementos = [];
-//
-//    puntero.onsuccess = function (e) {
-//        var result = e.target.result;
-//        if (result === null) {
-//            return;
-//        }
-//        elementos.push(result.value);
-//        result.continue();
-//    };
-//    transaccion.oncomplete = function ()
-//    {
-//        var encontrado = false;
-//        var i = 0;
-//        var registrosUsu=[];
-//        //Recorremos todos
-//        while (i < elementos.length && !encontrado)
-//        {
-//            //Si ecnontramos el usuario
-//            if (elementos[i].email === emailABuscar) {
-//                alert("Usuario encontrado!!!!");
-//                encontrado = true;
-//                
-//                registrosUsu.push(elementos.value);
-//            } 
-//            else
-//                i++;
-//        }
-//        if (!encontrado) {
-//            alert("Usuario no encontrado");
-//        }
-//    };
-//}
 
 //----------------CERRAR SESION----------------
 function cerrarSesion() {
