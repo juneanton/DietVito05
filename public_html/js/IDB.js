@@ -103,12 +103,8 @@ function iniciar() {
             correo.addEventListener("input", comprobacionRegistroPeso);
 
         peso = document.getElementById("peso");
-//        if (peso !== null)
-//            peso.addEventListener("input", comprobacionRegistroPeso);
 
         fecha = document.getElementById("fecha");
-//        if (fecha !== null)
-//            fecha.addEventListener("input", comprobacionRegistroPeso);
 
         //guardar peso en la bd
         var botonRegistrarPeso = document.getElementById("enviarPeso");
@@ -121,16 +117,15 @@ function iniciar() {
     
     //----------------PANTALLA REGISTRAR ACTIVIDADES----------------
     else if (document.title === "DietVito-Registrar Actividad") {
-        //HACER
-//        //DESPLEGABLE ESTA SIN HACER 
-//        var desple = document.getElementById("opt");
-//        desple .addEventListener("click",desplegableActi());
 
-        idUsuario = correo;
+        //idUsuario = correo;
+//        if(buscarEmail())
+//            idUsuario = document.getElementById("correo");
+        correo = document.getElementById("correo");
+        if (correo !== null)
+            correo.addEventListener("input", buscarEmail());
 
         actividad = document.getElementById("opt");
-        if (actividad !== null)
-            actividad.addEventListener("input", comprobacionRegistro);
 
         //guardar en la bd la actividad realizada
         var botonRegistrarActi = document.getElementById("enviarActi");
@@ -308,12 +303,15 @@ function comprobacionRegistro()
 }
 
 function comprobacionRegistroPeso() {
-    comprobarEmail(email.vaule);
+    comprobarEmail(email.value);
 
     if (comprobarEmail(email.value))
     {
         return true;
     }
+}
+function comprobacionRegistroActi(){
+    
 }
 
 //NO VA
