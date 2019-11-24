@@ -192,8 +192,16 @@ function add() {
         document.querySelector('#peso').value = '';
         document.querySelector('#altura').value = '';
         document.getElementById('foto').value = '';
+        //document.getElementById('caja').addEventListener('click', limpiar);
         alert('se agrego correctamente el objeto');
     };
+}
+
+function limpiar(){
+//    var activo = document.activeElement.id;
+//    activo.innerHTML = "";
+      //caja = "";
+      document.getElementById('caja').value = "";
 }
 
 function addPeso() {
