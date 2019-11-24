@@ -439,19 +439,6 @@ function comprobarContraseña(pContraseña)
     }
 }
 
-function comprobarFecha()
-{
-    fechaI = document.getElementById("fechaI").value;
-    fechaF = document.getElementById("fechaF").value;
-
-    if (fechaI <= fechaF) {
-        alert('fecha bien introducida');
-        return true;
-        
-    } else {
-        alert('fechaI no puede ser mayor que fechaF');
-    }
-}
 
 //----------------VERIFICA EL LOGIN Y HACE EL HOLA NOSEQUIEN----------------
 function buscarEmail()
@@ -524,6 +511,51 @@ function buscarEmail()
         }
         if (!encontrado)
             alert("El email no esta en la BD");
+    };
+}
+
+//-------------BUSCA EL EMAIL Y COMPRUEBA FECHAS OK --> SALEN ACTIVIDADES----------
+function existeUsu() {
+    
+    var emailABuscar = document.getElementById("correo").value;
+    fechaI = document.getElementById("fechaI").value;
+    fechaF = document.getElementById("fechaF").value;
+    var active = database.result;
+    var transaccion = active.transaction(["cliente"], "readonly");
+    var almacen = transaccion.objectStore("cliente");
+    var puntero = almacen.openCursor();
+    var elementos = [];
+    
+    puntero.onsuccess = function (e) {
+        var result = e.target.result;
+        if (result === null) {
+            return;
+        }
+        elementos.push(result.value);
+        result.continue();
+    };
+     transaccion.oncomplete = function ()
+    {
+        var encontrado = false;
+        var i = 0;
+        while (i < elementos.length && !encontrado)
+        {
+            if(emailABuscar === elementos[i].email){
+                 if (fechaI <= fechaF) {
+                    buscarActividad();
+                    encontrado = true;
+                } 
+                else
+                    alert('fecha incorrecta');
+            }
+            else
+                i++;
+        }
+        
+        if (!encontrado)
+            alert("El email no esta en la BD");
+        else
+            alert("Usuario encontrado;");
     };
 }
 
