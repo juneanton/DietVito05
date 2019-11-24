@@ -575,14 +575,14 @@ function buscarFotoUsuario(){
     //COMO BUSCO LA FOTOOO????????????
 };
 
-//---------------BUSCA EL USUARIO EN LA BD PARA MOSTRAR SUS REGISTROS--------
+//---------------BUSCA EMAIL EN LAS ACTI REGIST--------
 function buscarEmailParaVerDatos() {
     var emailABuscar = document.getElementById("correo").value;
 
     //----------- CONECTAR A LA BD ----------------  
     var active = database.result;
-    var transaccion = active.transaction(["cliente"], "readonly");
-    var almacen = transaccion.objectStore("cliente");
+    var transaccion = active.transaction(["actividadDiaria"], "readonly");
+    var almacen = transaccion.objectStore("actividadDiaria");
     var puntero = almacen.openCursor();
     var elementos = [];
     //---------------------------------------------
@@ -599,6 +599,7 @@ function buscarEmailParaVerDatos() {
     {
         var encontrado = false;
         var i = 0;
+        var registrosUsu=[];
         //Recorremos todos
         while (i < elementos.length && !encontrado)
         {
@@ -606,16 +607,10 @@ function buscarEmailParaVerDatos() {
             if (elementos[i].email === emailABuscar) {
                 alert("Usuario encontrado!!!!");
                 encontrado = true;
-
-
-                //Array con todos los datos de ESE usuario
-                var datos = new Array();//Creamos un nuevo array vacío
-                datos[0] = elementos[i].idUsuario;
-                datos[1] = elementos[i].idActi;
-                datos[2] = elementos[i].fecha;
-
-
-            } else
+                
+                registrosUsu.push(elementos.value);
+            } 
+            else
                 i++;
         }
         if (!encontrado) {
