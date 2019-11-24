@@ -246,8 +246,7 @@ function addActividad() {
 
     //Insertar
     var request = object.put({
-        //COMO COGER EL PUTO CORREO HOSTIA, CREO QUE ASI YA ESTA
-        idUsuario: correo,
+        idUsuario: document.querySelector('#correo').value,
         fecha: document.querySelector('#fecha').value,
         idActi: document.querySelector('#opt').value
     });
