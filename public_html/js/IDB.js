@@ -126,6 +126,12 @@ function iniciar() {
 //        var desple = document.getElementById("opt");
 //        desple .addEventListener("click",desplegableActi());
 
+        idUsuario = correo;
+
+        actividad = document.getElementById("opt");
+        if (actividad !== null)
+            actividad.addEventListener("input", comprobacionRegistro);
+
         //guardar en la bd la actividad realizada
         var botonRegistrarActi = document.getElementById("enviarActi");
         botonRegistrarActi.addEventListener("click", addActividad());
@@ -233,8 +239,7 @@ function addPeso() {
 }
 
 function addActividad() {
-    //HACER EL REGISTRO DE ACTIVIDAD CUANDO ESTE EL DESPLEGABLE HECHO
-    //METER CON IDUSU PARA QUE LUEGO SEA MAS FACIL BUSCA --> METER EN LA TABLA DE ACTIVIDADDIARIA QUE SINO MAL PARA BUSCAR
+    
     var active = database.result;
     var data = active.transaction(["actividadDiaria"], "readwrite");
     object = data.objectStore("actividadDiaria");
