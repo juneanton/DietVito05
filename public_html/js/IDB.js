@@ -193,6 +193,7 @@ function add() {
         document.querySelector('#altura').value = '';
         document.getElementById('foto').value = '';
         //document.getElementById('caja').addEventListener('click', limpiar);
+        document.getElementById('caja').style.backgroundImage=rgb(230,230,230);
         alert('se agrego correctamente el objeto');
     };
 }

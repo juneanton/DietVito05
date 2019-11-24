@@ -19,3 +19,7 @@ function cargar(ev) {
 function leer(ev) {
     document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
 }
+
+function limpiar(){
+    document.getElementById('caja').addEventListener('click', inicio);
+}
