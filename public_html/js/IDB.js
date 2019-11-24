@@ -447,6 +447,7 @@ function comprobarFecha()
     if (fechaI <= fechaF) {
         alert('fecha bien introducida');
         return true;
+        
     } else {
         alert('fechaI no puede ser mayor que fechaF');
     }
@@ -531,11 +532,15 @@ function buscarActividad() {
      //Recuperar la conexión que tenemos activa sobre nuestra bd
     var active = database.result;
     //Para lanzar instrucciones ->Una transacción SOLO PARA RECUPERAR, no podemos modificar datos
-    var data = active.transaction(["actividades"], "readonly");
+    var data = active.transaction(["actividadDiaria"], "readonly");
     //Sobre que almacen? TODOS LOS OBJETOS DEL ALMACEN ACTIVIDADES
-    var object = data.objectStore("actividades");
+    var object = data.objectStore("actividadDiaria");
     //Donde almacenaremos los objetos que vayamos recorriendo para poder mostarlos luego
     var elements = [];
+    //Email y fecha que tenemos que buscar
+    var emailABuscar = document.getElementById("correo").value;
+    var fechaI = document.getElementById("fechaI").value;
+    var fechaF = document.getElementById("fechaF").value;
 
     //Recorrer los elementos del almacenamiento actividades --> Bucle
     //El cursor es como un puntero. Le decimos qeu se coloque a la entrada
@@ -560,12 +565,17 @@ function buscarActividad() {
 
         //Por cada elemento del array
         for (var key in elements) {
-            //Incorporarle una
-            outerHTML += '\n\
-            <tr>\n\
-                <td>' + elements[key].actividad + '</td>\n\
-                <td>' + elements[key].descripcion + '</td>\n\
-            </tr>';
+            
+           //Si el correo coincide y si está entre las fechas
+            if(emailABuscar===elements[key].idUsuario && fechaI < elements[key].fecha < fechaF){
+                //Incorporarle una FECHA Y ACTIVIDAD
+                outerHTML += '\n\
+                <tr>\n\
+                    <td>' + elements[key].fecha + '</td>\n\
+                    <td>' + elements[key].idActi + '</td>\n\
+                </tr>';
+            }
+            
         }
 
         //Vaciamos elements

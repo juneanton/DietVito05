@@ -47,14 +47,13 @@
                 <a> Consultar las actividades: </a>
                 <section id="FormularioCA">
                     <form name="informacion" method="get" action="procesar.php">
-                        <p> Usuario: <input type="number"></p>
-                        <p onclick="buscarEmailParaVerDatos();"><button type="button" id="enviar">Buscar usuario</button></p>
-                        <p>Desde: <input type="datetime-local" name="fecha" > Hasta: <input type="datetime-local" name="fecha" ></p>
-                        <p onclick="comprobarFecha();"><button type="button" id="enviar">Aceptar</button></p>
+                       <p><label>Correo: <input type="email" name="correo" id="correo" required placeholder="ejemplo@ejemplo.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></label></p>
+                        <p>Desde: <input type="datetime-local" name="fechaI" id="fechaI" required> Hasta: <input type="datetime-local" name="fechaF" id="fechaF" required></p>
+                        <p onclick="buscarActividad();comprobarFecha();"><button type="button" id="enviar">Aceptar</button></p>
                     </form>
                 </section>
                 <!--QUE SE VISUALICEN LAS ACTIVIDADEEEEEEEES-->
-                <article id="tablaCC">
+                <article id="elements">
                     <table width="50%">
                         <caption>Actividades realizadas del usuario seleccionado durante las fechas seleccionadas:</caption>
                        <thead>
