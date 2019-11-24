@@ -562,10 +562,8 @@ function buscarActividad() {
     data.oncomplete = function () {
         //Generear el contenido HTML que tenemos qeu insertar en el tbody desde el array
         var outerHTML = ''; //Cadena vacía
-
         //Por cada elemento del array
-        for (var key in elements) {
-            
+        for (var key in elements) {   
            //Si el correo coincide y si está entre las fechas
             if(emailABuscar===elements[key].idUsuario && fechaI < elements[key].fecha < fechaF){
                 //Incorporarle una FECHA Y ACTIVIDAD
@@ -575,9 +573,7 @@ function buscarActividad() {
                     <td>' + elements[key].idActi + '</td>\n\
                 </tr>';
             }
-            
         }
-
         //Vaciamos elements
         elements = [];
         //Para que a elementsList le asigne el valor de outerHTML
