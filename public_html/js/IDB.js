@@ -395,7 +395,6 @@ function mostrarActividades() {
                 <td>' + elements[key].calorias + '</td>\n\
             </tr>';
         }
-
         //Vaciamos elements
         elements = [];
         //Para que a elementsList le asigne el valor de outerHTML
@@ -588,10 +587,6 @@ function saludarUsuario(){
 function buscarFotoUsuario(){
     //COMO BUSCO LA FOTOOO????????????
 };
-
-
-
-
 
 ////---------------BUSCA EMAIL EN LAS ACTI REGIST--------
 //function buscarEmailParaVerDatos() {
