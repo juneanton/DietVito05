@@ -447,6 +447,7 @@ function comprobarFecha()
     if (fechaI <= fechaF) {
         alert('fecha bien introducida');
         return true;
+        
     } else {
         alert('fechaI no puede ser mayor que fechaF');
     }
