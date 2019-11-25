@@ -178,7 +178,7 @@ function add() {
         nombre: document.querySelector('#nombre').value,
         peso: document.querySelector('#peso').value,
         altura: document.querySelector('#altura').value,
-        foto: document.getElementById('foto').files[0].name
+        foto: document.getElementById('#foto')
 
     });
     request.onerror = function (e) {
