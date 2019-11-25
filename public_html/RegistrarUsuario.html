@@ -51,8 +51,8 @@
                         <p><label>Peso Inicial: <input type="number" name="peso" id="peso" step="0.001" required></label>kg.</p> 
                         <p><label>Altura: <input type="number" name="altura" id="altura" step="0.001" required></label>cm.</p> 
 
-                        <p>Añada una imagen suya:</p><input type="file" name="foto" id="foto" required>
-                        <p onclick="add();"><button type="button" id="enviar" onclick="limpiar();">Aceptar</button></p>
+                        <p>Añada una imagen suya:</p><img id="foto">
+                        <p onclick="add();limpiar();"><button type="button" id="enviar" onclick="limpiar();">Aceptar</button></p>
                         <div id="caja" ></div>
 
                     </form>
